@@ -19,5 +19,11 @@ public class FormulaHelper
 		return ((deltaTime*curVelocty)+prevDisplacement);
 	}
 	
-	//
+	//Optics
+	
+	//mainformula
+	public static double computeImageDistance(double focalPoint, double objectDistance)
+	{
+		return (Constants.ONE/((Constants.ONE/focalPoint)+(Constants.ONE/objectDistance)));
+	}
 }

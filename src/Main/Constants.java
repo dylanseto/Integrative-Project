@@ -18,4 +18,10 @@ public interface Constants
 	
 	public final double METER_RATIO = 1/1000;
 	public final double SCREEN_SPLIT_RATIO = 1/2;
+
+	//Combo Box options
+	public final String OPTION_MECHANICS = "Mechanics";
+	public final String OPTION_WAVES = "Waves";
+	public final String OPTION_CALCULUS = "Calculus";
+	public final String OPTION_EXIT = "Exit";
 }
