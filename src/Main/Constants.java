@@ -5,8 +5,11 @@ public interface Constants
 	public final int ZERO = 0;
 	public final int ONE = 1;
 
+<<<<<<< .mine
+=======
 	public final double GRAVITY = 9.80665;
 
+>>>>>>> .r20
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
 	public final double INDEX_REF_WATER = 1.333;
@@ -25,4 +28,16 @@ public interface Constants
 	public final String OPTION_WAVES = "Waves";
 	public final String OPTION_CALCULUS = "Calculus";
 	public final String OPTION_EXIT = "Exit";
+	
+	enum UserInterface
+	{
+		NO_CHOICE,
+		NEWTON_LAW,
+		PROJ_MOTION,
+		OPTICS,
+		THIN_FILM,
+		SPORTS_BIKE,
+		INF_GEOM_SERIES
+	}
+	public final double GRAVITY = 9.80665;
 }
