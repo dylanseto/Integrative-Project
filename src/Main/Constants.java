@@ -39,5 +39,15 @@ public interface Constants
 		SPORTS_BIKE,
 		INF_GEOM_SERIES
 	}
-	public final double GRAVITY = 9.80665;
+	
+	//Gravity constants
+	public final double GRAVITY_NOTHING = 0;
+	public final double GRAVITY_EARTH = 9.80665;
+	public final double GRAVITY_SUPERMARIO = 91.28;
+	public final double GRAVITY_SUPERMARIO2 = 107.95;
+	public final double GRAVITY_SUPERMARIO3 = 92.31;
+	public final double GRAVITY_SUPERWORLD = 61.92;
+	public final double GRAVITY_MARIOSUNSHINE = 43.05;
+	public final double GRAVITY_SUPERPAPER = 49.47;
+	public final double GRAVITY_SUPERMARIO64 = 69.22;
 }
