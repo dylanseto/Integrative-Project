@@ -34,8 +34,11 @@ public interface Constants
 		SPORTS_BIKE,
 		INF_GEOM_SERIES
 	}
+<<<<<<< .mine
+=======
 
 	//Gravity constants
+>>>>>>> .r24
 	public final double GRAVITY_NOTHING = 0;
 	public final double GRAVITY_EARTH = 9.80665;
 	public final double GRAVITY_SUPERMARIO = 91.28;
