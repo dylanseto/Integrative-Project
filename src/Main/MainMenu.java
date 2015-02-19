@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 
 public class MainMenu extends VBox
 {
-	ComboBox<String> mainOptionBox;
+	private ComboBox<String> mainOptionBox;
 	
 	public MainMenu() 
 	{

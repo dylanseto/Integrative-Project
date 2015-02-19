@@ -4,6 +4,7 @@ public interface Constants
 {
 	public final int ZERO = 0;
 	public final int ONE = 1;
+	public final double ONE_HALF = 0.5;
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -24,7 +25,7 @@ public interface Constants
 	public final String OPTION_CALCULUS = "Calculus";
 	public final String OPTION_EXIT = "Exit";
 
-	enum UserInterface
+	public enum UserInterface
 	{
 		NO_CHOICE,
 		NEWTON_LAW,
@@ -34,11 +35,7 @@ public interface Constants
 		SPORTS_BIKE,
 		INF_GEOM_SERIES
 	}
-<<<<<<< .mine
-=======
-
 	//Gravity constants
->>>>>>> .r24
 	public final double GRAVITY_NOTHING = 0;
 	public final double GRAVITY_EARTH = 9.80665;
 	public final double GRAVITY_SUPERMARIO = 91.28;
@@ -48,4 +45,8 @@ public interface Constants
 	public final double GRAVITY_MARIOSUNSHINE = 43.05;
 	public final double GRAVITY_SUPERPAPER = 49.47;
 	public final double GRAVITY_SUPERMARIO64 = 69.22;
+	
+	//Math
+	public final double TWO_PI = 2*Math.PI;
+	public final double FULL_ROTATION = 360;
 }
