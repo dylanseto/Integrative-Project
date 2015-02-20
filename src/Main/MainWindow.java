@@ -1,5 +1,6 @@
 package Main;
 
+import sections.MainMenuSection;
 import sections.TableSection;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
@@ -14,7 +15,7 @@ public class MainWindow extends Application
 	private static Constants.UserInterface userInterface;
 	private static SplitPane topSplitPane;
 	private static SplitPane buttomSplitPane;
-	private static MainMenu mainMenu;
+	private static MainMenuSection mainMenu;
 	
 	public static void main(String[] args) 
 	{
@@ -26,7 +27,7 @@ public class MainWindow extends Application
 		VBox mainWindow = new VBox();
 		topSplitPane = new SplitPane();
 		buttomSplitPane = new SplitPane();
-		mainMenu = new MainMenu();
+		mainMenu = new MainMenuSection();
 		userInterface = Constants.UserInterface.NO_CHOICE;
 		
 		topSplitPane.setOrientation(Orientation.HORIZONTAL);
@@ -61,7 +62,7 @@ public class MainWindow extends Application
 		return buttomSplitPane;
 	}
 
-	public static MainMenu getMainMenu() 
+	public static MainMenuSection getMainMenu() 
         {
 		return mainMenu;
 	}

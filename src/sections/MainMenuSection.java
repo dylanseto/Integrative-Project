@@ -1,13 +1,13 @@
-package Main;
+package sections;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 
-public class MainMenu extends VBox
+public class MainMenuSection extends VBox
 {
 	private ComboBox<String> mainOptionBox;
 	
-	public MainMenu() 
+	public MainMenuSection() 
 	{
 		mainOptionBox = new ComboBox<String>();
 	}
