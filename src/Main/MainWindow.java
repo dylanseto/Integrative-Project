@@ -1,7 +1,6 @@
 package Main;
 
 import sections.MainMenuSection;
-import sections.TableSection;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;

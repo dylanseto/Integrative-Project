@@ -4,7 +4,9 @@ public interface Constants
 {
 	public final int ZERO = 0;
 	public final int ONE = 1;
+        public final int TWO = 2;
 	public final double ONE_HALF = 0.5;
+        public final String EMPTY_STRING = "";
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -24,6 +26,10 @@ public interface Constants
 	public final String OPTION_WAVES = "Waves";
 	public final String OPTION_CALCULUS = "Calculus";
 	public final String OPTION_EXIT = "Exit";
+        
+        //TableSection constants
+        public final String RIGHT_VALUE = "rightValue";
+        public final String LEFT_VALUE  = "leftValue";
 
 	public enum UserInterface
 	{
