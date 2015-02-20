@@ -3,10 +3,7 @@ package Main;
 
 import javafx.scene.chart.*;
 
-/**
- *
- * @author Ahmad El-Baher
- */
+
 public class ChartSection extends LineChart<Number, Number>
 {
     public ChartSection()
@@ -15,7 +12,7 @@ public class ChartSection extends LineChart<Number, Number>
         getData().add(new XYChart.Series());
     }
     
-    public void changeLabels(String chartTitle, String xAxisLabel, String yAxisLabel)
+    public void setLabels(String chartTitle, String xAxisLabel, String yAxisLabel)
     {
         setTitle(chartTitle);
         getXAxis().setLabel(xAxisLabel);

@@ -34,11 +34,12 @@ public class MainWindow extends Application
 		buttomSplitPane.setOrientation(Orientation.HORIZONTAL);
 		buttomSplitPane.setPrefSize(600, 300);
 		
-		mainWindow.getChildren().add(topSplitPane);
-		mainWindow.getChildren().add(buttomSplitPane);
+                mainWindow.getChildren().add(new TableSection());
+		//mainWindow.getChildren().add(topSplitPane);
+		//mainWindow.getChildren().add(buttomSplitPane);
 		
 		primaryStage.setScene(new Scene(new Group(mainWindow), 599, 590));
-		 primaryStage.show();
+		primaryStage.show();
 	}
 	
 	public static Constants.UserInterface getUserInterface()
@@ -50,15 +51,18 @@ public class MainWindow extends Application
 		userInterface = ui;
 	}
 
-	public static SplitPane getTopSplitPane() {
+	public static SplitPane getTopSplitPane() 
+        {
 		return topSplitPane;
 	}
 
-	public static SplitPane getButtomSplitPane() {
+	public static SplitPane getButtomSplitPane() 
+        {
 		return buttomSplitPane;
 	}
 
-	public static MainMenu getMainMenu() {
+	public static MainMenu getMainMenu() 
+        {
 		return mainMenu;
 	}
 }
