@@ -1,5 +1,6 @@
 package Main;
 
+import sections.TableSection;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
@@ -34,9 +35,8 @@ public class MainWindow extends Application
 		buttomSplitPane.setOrientation(Orientation.HORIZONTAL);
 		buttomSplitPane.setPrefSize(600, 300);
 		
-                mainWindow.getChildren().add(new TableSection());
-		//mainWindow.getChildren().add(topSplitPane);
-		//mainWindow.getChildren().add(buttomSplitPane);
+                mainWindow.getChildren().add(topSplitPane);
+		mainWindow.getChildren().add(buttomSplitPane);
 		
 		primaryStage.setScene(new Scene(new Group(mainWindow), 599, 590));
 		primaryStage.show();

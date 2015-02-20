@@ -1,6 +1,7 @@
 
-package Main;
+package sections;
 
+import Main.Constants;
 import javafx.scene.chart.*;
 
 
