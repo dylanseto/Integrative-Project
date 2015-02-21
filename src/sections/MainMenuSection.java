@@ -1,9 +1,9 @@
 package sections;
 
 import Main.Constants;
-import java.awt.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -17,6 +17,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 {
 	private final ComboBox mainOptionBox;
 	private final ObservableList<String> mainOptionsList;
+        
         private final Button subChoiceOneButton;
         private final Button subChoiceTwoButton;
         private final Button startButton;
@@ -26,10 +27,14 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
         private final Button doneButton;
         private final Button continueButton;
         
+        
 	public MainMenuSection() 
 	{
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
             mainOptionBox = new ComboBox(mainOptionsList);
+            mainOptionBox.setOnAction(this);
+            
+            getChildren().add(mainOptionBox);
             //initialize all buttons, add "this" to the buttons for action event
             
 	}
@@ -42,6 +47,15 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             //depending on the button's text, then remove sub choice buttons and add main menu buttons
             //when you click done, remove the main menu buttons and add combobox
             //when you click help, a JOptionPane-like message pops up and shows approproate text depending on userInterface
+            
+            if(event.getSource() == mainOptionBox)
+            {
+                //this is an example of how to handle a combo box event in our case specifically
+                if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equals(Constants.OPTION_MECHANICS))
+                {
+                    
+                }
+            }
         }
         
         private void showComboBoxMenu()
@@ -69,5 +83,6 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             getChildren().add(doneButton);
             getChildren().add(continueButton);
         }
+
 
 }
