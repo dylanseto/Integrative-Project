@@ -15,7 +15,7 @@ public class TableSection extends TableView
     private final TableColumn colTitle;
     private final TableColumn colRightValue;
     private final TableColumn colLeftValue;
-
+    
     private final ObservableList<TableEntry> dataList = FXCollections.observableArrayList();
       
     public TableSection()
