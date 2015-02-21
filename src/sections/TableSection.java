@@ -2,6 +2,7 @@
 
 package sections;
 
+import Main.Constants;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,28 +16,36 @@ public class TableSection extends TableView
     private final TableColumn colTitle;
     private final TableColumn colRightValue;
     private final TableColumn colLeftValue;
-    
+
     private final ObservableList<TableEntry> dataList = FXCollections.observableArrayList();
       
-    public TableSection()
+    public TableSection(double prefWidth, double prefHeight)
     {
-        this("", "", ""); //GOTTA MAKE THESE CONSTANTS!!
+        this(prefWidth, prefHeight, Constants.EMPTY_STRING, Constants.EMPTY_STRING, Constants.EMPTY_STRING);
     }
-    public TableSection(String titleLabel, String rightValueLabel, String leftValueLabel)
+    public TableSection(double prefWidth, double prefHeight, String titleLabel, String leftValueLabel, String rightValueLabel)
     {
-        setPrefSize(302, 300); //GOTTA MAKE THESE CONSTANTS!!
+        setEditable(false);
+        setPrefSize(prefWidth + Constants.TWO, prefHeight);
+        
         colTitle = new TableColumn();
-        colTitle.setPrefWidth(300);
+        colTitle.setPrefWidth(prefWidth);
+        colTitle.setEditable(false);
+        colTitle.setResizable(false);
         
         colRightValue = new TableColumn();
-        colRightValue.setPrefWidth(150); //GOTTA MAKE THESE CONSTANTS!!
+        colRightValue.setPrefWidth(prefWidth * Constants.ONE_HALF);
         colRightValue.setCellValueFactory(
-              new PropertyValueFactory<TableEntry,String>("rightValue"));
+              new PropertyValueFactory<TableEntry,String>(Constants.RIGHT_VALUE));
+        colRightValue.setEditable(false);
+        colRightValue.setResizable(false);
         
         colLeftValue = new TableColumn();
-        colLeftValue.setPrefWidth(150); //GOTTA MAKE THESE CONSTANTS!!
+        colLeftValue.setPrefWidth(colRightValue.getPrefWidth());
         colLeftValue.setCellValueFactory(
-                new PropertyValueFactory<TableEntry,String>("leftValue"));
+                new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
+        colLeftValue.setEditable(false);
+        colLeftValue.setResizable(false);
 
         setColumnLabels(titleLabel, rightValueLabel, leftValueLabel);
         setItems(dataList);
@@ -45,7 +54,7 @@ public class TableSection extends TableView
 
     }
 
-    public void setColumnLabels(String titleLabel, String rightValueLabel, String leftValueLabel)
+    public void setColumnLabels(String titleLabel, String leftValueLabel, String rightValueLabel)
     {
         colTitle.setText(titleLabel);
         colRightValue.setText(rightValueLabel);
@@ -57,31 +66,31 @@ public class TableSection extends TableView
         dataList.clear();
     }
     
-    public void addRow(double rightValue, double leftValue)
+    public void addRow(double leftValue, double rightValue)
     {
-        addRow(String.valueOf(rightValue), String.valueOf(leftValue));
+        addRow(String.valueOf(leftValue), String.valueOf(rightValue));
     }
     
-    public void addRow(String rightValue, String leftValue)
+    public void addRow(String leftValue, String rightValue)
     {
-        dataList.add(new TableEntry(rightValue, leftValue));
+        dataList.add(new TableEntry(leftValue, rightValue));
     }
     
-    public void addRightValue(String rightValue)
+    public void addLeftValue(String leftValue)
     {
-        dataList.add(new TableEntry(rightValue));
+        dataList.add(new TableEntry(leftValue));
     }
     
-    public void setLeftValue(int index, double leftValue)
+    public void setRightValue(int index, double rightValue)
     {
-        setLeftValue(index, String.valueOf(leftValue));
+        setRightValue(index, String.valueOf(rightValue));
     }
     
-    public void setLeftValue(int index, String leftValue)
+    public void setRightValue(int index, String rightValue)
     {
-        if(index >= 0 && index < dataList.size())//GOTTA MAKE THESE CONSTANTS!!
+        if(index >= Constants.ZERO && index < dataList.size())
         {
-            dataList.get(index).setLeftValue(leftValue);
+            dataList.get(index).setRightValue(rightValue);
         }
     }
     
@@ -90,15 +99,15 @@ public class TableSection extends TableView
           private final SimpleStringProperty rightValue;
           private final SimpleStringProperty leftValue;
 
-          TableEntry(String rightValue)
+          TableEntry(String leftValue)
           {
-              this(rightValue, null);
+              this(leftValue, null);
           }
           
-          TableEntry(String rightValue, String leftValue)
+          TableEntry(String leftValue, String rightValue)
           {
               this.rightValue = new SimpleStringProperty(rightValue);
-              this.leftValue  = new SimpleStringProperty(leftValue);
+              this.leftValue  = new SimpleStringProperty(rightValue);
           }
 
           public String getRightValue() 
