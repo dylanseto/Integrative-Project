@@ -36,6 +36,14 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             
             getChildren().add(mainOptionBox);
             //initialize all buttons, add "this" to the buttons for action event
+            this.subChoiceOneButton = new Button("temp name");
+            this.subChoiceTwoButton = new Button("temp name");
+            this.startButton = new Button("Start");
+            this.pauseButton = new Button("Pause");
+            this.resetButton = new Button("Reset");
+            this.helpButton = new Button("Help");
+            this.doneButton = new Button("Done");
+            this.continueButton = new Button("Continue");
             
 	}
 

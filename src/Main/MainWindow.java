@@ -1,5 +1,6 @@
 package Main;
 
+import sections.ChartSection;
 import sections.MainMenuSection;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
@@ -34,6 +35,12 @@ public class MainWindow extends Application
 		
 		buttomSplitPane.setOrientation(Orientation.HORIZONTAL);
 		buttomSplitPane.setPrefSize(600, 300);
+		ChartSection s = new ChartSection();
+		s.setLabels("boob", "x", "y");
+		s.addDataPoint(10, 100);
+		s.addDataPoint(20, 120);
+		s.addDataPoint(30, 110);
+		buttomSplitPane.getItems().add(s);
 		
                 mainWindow.getChildren().add(topSplitPane);
 		mainWindow.getChildren().add(buttomSplitPane);

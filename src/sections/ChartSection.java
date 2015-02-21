@@ -2,7 +2,13 @@
 package sections;
 
 import Main.Constants;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.chart.*;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.layout.StackPane;
+import javafx.scene.input.MouseEvent;
 
 
 public class ChartSection extends LineChart<Number, Number>
@@ -11,6 +17,7 @@ public class ChartSection extends LineChart<Number, Number>
     {
         super(new NumberAxis(), new NumberAxis());
         getData().add(new XYChart.Series());
+        setCursor(Cursor.CROSSHAIR);
     }
     
     public void setLabels(String chartTitle, String xAxisLabel, String yAxisLabel)
@@ -27,7 +34,31 @@ public class ChartSection extends LineChart<Number, Number>
     
     public void addDataPoint(double x, double y)
     {
-        getData().get(Constants.ZERO).getData().add(new Data(x, y));
+    	XYChart.Data<Number, Number> data = new Data<Number, Number>(x, y);
+    	data.setNode(new HoverDetector());
+        getData().get(Constants.ZERO).getData().add(data);
+    }
+    private class HoverDetector extends StackPane
+    {
+    	HoverDetector()
+    	{
+    		setPrefSize(15, 15);
+    		
+    		setOnMouseEntered(new EventHandler<MouseEvent>() {
+    	        @Override public void handle(MouseEvent mouseEvent) {
+    	          System.out.println("mouse over"); //hover over
+    	          setCursor(Cursor.NONE);
+    	          toFront();
+    	        }
+    	      });
+    		setOnMouseExited(new EventHandler<MouseEvent>() {
+    	        @Override public void handle(MouseEvent mouseEvent) {
+    	          System.out.println("mouse exit"); //hovers away
+    	          setCursor(Cursor.CROSSHAIR);
+    	          toFront();
+    	        }
+    	      });
+    	}
     }
 
 }
