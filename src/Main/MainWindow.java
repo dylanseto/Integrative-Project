@@ -1,5 +1,6 @@
 package Main;
 
+import sections.AnimationSection;
 import sections.ChartSection;
 import sections.MainMenuSection;
 import javafx.application.Application;
@@ -9,13 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sections.GUIControlSection;
 
 public class MainWindow extends Application
 {
 	private static Constants.UserInterface userInterface;
 	private static SplitPane topSplitPane;
 	private static SplitPane buttomSplitPane;
-	private static MainMenuSection mainMenu;
+        private static AnimationSection animSection;
+        private static ChartSection chartSection;
+	private static MainMenuSection mainMenuSection;
+        private static GUIControlSection guiControlSection;
 	
 	public static void main(String[] args) 
 	{
@@ -27,7 +32,7 @@ public class MainWindow extends Application
 		VBox mainWindow = new VBox();
 		topSplitPane = new SplitPane();
 		buttomSplitPane = new SplitPane();
-		mainMenu = new MainMenuSection();
+		mainMenuSection = new MainMenuSection();
 		userInterface = Constants.UserInterface.NO_CHOICE;
 		
 		topSplitPane.setOrientation(Orientation.HORIZONTAL);
@@ -68,9 +73,24 @@ public class MainWindow extends Application
         {
 		return buttomSplitPane;
 	}
-
-	public static MainMenuSection getMainMenu() 
+        
+        public static AnimationSection getAnimSection() 
         {
-		return mainMenu;
+		return animSection;
 	}
+        
+        public static ChartSection getChartSection()
+        {
+            return chartSection;
+        }
+
+	public static MainMenuSection getMainMenuSection() 
+        {
+		return mainMenuSection;
+	}
+        
+        public static GUIControlSection getGUIControlSection()
+        {
+            return guiControlSection;
+        }
 }
