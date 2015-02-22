@@ -34,8 +34,17 @@ public class ChartSection extends LineChart<Number, Number>
     
     public void addDataPoint(double x, double y)
     {
+    	addDataPoint(x, y, false);
+    }
+    public void addDataPoint(double x, double y, boolean hover)
+    {
     	XYChart.Data<Number, Number> data = new Data<Number, Number>(x, y);
-    	data.setNode(new HoverDetector());
+    	
+    	if(hover)
+    	{
+    		data.setNode(new HoverDetector());
+    	}
+    	
         getData().get(Constants.ZERO).getData().add(data);
     }
     private class HoverDetector extends StackPane

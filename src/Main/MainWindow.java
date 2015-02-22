@@ -43,9 +43,9 @@ public class MainWindow extends Application
 
 		ChartSection s = new ChartSection();
 		s.setLabels("lol", "x", "y");
-		s.addDataPoint(10, 100);
-		s.addDataPoint(20, 120);
-		s.addDataPoint(30, 110);
+		s.addDataPoint(10, 100, true);
+		s.addDataPoint(20, 120, true);
+		s.addDataPoint(30, 110, true);
 		buttomSplitPane.getItems().add(s);
 		
                 mainWindow.getChildren().add(topSplitPane);
