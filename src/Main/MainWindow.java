@@ -11,6 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sections.GUIControlSection;
+import sections.TableSection;
 
 public class MainWindow extends Application
 {
@@ -19,9 +20,10 @@ public class MainWindow extends Application
 	private static SplitPane buttomSplitPane;
         private static AnimationSection animSection;
         private static ChartSection chartSection;
+        private static TableSection tableSection;
 	private static MainMenuSection mainMenuSection;
         private static GUIControlSection guiControlSection;
-	
+        
 	public static void main(String[] args) 
 	{
 		launch(args); 
@@ -83,6 +85,11 @@ public class MainWindow extends Application
         {
             return chartSection;
         }
+        
+        public static TableSection getTableSection()
+        {
+            return tableSection;
+        }
 
 	public static MainMenuSection getMainMenuSection() 
         {
@@ -92,5 +99,5 @@ public class MainWindow extends Application
         public static GUIControlSection getGUIControlSection()
         {
             return guiControlSection;
-        }
+        }    
 }
