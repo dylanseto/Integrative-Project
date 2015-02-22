@@ -2,6 +2,7 @@ package Main;
 
 public interface Constants
 {
+        //general
 	public final int ZERO = 0;
 	public final int ONE = 1;
         public final int TWO = 2;
@@ -16,7 +17,11 @@ public interface Constants
 	public final double INDEX_REF_ZIRCON = 1.920;
 	public final double INDEX_REF_DIAMOND = 2.417;
 	public final double INDEX_REF_PYREX = 1.470;
-
+        
+        //visible light range (in nm)
+        public final double MIN_VIS_LIGHT_LENGTH = 400;
+        public final double MAX_VIS_LIGHT_LENGTH = 700;
+        
 	//Sizing ratios
 	public final double METER_RATIO = 1/1000;
 	public final double SCREEN_SPLIT_RATIO = 1/2;
