@@ -60,4 +60,5 @@ public interface Constants
 	//Math
 	public final double TWO_PI = 2*Math.PI;
 	public final double FULL_ROTATION = 360;
+        public final String SIGMA = "\u03A3";
 }

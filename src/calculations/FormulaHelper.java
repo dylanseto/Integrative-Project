@@ -1,5 +1,6 @@
-package Main;
+package calculations;
 
+import Main.Constants;
 import java.util.ArrayList;
 
 public class FormulaHelper 
@@ -84,5 +85,25 @@ public class FormulaHelper
         public static ArrayList<Double> getWaveLengthsDestructive(double indexRefFilm, double thickness)
         {
             return getWaveLengthsThinFilm(indexRefFilm, thickness, false);
+        }
+        
+        public static double computeInfSum(double coefficient, double base)
+        {
+            return coefficient * (Constants.ONE/(Constants.ONE - base));
+        }
+        
+        public static double computeTermOfSum(double coefficient, double base, int exponent)
+        {
+            return coefficient * Math.pow(base, exponent);
+        }
+        
+        public static double computePartialSum(double coefficient, double base, int lastTermNumber)
+        {
+            double partialSum = Constants.ZERO;
+            for(int i = Constants.ZERO; i <= lastTermNumber; ++i)
+            {
+                partialSum += computeTermOfSum(coefficient, base, i);
+            }
+            return partialSum;
         }
 }

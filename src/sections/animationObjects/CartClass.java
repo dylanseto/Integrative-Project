@@ -1,4 +1,4 @@
-package Main;
+package sections.animationObjects;
 
 import java.util.Random;
 
@@ -14,8 +14,8 @@ import javafx.util.Duration;
 public class CartClass
 {	
 	
-	private DoubleProperty X_PROPERTY;
-	private DoubleProperty Y_PROPERTY;
+	private DoubleProperty x_property;
+	private DoubleProperty y_property;
 	private Timeline timeline;
 	private boolean isRunning;
 	
@@ -23,20 +23,20 @@ public class CartClass
 	
 	public CartClass(GraphicsContext graphics) 
 	{
-		this.X_PROPERTY = new SimpleDoubleProperty();
-		this.Y_PROPERTY = new SimpleDoubleProperty();
+		/*this.x_property = new SimpleDoubleProperty();
+		this.y_property = new SimpleDoubleProperty();
 		
 		this.graphics = graphics;
 		this.isRunning = false;
 		
-		/*timeline = new Timeline(
+		timeline = new Timeline(
 	            new KeyFrame(Duration.seconds(Constants.ZERO),
-	                    new KeyValue(X_PROPERTY, Constants.ZERO),
-	                    new KeyValue(Y_PROPERTY, Constants.ZERO)
+	                    new KeyValue(x_property, Constants.ZERO),
+	                    new KeyValue(y_property, Constants.ZERO)
 	            ),
 	            new KeyFrame(Duration.seconds(rand.nextInt(Constants.MAX_SPEED)+Constants.MAX_SPEED),
-	            		new KeyValue(X_PROPERTY, Constants.ANIMATION_POINT),
-	                    new KeyValue(Y_PROPERTY, Constants.ZERO)
+	            		new KeyValue(x_property, Constants.ANIMATION_POINT),
+	                    new KeyValue(y_property, Constants.ZERO)
 	            )
 	        );*/
 		
@@ -46,12 +46,12 @@ public class CartClass
 	public void setTimeline(Timeline timeline) {
 		this.timeline = timeline;
 	}
-	public void startCar()
+	public void startCart()
 	{
 		this.isRunning = true;
 		timeline.play();
 	}
-	public void stopCar()
+	public void stopCart()
 	{
 		this.isRunning = false;
 		timeline.stop();
@@ -59,7 +59,7 @@ public class CartClass
 	public boolean isRunning() {
 		return isRunning;
 	}
-	public void drawCar()
+	public void drawCart()
 	{
 		/*graphics.setFill(Color.BLACK);
 		graphics.strokeLine(0, 40, 300, 40);
@@ -81,17 +81,17 @@ public class CartClass
 		graphics.fillText(String.valueOf(id+1), 37+X_PROPERTY.doubleValue(), Y_PROPERTY.doubleValue()+30+Constants.CAR_SPACE*id);*/
 	}
 	public DoubleProperty getX() {
-		return X_PROPERTY;
+		return x_property;
 	}
 	public void setX(double x)
 	{
-		X_PROPERTY.set(x);
+		x_property.set(x);
 	}
 	public DoubleProperty getY() {
-		return Y_PROPERTY;
+		return y_property;
 	}
 	public void setY(double y)
 	{
-		Y_PROPERTY.set(y);
+		y_property.set(y);
 	}
 }

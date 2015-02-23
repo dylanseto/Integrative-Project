@@ -47,6 +47,7 @@ public class ChartSection extends LineChart<Number, Number>
     	
         getData().get(Constants.ZERO).getData().add(data);
     }
+    
     private class HoverDetector extends StackPane
     {
     	HoverDetector()
