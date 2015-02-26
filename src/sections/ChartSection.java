@@ -47,13 +47,10 @@ public class ChartSection extends LineChart<Number, Number>
     	
         getData().get(Constants.ZERO).getData().add(data);
     }
-    
     private class HoverDetector extends StackPane
     {
     	HoverDetector()
-    	{
-    		setPrefSize(15, 15);
-    		
+    	{	
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
     	          System.out.println("mouse over"); //hover over
