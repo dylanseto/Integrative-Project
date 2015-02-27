@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -33,17 +34,18 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
             mainOptionBox = new ComboBox(mainOptionsList);
             mainOptionBox.setOnAction(this);
+            getChildren().add(new Canvas(1, 1));
             
             getChildren().add(mainOptionBox);
             //initialize all buttons, add "this" to the buttons for action event
-            this.subChoiceOneButton = new Button("temp name");
-            this.subChoiceTwoButton = new Button("temp name");
-            this.startButton = new Button("Start");
-            this.pauseButton = new Button("Pause");
-            this.resetButton = new Button("Reset");
-            this.helpButton = new Button("Help");
-            this.doneButton = new Button("Done");
-            this.continueButton = new Button("Continue");
+            this.subChoiceOneButton = new Button();
+            this.subChoiceTwoButton = new Button();
+            this.startButton = new Button(Constants.START_BUTTON);
+            this.pauseButton = new Button(Constants.PAUSE_BUTTON);
+            this.resetButton = new Button(Constants.RESET_BUTTON);
+            this.helpButton = new Button(Constants.HELP_BUTTON);
+            this.doneButton = new Button(Constants.DONE_BUTTON);
+            this.continueButton = new Button(Constants.CONTINUE_BUTTON);
             
 	}
 

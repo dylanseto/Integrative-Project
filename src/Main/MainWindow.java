@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,7 +18,7 @@ public class MainWindow extends Application
 {
 	private static Constants.UserInterface userInterface;
 	private static SplitPane topSplitPane;
-	private static SplitPane buttomSplitPane;
+	private static SplitPane bottomSplitPane;
         private static AnimationSection animSection;
         private static ChartSection chartSection;
         private static TableSection tableSection;
@@ -31,27 +32,31 @@ public class MainWindow extends Application
 	
 	public void start(Stage primaryStage)
 	{
-		VBox mainWindow = new VBox();
+                VBox mainWindow = new VBox();
 		topSplitPane = new SplitPane();
-		buttomSplitPane = new SplitPane();
-		mainMenuSection = new MainMenuSection();
-		userInterface = Constants.UserInterface.NO_CHOICE;
-		
-		topSplitPane.setOrientation(Orientation.HORIZONTAL);
+		bottomSplitPane = new SplitPane();
+                
+                topSplitPane.setOrientation(Orientation.HORIZONTAL);
 		topSplitPane.setPrefSize(600, 300);
-		
-		buttomSplitPane.setOrientation(Orientation.HORIZONTAL);
-		buttomSplitPane.setPrefSize(600, 300);
-
-		ChartSection s = new ChartSection();
-		s.setLabels("lol", "x", "y");
-		s.addDataPoint(10, 100, true);
-		s.addDataPoint(20, 120, true);
-		s.addDataPoint(30, 110, true);
-		buttomSplitPane.getItems().add(s);
-		
+                
+                bottomSplitPane.setOrientation(Orientation.HORIZONTAL);
+		bottomSplitPane.setPrefSize(600, 300);
+       
+		mainMenuSection = new MainMenuSection();
+                //animSection = new AnimationSection();
+                tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight()/Constants.TWO);
+                chartSection = new ChartSection();
+                guiControlSection = new GUIControlSection();
+		userInterface = Constants.UserInterface.NO_CHOICE;
+                
+                //topSplitPane.getItems().add(animSection);
+                topSplitPane.getItems().add(tableSection);
+                
+                bottomSplitPane.getItems().add(mainMenuSection);
+                bottomSplitPane.getItems().add(guiControlSection);
+                
                 mainWindow.getChildren().add(topSplitPane);
-		mainWindow.getChildren().add(buttomSplitPane);
+		mainWindow.getChildren().add(bottomSplitPane);
 		
 		primaryStage.setScene(new Scene(new Group(mainWindow), 599, 590));
 		primaryStage.show();
@@ -73,31 +78,31 @@ public class MainWindow extends Application
 
 	public static SplitPane getButtomSplitPane() 
         {
-		return buttomSplitPane;
+		return bottomSplitPane;
 	}
-        
-    public static AnimationSection getAnimSection() 
-    {
-    	return animSection;
-	}
-        
-    public static ChartSection getChartSection()
-    {
-    	return chartSection;
-    }
-        
-    public static TableSection getTableSection()
-    {
-    	return tableSection;
-    }
 
-	public static MainMenuSection getMainMenuSection() 
-    {
-		return mainMenuSection;
-	}
-        
-    public static GUIControlSection getGUIControlSection()
-    {
-    	return guiControlSection;
-    }    
+        public static AnimationSection getAnimSection() 
+        {
+            return animSection;
+        }
+
+        public static ChartSection getChartSection()
+        {
+            return chartSection;
+        }
+
+        public static TableSection getTableSection()
+        {
+            return tableSection;
+        }
+
+            public static MainMenuSection getMainMenuSection() 
+        {
+                    return mainMenuSection;
+        }
+
+        public static GUIControlSection getGUIControlSection()
+        {
+            return guiControlSection;
+        }    
 }
