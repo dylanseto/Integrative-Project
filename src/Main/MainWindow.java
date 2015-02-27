@@ -19,9 +19,9 @@ public class MainWindow extends Application
 	private static Constants.UserInterface userInterface;
 	private static SplitPane topSplitPane;
 	private static SplitPane bottomSplitPane;
-        private static AnimationSection animSection;
-        private static ChartSection chartSection;
-        private static TableSection tableSection;
+    private static AnimationSection animSection;
+    private static ChartSection chartSection;
+    private static TableSection tableSection;
 	private static MainMenuSection mainMenuSection;
         private static GUIControlSection guiControlSection;
         
@@ -55,7 +55,7 @@ public class MainWindow extends Application
                 bottomSplitPane.getItems().add(mainMenuSection);
                 bottomSplitPane.getItems().add(guiControlSection);
                 
-                mainWindow.getChildren().add(topSplitPane);
+        mainWindow.getChildren().add(topSplitPane);
 		mainWindow.getChildren().add(bottomSplitPane);
 		
 		primaryStage.setScene(new Scene(new Group(mainWindow), 599, 590));

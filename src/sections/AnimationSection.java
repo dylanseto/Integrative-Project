@@ -1,5 +1,7 @@
 package sections;
 
+import Main.Constants;
+import Main.MainWindow;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import sections.animationObjects.CartClass;
@@ -11,8 +13,19 @@ public class AnimationSection extends Canvas
 		@Override
 		public void handle(long arg0) 
 		{
+			switch(MainWindow.getUserInterface())
+			{
+				case NO_CHOICE: break;
+				case NEWTON_LAW: break;
+				case PROJ_MOTION: break;
+				case OPTICS: break;
+				case THIN_FILM: break;
+				case SPORTS_BIKE: break;
+				case INF_GEOM_SERIES: break;
+				default: break; //ERROR
+			}
 		}
-	};;
+	};
 	
 	public AnimationSection()
 	{
@@ -44,14 +57,14 @@ public class AnimationSection extends Canvas
 	}
 	public void start()
 	{
-		
+		this.animTimer.start();
 	}
 	public void stop()
 	{
-		
+		this.animTimer.stop();
 	}
 	public void reset()
 	{
-		
+		this.newtonLawCart.setX(0);
 	}
 }
