@@ -54,12 +54,12 @@ public interface Constants
         public final String CONTINUE_BUTTON = "Continue";
         
         //Help messages
-        public final String NEWTON_HELP_MSG = INSERT HELP MSG HERE;
-        public final String PROJ_MOT_HELP_MSG = INSERT HELP MSG HERE;
-        public final String OPTICS_HELP_MSG = INSERT HELP MSG HERE;
-        public final String THIN_FILM_HELP_MSG = INSERT HELP MSG HERE;
-        public final String NEW_BIKE_HELP_MSG = INSERT HELP MSG HERE;
-        public final String INF_GEOM_HELP_MSG = INSERT HELP MSG HERE;
+        public final String NEWTON_HELP_MSG = "";
+        public final String PROJ_MOT_HELP_MSG = "";
+        public final String OPTICS_HELP_MSG = "";
+        public final String THIN_FILM_HELP_MSG = "";
+        public final String NEW_BIKE_HELP_MSG = "";
+        public final String INF_GEOM_HELP_MSG = "";
         
         //GUISection label texts
         public final String ENTER_VAL_LABEL_TEXT = "Enter Values";
