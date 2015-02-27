@@ -1,6 +1,7 @@
 package sections;
 
 import Main.Constants;
+import Main.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,11 +34,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 	{
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
             mainOptionBox = new ComboBox(mainOptionsList);
-            mainOptionBox.setOnAction(this);
-            getChildren().add(new Canvas(1, 1));
-            
-            getChildren().add(mainOptionBox);
-            //initialize all buttons, add "this" to the buttons for action event
+
             this.subChoiceOneButton = new Button();
             this.subChoiceTwoButton = new Button();
             this.startButton = new Button(Constants.START_BUTTON);
@@ -47,24 +44,93 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             this.doneButton = new Button(Constants.DONE_BUTTON);
             this.continueButton = new Button(Constants.CONTINUE_BUTTON);
             
+            mainOptionBox.setOnAction(this);
+            subChoiceOneButton.setOnAction(this);
+            subChoiceTwoButton.setOnAction(this);
+            startButton.setOnAction(this);
+            pauseButton.setOnAction(this);
+            resetButton.setOnAction(this);
+            helpButton.setOnAction(this);
+            doneButton.setOnAction(this);
+            continueButton.setOnAction(this);
+            
+            showComboBoxMenu();
+            
 	}
 
         public void handle(ActionEvent event) 
         {
-            //add all handling here
-            //For the combobox handling, show add the subchoice buttons with their appropriate texts, then remove combobox and add subchoice buttons
-            //for the subChoiceOneButton and subChoiceTwoButton, change the value of the MainWindow's userInterface var
-            //depending on the button's text, then remove sub choice buttons and add main menu buttons
-            //when you click done, remove the main menu buttons and add combobox
             //when you click help, a JOptionPane-like message pops up and shows approproate text depending on userInterface
             
             if(event.getSource() == mainOptionBox)
             {
-                //this is an example of how to handle a combo box event in our case specifically
-                if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equals(Constants.OPTION_MECHANICS))
+                if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equalsIgnoreCase(Constants.OPTION_MECHANICS))
                 {
-                    
+                    showSubMenu(Constants.OPTION_NEWTON, Constants.OPTION_PROJ_MOT);
                 }
+                else if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equalsIgnoreCase(Constants.OPTION_WAVES))
+                {
+                    showSubMenu(Constants.OPTION_OPTICS, Constants.OPTION_THIN_FILM);
+                }
+                else if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equalsIgnoreCase(Constants.OPTION_CALCULUS))
+                {
+                    showSubMenu(Constants.OPTION_NEW_BIKE, Constants.OPTION_INF_GEOM);
+                }
+            }
+            else if(event.getSource() == subChoiceOneButton)
+            {
+                if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_NEWTON))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.NEWTON_LAW);
+                }
+                else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_OPTICS))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.OPTICS);
+                }
+                else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_NEW_BIKE))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.SPORTS_BIKE);
+                }
+                
+                showMainMenu();
+            }
+            else if(event.getSource() == subChoiceTwoButton)
+            {
+                if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_PROJ_MOT))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
+                }
+                else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.THIN_FILM);
+                }
+                else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_INF_GEOM))
+                {
+                    MainWindow.setUserInterface(Constants.UserInterface.INF_GEOM_SERIES);
+                }
+                
+                showMainMenu();
+            }
+            else if(event.getSource() == startButton || event.getSource() == continueButton)
+            {
+                MainWindow.getAnimSection().start();
+            }
+            else if(event.getSource() == pauseButton)
+            {
+                MainWindow.getAnimSection().stop();
+            }
+            else if(event.getSource() == resetButton)
+            {
+                MainWindow.getAnimSection().reset();
+            }
+            else if(event.getSource() == helpButton)
+            {
+                
+            }
+            else if(event.getSource() == doneButton)
+            {
+                MainWindow.setUserInterface(Constants.UserInterface.NO_CHOICE);
+                showComboBoxMenu();
             }
         }
         
@@ -79,19 +145,13 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             getChildren().clear();
             subChoiceOneButton.setText(subChoiceOneText);
             subChoiceOneButton.setText(subChoiceTwoText);
-            getChildren().add(subChoiceOneButton);
-            getChildren().add(subChoiceTwoButton);
+            getChildren().addAll(subChoiceOneButton, subChoiceTwoButton);
         }
         
         private void showMainMenu()
         {
             getChildren().clear();
-            getChildren().add(startButton);
-            getChildren().add(pauseButton);
-            getChildren().add(resetButton);
-            getChildren().add(helpButton);
-            getChildren().add(doneButton);
-            getChildren().add(continueButton);
+            getChildren().addAll(startButton, pauseButton, resetButton, helpButton, doneButton, continueButton);
         }
 
 
