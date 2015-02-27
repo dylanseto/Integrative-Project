@@ -76,28 +76,28 @@ public class MainWindow extends Application
 		return buttomSplitPane;
 	}
         
-        public static AnimationSection getAnimSection() 
-        {
-		return animSection;
+    public static AnimationSection getAnimSection() 
+    {
+    	return animSection;
 	}
         
-        public static ChartSection getChartSection()
-        {
-            return chartSection;
-        }
+    public static ChartSection getChartSection()
+    {
+    	return chartSection;
+    }
         
-        public static TableSection getTableSection()
-        {
-            return tableSection;
-        }
+    public static TableSection getTableSection()
+    {
+    	return tableSection;
+    }
 
 	public static MainMenuSection getMainMenuSection() 
-        {
+    {
 		return mainMenuSection;
 	}
         
-        public static GUIControlSection getGUIControlSection()
-        {
-            return guiControlSection;
-        }    
+    public static GUIControlSection getGUIControlSection()
+    {
+    	return guiControlSection;
+    }    
 }
