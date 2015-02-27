@@ -1,17 +1,16 @@
 package Main;
 
-import sections.AnimationSection;
-import sections.ChartSection;
-import sections.MainMenuSection;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sections.AnimationSection;
+import sections.ChartSection;
 import sections.GUIControlSection;
+import sections.MainMenuSection;
 import sections.TableSection;
 
 public class MainWindow extends Application
@@ -46,17 +45,18 @@ public class MainWindow extends Application
                 //animSection = new AnimationSection();
                 tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight()/Constants.TWO);
                 chartSection = new ChartSection();
+
                 guiControlSection = new GUIControlSection();
 		userInterface = Constants.UserInterface.NO_CHOICE;
                 
-                //topSplitPane.getItems().add(animSection);
-                topSplitPane.getItems().add(tableSection);
                 
+                //topSplitPane.getItems().add(animSection);
+                topSplitPane.getItems().add(chartSection);
+               
                 bottomSplitPane.getItems().add(mainMenuSection);
                 bottomSplitPane.getItems().add(guiControlSection);
-                
-        mainWindow.getChildren().add(topSplitPane);
-		mainWindow.getChildren().add(bottomSplitPane);
+
+        mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
 		
 		primaryStage.setScene(new Scene(new Group(mainWindow), 599, 590));
 		primaryStage.show();
