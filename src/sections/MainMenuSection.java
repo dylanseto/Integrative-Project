@@ -9,7 +9,9 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +19,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 {
-	private final ComboBox mainOptionBox;
+	private ComboBox mainOptionBox;
 	private final ObservableList<String> mainOptionsList;
         
         private final Button subChoiceOneButton;
@@ -76,6 +78,14 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     showSubMenu(Constants.OPTION_NEW_BIKE, Constants.OPTION_INF_GEOM);
                 }
+                else if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equalsIgnoreCase(Constants.OPTION_EXIT))
+                {
+                    getChildren().add(new Label(Constants.CONFIRM_EXIT_MSG));
+                    showSubMenu(Constants.OPTION_YES, Constants.OPTION_NO);
+                }
+                
+                //mainOptionBox = new ComboBox(mainOptionsList);
+                //mainOptionBox.setOnAction(this);
             }
             else if(event.getSource() == subChoiceOneButton)
             {
@@ -91,8 +101,15 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.SPORTS_BIKE);
                 }
+                else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_YES))
+                {
+                    System.exit(Constants.ZERO);
+                }
                 
-                showMainMenu();
+                if(!subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_YES))
+                {
+                   showMainMenu(); 
+                }
             }
             else if(event.getSource() == subChoiceTwoButton)
             {
@@ -108,8 +125,15 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.INF_GEOM_SERIES);
                 }
+                else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_NO))
+                {
+                    showComboBoxMenu();
+                }
                 
-                showMainMenu();
+                if(!subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_NO))
+                {
+                   showMainMenu(); 
+                }
             }
             else if(event.getSource() == startButton || event.getSource() == continueButton)
             {
@@ -144,7 +168,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
         {
             getChildren().clear();
             subChoiceOneButton.setText(subChoiceOneText);
-            subChoiceOneButton.setText(subChoiceTwoText);
+            subChoiceTwoButton.setText(subChoiceTwoText);
             getChildren().addAll(subChoiceOneButton, subChoiceTwoButton);
         }
         

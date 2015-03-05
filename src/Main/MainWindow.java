@@ -42,15 +42,18 @@ public class MainWindow extends Application
 		bottomSplitPane.setPrefSize(600, 300);
        
 		mainMenuSection = new MainMenuSection();
-                //animSection = new AnimationSection();
+                animSection = new AnimationSection();
+                animSection.setWidth(topSplitPane.getPrefWidth()/Constants.TWO);
+                animSection.setHeight(topSplitPane.getPrefHeight()/Constants.TWO);
                 tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight()/Constants.TWO);
                 chartSection = new ChartSection();
+                
 
                 guiControlSection = new GUIControlSection();
 		userInterface = Constants.UserInterface.NO_CHOICE;
                 
                 
-                //topSplitPane.getItems().add(animSection);
+                topSplitPane.getItems().add(animSection);
                 topSplitPane.getItems().add(chartSection);
                
                 bottomSplitPane.getItems().add(mainMenuSection);

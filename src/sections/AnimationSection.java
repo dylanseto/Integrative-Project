@@ -1,6 +1,5 @@
 package sections;
 
-import Main.Constants;
 import Main.MainWindow;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;

@@ -40,8 +40,8 @@ public class CartClass
 	            )
 	        );*/
 		
-		timeline.setAutoReverse(true);
-        timeline.setCycleCount(Timeline.INDEFINITE);
+		//timeline.setAutoReverse(true);
+                //timeline.setCycleCount(Timeline.INDEFINITE);
 	}
 	public void setTimeline(Timeline timeline) {
 		this.timeline = timeline;

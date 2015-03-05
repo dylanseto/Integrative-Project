@@ -42,6 +42,7 @@ public interface Constants
         public final String OPTION_THIN_FILM = "Thin Film";
         public final String OPTION_NEW_BIKE = "New Sports Bike";
         public final String OPTION_INF_GEOM = "Infinite Geometric Series";
+        public final String CONFIRM_EXIT_MSG = "Are you sure you want to exit?";
         public final String OPTION_YES = "Yes"; 
         public final String OPTION_NO = "No";
         
