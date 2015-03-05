@@ -1,5 +1,6 @@
 package sections;
 
+import Main.Constants;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,13 +27,13 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField initVelTextField = new TextField();
 	
 	private final FlowPane projectileFlowPane = new FlowPane();
-	private final ComboBox projectileOptionBox = new ComboBox();
-	//private final ObservableList<String> projectileList = new ObservableList<String>();
+	private final ObservableList<String> projectileList = Constants.PROJECTILE_TYPE_LIST;
+	private final ComboBox<String> projectileOptionBox = new ComboBox(projectileList);
 
     
 	private final FlowPane gravityFlowPane = new FlowPane();
-	private final ComboBox gravityOptionBox = new ComboBox();
-	//private final ObservableList<String> GravityList = new ObservableList<String>();
+	private final ObservableList<String> GravityList = Constants.GRAVITY_TYPE_LIST;
+	private final ComboBox<String> gravityOptionBox = new ComboBox(GravityList);
 	
 	private final FlowPane angleFLowPane = new FlowPane();
 	private final Label angleLabel = new Label("Angle: ");
@@ -100,15 +101,16 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	public void showNewtonLawControls()
 	{
 		massFlowPane.getChildren().addAll(massLabel, massTextField);
-		this.getChildren().add(massFlowPane);
 		forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
-		this.getChildren().add(forceFlowPane);
+		this.getChildren().addAll(massFlowPane, forceFlowPane);
 		
 	}
 	
 	public void showProjMotControls()
 	{
-		
+		this.projectileFlowPane.getChildren().add(projectileOptionBox);
+		this.gravityFlowPane.getChildren().add(gravityOptionBox);
+		this.getChildren().addAll(projectileFlowPane, gravityFlowPane);
 	}
 	
 	public void showOpticsControls()
