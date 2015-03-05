@@ -16,6 +16,7 @@ public class ChartSection extends LineChart<Number, Number>
     public ChartSection()
     {
         super(new NumberAxis(), new NumberAxis());
+        this.setLegendVisible(false);
         getData().add(new XYChart.Series());
         setCursor(Cursor.CROSSHAIR);
     }

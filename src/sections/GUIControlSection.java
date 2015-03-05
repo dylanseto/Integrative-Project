@@ -14,7 +14,11 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label enterValuesLabel = new Label("Enter Value:");
 	
 	private final FlowPane forceFlowPane = new FlowPane();
-	private final Label massLabel = new Label("Mass");
+	private final Label forceLabel = new Label("Force (N): ");
+	private final TextField forceTextField = new TextField();
+	
+	private final FlowPane massFlowPane = new FlowPane();
+	private final Label massLabel = new Label("Mass (kg): ");
 	private final TextField massTextField = new TextField();
 	
 	private final FlowPane initVelFLowPane = new FlowPane();
@@ -93,8 +97,12 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		
 	}
 	
-	public void showNEwtonLawControls()
+	public void showNewtonLawControls()
 	{
+		massFlowPane.getChildren().addAll(massLabel, massTextField);
+		this.getChildren().add(massFlowPane);
+		forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
+		this.getChildren().add(forceFlowPane);
 		
 	}
 	

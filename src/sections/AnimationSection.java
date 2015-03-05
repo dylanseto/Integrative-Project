@@ -30,9 +30,9 @@ public class AnimationSection extends Canvas
 	{
 		newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
 	}
-	private void drawNewtonFrame()
+	public void drawNewtonFrame()
 	{
-		
+		newtonLawCart.drawCart();
 	}
 	private void drawProjMotFrame()
 	{
