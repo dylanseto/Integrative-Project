@@ -72,6 +72,41 @@ public class MainWindow extends Application
 	public static void setUserInterface(Constants.UserInterface ui)
 	{
 		userInterface = ui;
+
+                switch(userInterface)
+                {
+                    case NO_CHOICE:
+                        break;
+                        
+                    case NEWTON_LAW:
+                        topSplitPane.getItems().remove(Constants.ONE);
+                        topSplitPane.getItems().add(chartSection);
+                        chartSection.setLabels(Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
+                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
+                        guiControlSection.showNewtonLawControls();
+                        animSection.drawNewtonFrame(); //change this later
+                        break;
+                        
+                    case PROJ_MOTION:
+                        topSplitPane.getItems().remove(Constants.ONE);
+                        topSplitPane.getItems().add(chartSection);
+                        chartSection.setLabels(Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                                               Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
+                                               Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
+                        guiControlSection.showProjMotControls();
+                        break;
+                    
+                        /*
+                    case OPTICS:
+                        topSplitPane.getItems().remove(Constants.ONE);
+                        topSplitPane.getItems().add(tableSection);
+                        tableSection.setColumnLabels(Constants.IMAGE_LABEL_TEXT, STYLESHEET_MODENA, STYLESHEET_MODENA);
+                        guiControlSection.showProjMotControls();
+                        break;
+                                */
+                        //add the rest of the things here.
+                }
 	}
 
 	public static SplitPane getTopSplitPane() 

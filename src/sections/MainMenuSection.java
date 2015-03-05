@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.layout.VBox;
 import javax.swing.JOptionPane;
 
@@ -84,16 +85,16 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                     showSubMenu(Constants.OPTION_YES, Constants.OPTION_NO);
                 }
                 
-                //mainOptionBox = new ComboBox(mainOptionsList);
-                //mainOptionBox.setOnAction(this);
+                mainOptionBox = new ComboBox(mainOptionsList);
+                mainOptionBox.setOnAction(this);
             }
             else if(event.getSource() == subChoiceOneButton)
             {
                 if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_NEWTON))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.NEWTON_LAW);
-                    MainWindow.getAnimSection().drawNewtonFrame();
-                }
+<<<<<<< .mine=======                    MainWindow.getAnimSection().drawNewtonFrame();
+>>>>>>> .theirs                }
                 else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_OPTICS))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.OPTICS);
