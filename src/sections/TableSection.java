@@ -32,6 +32,7 @@ public class TableSection extends TableView
         colTitle.setPrefWidth(prefWidth);
         colTitle.setEditable(false);
         colTitle.setResizable(false);
+        colTitle.setSortable(false);
         
         colRightValue = new TableColumn();
         colRightValue.setPrefWidth(prefWidth * Constants.ONE_HALF);
@@ -39,6 +40,7 @@ public class TableSection extends TableView
               new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
         colRightValue.setEditable(false);
         colRightValue.setResizable(false);
+        colRightValue.setSortable(false);
         
         colLeftValue = new TableColumn();
         colLeftValue.setPrefWidth(colRightValue.getPrefWidth());
@@ -46,11 +48,13 @@ public class TableSection extends TableView
                 new PropertyValueFactory<TableEntry,String>(Constants.RIGHT_VALUE));
         colLeftValue.setEditable(false);
         colLeftValue.setResizable(false);
+        colLeftValue.setSortable(false);
 
         setColumnLabels(titleLabel, rightValueLabel, leftValueLabel);
         setItems(dataList);
         colTitle.getColumns().addAll(colRightValue, colLeftValue);
         getColumns().add(colTitle);
+
         setDisabled(true);
     }
 
