@@ -47,7 +47,8 @@ public class MainWindow extends Application
                 animSection.setHeight(topSplitPane.getPrefHeight()/Constants.TWO);
                 tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight()/Constants.TWO);
                 chartSection = new ChartSection();
-                
+                chartSection.setVisible(false);
+                tableSection.setVisible(false);
 
                 guiControlSection = new GUIControlSection();
 		userInterface = Constants.UserInterface.NO_CHOICE;
@@ -55,6 +56,7 @@ public class MainWindow extends Application
                 
                 topSplitPane.getItems().add(animSection);
                 topSplitPane.getItems().add(chartSection);
+                
                
                 bottomSplitPane.getItems().add(mainMenuSection);
                 bottomSplitPane.getItems().add(guiControlSection);
@@ -72,40 +74,108 @@ public class MainWindow extends Application
 	public static void setUserInterface(Constants.UserInterface ui)
 	{
 		userInterface = ui;
-
+                
                 switch(userInterface)
                 {
                     case NO_CHOICE:
+                        guiControlSection.setVisible(false);
+                        animSection.getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, animSection.getWidth(), animSection.getHeight());
+                        if(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection)
+                        {
+                            chartSection.setVisible(false);
+                        }
+                        else
+                        {
+                            tableSection.setVisible(false);
+                        }
                         break;
                         
                     case NEWTON_LAW:
-                        topSplitPane.getItems().remove(Constants.ONE);
-                        topSplitPane.getItems().add(chartSection);
-                        chartSection.setLabels(Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                    case PROJ_MOTION:
+                    case SPORTS_BIKE:
+                    case INF_GEOM_SERIES:
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection))
+                        {
+                           topSplitPane.getItems().remove(Constants.ONE);
+                           topSplitPane.getItems().add(chartSection);
+                           if(!chartSection.isVisible())
+                           {
+                               chartSection.setVisible(true);
+                           }
+                        }
+                        
+                        switch(userInterface)
+                        {
+                            case NEWTON_LAW:
+                                chartSection.setLabels(Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
                                                Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
                                                Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
-                        guiControlSection.showNewtonLawControls();
-                        animSection.drawNewtonFrame(); //change this later
-                        break;
-                        
-                    case PROJ_MOTION:
-                        topSplitPane.getItems().remove(Constants.ONE);
-                        topSplitPane.getItems().add(chartSection);
-                        chartSection.setLabels(Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                                guiControlSection.showNewtonLawControls();
+                                animSection.drawNewtonFrame(); //change this later
+                                break;
+                            
+                            case PROJ_MOTION:
+                                chartSection.setLabels(Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
-                        guiControlSection.showProjMotControls();
+                                guiControlSection.showProjMotControls();
+                                break;
+                                
+                            case SPORTS_BIKE:
+                                chartSection.setLabels(Constants.NEW_BIKE_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                                               Constants.NEW_BIKE_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
+                                               Constants.NEW_BIKE_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
+                                guiControlSection.showNewBikeControls();
+                                break;
+                                
+                            case INF_GEOM_SERIES:
+                                chartSection.setLabels(Constants.INF_GEOM_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
+                                               Constants.INF_GEOM_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
+                                               Constants.INF_GEOM_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
+                                guiControlSection.showInfSeriesControls();
+                                break;
+                                
+                            default:
+                                break;
+                        }
                         break;
-                    
-                        /*
+                        
                     case OPTICS:
-                        topSplitPane.getItems().remove(Constants.ONE);
-                        topSplitPane.getItems().add(tableSection);
-                        tableSection.setColumnLabels(Constants.IMAGE_LABEL_TEXT, STYLESHEET_MODENA, STYLESHEET_MODENA);
-                        guiControlSection.showProjMotControls();
+                    case THIN_FILM:
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof TableSection))
+                        {
+                            topSplitPane.getItems().remove(Constants.ONE);
+                            topSplitPane.getItems().add(tableSection);
+                            if(!tableSection.isVisible())
+                            {
+                                tableSection.setVisible(true);
+                            }
+                        }
+                        
+                        switch(userInterface)
+                        {
+                            case OPTICS:
+                                tableSection.setColumnLabels(Constants.IMAGE_LABEL_TEXT, Constants.EMPTY_STRING, Constants.EMPTY_STRING);
+                                tableSection.addLeftValue(Constants.IMG_DIST_LABEL_TEXT);
+                                tableSection.addLeftValue(Constants.IMG_HEIGHT_LABEL_TEXT);
+                                tableSection.addLeftValue(Constants.MAGNIFICATION_LABEL_TEXT);
+                                tableSection.addLeftValue(Constants.REAL_OR_VIRT_LABEL_TEXT);
+
+                                guiControlSection.showOpticsControls();
+                                break;
+                                
+                            case THIN_FILM:
+                                tableSection.setColumnLabels(Constants.WAVE_LENGTHS_LABEL_TEXT, Constants.ENHANCED_LABEL_TEXT, Constants.DESTROYED_LABEL_TEXT); 
+                                guiControlSection.showThinLensControls();
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                    break;
+                        
+                    default:
                         break;
-                                */
-                        //add the rest of the things here.
                 }
 	}
 

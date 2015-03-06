@@ -74,6 +74,7 @@ public interface Constants
         public final String IMG_DIST_LABEL_TEXT = "Distance";
         public final String IMG_HEIGHT_LABEL_TEXT = "Height";
         public final String MAGNIFICATION_LABEL_TEXT = "Magnification";
+        public final String REAL_OR_VIRT_LABEL_TEXT = "Real or Virtual?";
         public final String REAL_LABEL_TEXT = "Real";
         public final String VIRTUAL_LABEL_TEXT = "Virtual";
         public final String LENS_LABEL_TEXT = "Lens type:";
