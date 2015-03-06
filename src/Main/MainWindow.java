@@ -167,7 +167,7 @@ public class MainWindow extends Application
                                 
                             case THIN_FILM:
                                 tableSection.setColumnLabels(Constants.WAVE_LENGTHS_LABEL_TEXT, Constants.ENHANCED_LABEL_TEXT, Constants.DESTROYED_LABEL_TEXT); 
-                                guiControlSection.showThinLensControls();
+                                guiControlSection.showThinFilmControls();
                                 break;
                                 
                             default:
