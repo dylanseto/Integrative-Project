@@ -93,8 +93,8 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_NEWTON))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.NEWTON_LAW);
-<<<<<<< .mine=======                    MainWindow.getAnimSection().drawNewtonFrame();
->>>>>>> .theirs                }
+                    MainWindow.getAnimSection().drawNewtonFrame();
+                }
                 else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_OPTICS))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.OPTICS);

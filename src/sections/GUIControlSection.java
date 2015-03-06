@@ -16,15 +16,37 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane forceFlowPane = new FlowPane();
 	private final Label forceLabel = new Label("Force (N): ");
-	private final TextField forceTextField = new TextField();
+	private final TextField forceTextField = new TextField()
+	{
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane massFlowPane = new FlowPane();
 	private final Label massLabel = new Label("Mass (kg): ");
-	private final TextField massTextField = new TextField();
+	private final TextField massTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane initVelFLowPane = new FlowPane();
 	private final Label initVelLabel = new Label("Initial Velocity: ");
-	private final TextField initVelTextField = new TextField();
+	private final TextField initVelTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane projectileFlowPane = new FlowPane();
 	private final ObservableList<String> projectileList = Constants.PROJECTILE_TYPE_LIST;
@@ -37,11 +59,25 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane angleFLowPane = new FlowPane();
 	private final Label angleLabel = new Label("Angle: ");
-	private final TextField angleTextField = new TextField();
+	private final TextField angleTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane objectHeightFLowPane = new FlowPane();
 	private final Label objectHeightLabel = new Label("Object Height: ");
-	private final TextField objectHeightTextField = new TextField();
+	private final TextField objectHeightTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane objectDistanceFLowPane = new FlowPane();
 	private final Label objectDistanceLabel = new Label("Object Distance: ");
@@ -49,7 +85,14 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane focalDistFLowPane = new FlowPane();
 	private final Label focalDistLabel = new Label("Focal Length: ");
-	private final TextField focalDistTextField = new TextField();
+	private final TextField focalDistTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane materialFlowPane = new FlowPane();
 	private final ComboBox materialOptionBox = new ComboBox();
@@ -59,19 +102,47 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane thicknessFLowPane = new FlowPane();
 	private final Label thicknessLabel = new Label("Thickness: ");
-	private final TextField thicknessTextField = new TextField();
+	private final TextField thicknessTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane costBikeFLowPane = new FlowPane();
 	private final Label costBikeLabel = new Label("Bike Cost: ");
-	private final TextField costBikeTextField = new TextField();
+	private final TextField costBikeTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane costSetUpFLowPane = new FlowPane();
 	private final Label costSetUpLabel = new Label("Setup Cost: ");
-	private final TextField costSetUpTextField = new TextField();
+	private final TextField costSetUpTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane indexRefFilmFLowPane = new FlowPane();
 	private final Label indexRefFilmLabel = new Label("Index Of Refraction: ");
-	private final TextField indexRefFilmTextField = new TextField();
+	private final TextField indexRefFilmTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane lenslFlowPane = new FlowPane();
 	private final ComboBox lensOptionBox = new ComboBox();
@@ -80,23 +151,39 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane coffiecientFLowPane = new FlowPane();
 	private final Label coffiecientLabel = new Label("Coefficient: ");
-	private final TextField coffiecientTextField = new TextField();
+	private final TextField coffiecientTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane baseFLowPane = new FlowPane();
 	private final Label baseLabel = new Label("Base: ");
-	private final TextField baseTextField = new TextField();
+	private final TextField baseTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final FlowPane exponentFLowPane = new FlowPane();
 	private final Label exponentLabel = new Label("Exponent: ");
-	private final TextField exponentTextField = new TextField();
+	private final TextField exponentTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};
 	
 	private final Label infSumEquationLabel = new Label();
 	private final Label partSumEquationLabel = new Label();
-	
-	public GUIControlSection()
-	{
-		
-	}
 	
 	public void showNewtonLawControls()
 	{
