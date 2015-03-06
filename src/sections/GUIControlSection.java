@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {
-	private final Label enterValuesLabel = new Label("Enter Value:");
+	private final Label enterValuesLabel = new Label("Enter Values---------------");
 	
 	private final FlowPane forceFlowPane = new FlowPane();
 	private final Label forceLabel = new Label("Force (N): ");
@@ -96,7 +96,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane materialFlowPane = new FlowPane();
 	private final ComboBox materialOptionBox = new ComboBox();
-	//private final ObservableList<String> materialList = new ObservableList<String>();
+	private final ObservableList<String> materialList = Constants.MATERIAL_TYPE_LIST;
 	
 	private final Label indexRefMatLabel = new Label();
 	
@@ -185,41 +185,51 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label infSumEquationLabel = new Label();
 	private final Label partSumEquationLabel = new Label();
 	
+	public GUIControlSection()
+	{
+		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
+		this.forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
+		
+		this.projectileFlowPane.getChildren().add(projectileOptionBox);
+		this.gravityFlowPane.getChildren().add(gravityOptionBox);
+		this.angleFLowPane.getChildren().addAll(angleLabel, angleTextField);
+		
+		this.objectHeightFLowPane.getChildren().addAll(objectHeightLabel, objectHeightTextField);
+		this.objectDistanceFLowPane.getChildren().addAll(objectDistanceLabel, objectDistanceTextField);
+		this.focalDistFLowPane.getChildren().addAll(focalDistLabel, focalDistTextField);
+	}
 	public void showNewtonLawControls()
 	{
-                getChildren().clear();
-		massFlowPane.getChildren().addAll(massLabel, massTextField);
-		forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
-		this.getChildren().addAll(massFlowPane, forceFlowPane);
+		this.getChildren().clear();
+		this.getChildren().addAll(enterValuesLabel, massFlowPane, forceFlowPane);
 		
 	}
 	
 	public void showProjMotControls()
 	{
-                getChildren().clear();
-		this.projectileFlowPane.getChildren().add(projectileOptionBox);
-		this.gravityFlowPane.getChildren().add(gravityOptionBox);
-		this.getChildren().addAll(projectileFlowPane, gravityFlowPane);
+		this.getChildren().clear();
+		this.getChildren().addAll(enterValuesLabel, projectileFlowPane, gravityFlowPane, angleFLowPane);
 	}
 	
 	public void showOpticsControls()
 	{
-		
+		this.getChildren().clear();
+		this.getChildren().addAll(enterValuesLabel, objectHeightFLowPane, objectDistanceFLowPane, focalDistFLowPane);
 	}
 	
-	public void showThinLensControls()
+	public void showThinFilmControls()
 	{
-		
+		this.getChildren().clear();
 	}
 	
 	public void showNewBikeControls()
 	{
-		
+		this.getChildren().clear();
 	}
 	
 	public void showInfSeriesControls()
 	{
-		
+		this.getChildren().clear();
 	}
 
 	@Override
