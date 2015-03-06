@@ -187,6 +187,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	public void showNewtonLawControls()
 	{
+                getChildren().clear();
 		massFlowPane.getChildren().addAll(massLabel, massTextField);
 		forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
 		this.getChildren().addAll(massFlowPane, forceFlowPane);
@@ -195,6 +196,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	public void showProjMotControls()
 	{
+                getChildren().clear();
 		this.projectileFlowPane.getChildren().add(projectileOptionBox);
 		this.gravityFlowPane.getChildren().add(gravityOptionBox);
 		this.getChildren().addAll(projectileFlowPane, gravityFlowPane);
