@@ -80,6 +80,7 @@ public class MainWindow extends Application
                     case NO_CHOICE:
                         guiControlSection.setVisible(false);
                         animSection.getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, animSection.getWidth(), animSection.getHeight());
+                        tableSection.clearRows();
                         if(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection)
                         {
                             chartSection.setVisible(false);
@@ -94,7 +95,7 @@ public class MainWindow extends Application
                     case PROJ_MOTION:
                     case SPORTS_BIKE:
                     case INF_GEOM_SERIES:
-                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection))
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection) || !chartSection.isVisible())
                         {
                            topSplitPane.getItems().remove(Constants.ONE);
                            topSplitPane.getItems().add(chartSection);
@@ -142,7 +143,7 @@ public class MainWindow extends Application
                         
                     case OPTICS:
                     case THIN_FILM:
-                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof TableSection))
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof TableSection) || !tableSection.isVisible())
                         {
                             topSplitPane.getItems().remove(Constants.ONE);
                             topSplitPane.getItems().add(tableSection);

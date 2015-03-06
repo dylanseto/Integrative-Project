@@ -36,14 +36,14 @@ public class TableSection extends TableView
         colRightValue = new TableColumn();
         colRightValue.setPrefWidth(prefWidth * Constants.ONE_HALF);
         colRightValue.setCellValueFactory(
-              new PropertyValueFactory<TableEntry,String>(Constants.RIGHT_VALUE));
+              new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
         colRightValue.setEditable(false);
         colRightValue.setResizable(false);
         
         colLeftValue = new TableColumn();
         colLeftValue.setPrefWidth(colRightValue.getPrefWidth());
         colLeftValue.setCellValueFactory(
-                new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
+                new PropertyValueFactory<TableEntry,String>(Constants.RIGHT_VALUE));
         colLeftValue.setEditable(false);
         colLeftValue.setResizable(false);
 
@@ -51,7 +51,7 @@ public class TableSection extends TableView
         setItems(dataList);
         colTitle.getColumns().addAll(colRightValue, colLeftValue);
         getColumns().add(colTitle);
-
+        setDisabled(true);
     }
 
     public void setColumnLabels(String titleLabel, String leftValueLabel, String rightValueLabel)
@@ -106,8 +106,8 @@ public class TableSection extends TableView
           
           TableEntry(String leftValue, String rightValue)
           {
+              this.leftValue  = new SimpleStringProperty(leftValue);
               this.rightValue = new SimpleStringProperty(rightValue);
-              this.leftValue  = new SimpleStringProperty(rightValue);
           }
 
           public String getRightValue() 
