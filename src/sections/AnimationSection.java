@@ -1,8 +1,12 @@
 package sections;
 
+import Main.Constants;
 import Main.MainWindow;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.transform.Rotate;
 import sections.animationObjects.CartClass;
 
 public class AnimationSection extends Canvas
@@ -12,11 +16,14 @@ public class AnimationSection extends Canvas
 		@Override
 		public void handle(long arg0) 
 		{
+                    getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 			switch(MainWindow.getUserInterface())
 			{
 				case NO_CHOICE: break;
 				case NEWTON_LAW: break;
-				case PROJ_MOTION: break;
+				case PROJ_MOTION:
+                                    drawProjMotFrame();
+                                    break;
 				case OPTICS: break;
 				case THIN_FILM: break;
 				case SPORTS_BIKE: break;
