@@ -34,10 +34,12 @@ public class AnimationSection extends Canvas
 	{
 		newtonLawCart.drawCart();
 	}
+        
 	private void drawProjMotFrame()
 	{
-		
+            
 	}
+        
 	private void drawOpticsFrame()
 	{
 		
