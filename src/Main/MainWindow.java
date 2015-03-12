@@ -78,16 +78,17 @@ public class MainWindow extends Application
                 switch(userInterface)
                 {
                     case NO_CHOICE:
-                        guiControlSection.setVisible(false);
                         animSection.getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, animSection.getWidth(), animSection.getHeight());
                         tableSection.clearRows();
                         if(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection)
                         {
                             chartSection.setVisible(false);
+                            chartSection.clearData();
                         }
                         else
                         {
                             tableSection.setVisible(false);
+                            tableSection.clearRows();
                         }
                         break;
                         
@@ -95,14 +96,15 @@ public class MainWindow extends Application
                     case PROJ_MOTION:
                     case SPORTS_BIKE:
                     case INF_GEOM_SERIES:
-                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection) || !chartSection.isVisible())
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection))
                         {
                            topSplitPane.getItems().remove(Constants.ONE);
                            topSplitPane.getItems().add(chartSection);
-                           if(!chartSection.isVisible())
-                           {
-                               chartSection.setVisible(true);
-                           }
+                        }
+                        
+                        if(!chartSection.isVisible())
+                        {
+                            chartSection.setVisible(true);
                         }
                         
                         switch(userInterface)
@@ -143,14 +145,16 @@ public class MainWindow extends Application
                         
                     case OPTICS:
                     case THIN_FILM:
-                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof TableSection) || !tableSection.isVisible())
+                        if(!(topSplitPane.getItems().get(Constants.ONE) instanceof TableSection))
                         {
                             topSplitPane.getItems().remove(Constants.ONE);
                             topSplitPane.getItems().add(tableSection);
-                            if(!tableSection.isVisible())
-                            {
-                                tableSection.setVisible(true);
-                            }
+                        }
+                        
+                        if(!tableSection.isVisible())
+                        {
+                            tableSection.clearRows();
+                            tableSection.setVisible(true);
                         }
                         
                         switch(userInterface)
@@ -178,6 +182,8 @@ public class MainWindow extends Application
                     default:
                         break;
                 }
+                
+                guiControlSection.setVisible(userInterface != Constants.UserInterface.NO_CHOICE);
 	}
 
 	public static SplitPane getTopSplitPane() 
@@ -185,7 +191,7 @@ public class MainWindow extends Application
 		return topSplitPane;
 	}
 
-	public static SplitPane getButtomSplitPane() 
+	public static SplitPane getBottomSplitPane() 
         {
 		return bottomSplitPane;
 	}
