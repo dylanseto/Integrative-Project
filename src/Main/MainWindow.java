@@ -213,7 +213,7 @@ public class MainWindow extends Application
 
             public static MainMenuSection getMainMenuSection() 
         {
-                    return mainMenuSection;
+            return mainMenuSection;
         }
 
         public static GUIControlSection getGUIControlSection()
