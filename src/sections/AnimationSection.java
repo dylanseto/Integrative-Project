@@ -104,6 +104,7 @@ public class AnimationSection extends Canvas
             getGraphicsContext2D().setFill(Color.BLACK);
             getGraphicsContext2D().fillRect(0, 225 - Variables.getThickness(), 300, Variables.getThickness());
             
+            //so far it's drawing the lines automatically done; next step is to make it so that the user can actually watch the lines being drawn.
             if(drawLines)
             {
                 double topOfMaterial = 225, 
@@ -113,11 +114,11 @@ public class AnimationSection extends Canvas
     
                 getGraphicsContext2D().setStroke(Color.RED);
                 getGraphicsContext2D().strokeLine(0, 0, middleOfFilm, topOfFilm);//line hitting film
-                double theta = Math.atan2(topOfFilm, middleOfFilm);
-                
-                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial);//line hitting material
                 getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, endPoint, 0);//line rebounding off film
-                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, 0);//line rebounding off material FIX THIS!! Parallel
+                
+                double theta = Math.atan2(topOfFilm, middleOfFilm);
+                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial);//line hitting material
+                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, Variables.getThickness()*( 1 + Math.tan(Math.PI/2 - theta) * Math.tan(theta)));//line rebounding off material
             }
             
 	}
