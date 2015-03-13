@@ -44,8 +44,8 @@ public class MainWindow extends Application
 		mainMenuSection = new MainMenuSection();
                 animSection = new AnimationSection();
                 animSection.setWidth(topSplitPane.getPrefWidth()/Constants.TWO);
-                animSection.setHeight(topSplitPane.getPrefHeight()/Constants.TWO);
-                tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight()/Constants.TWO);
+                animSection.setHeight(topSplitPane.getPrefHeight());
+                tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight());
                 chartSection = new ChartSection();
                 chartSection.setVisible(false);
                 tableSection.setVisible(false);

@@ -42,6 +42,42 @@ public class Variables
     private static String projectileType;
     private static String gravityType;
     
+    static
+    {
+        velocity = Constants.ZERO;
+        displacement = Constants.ZERO;
+        force = Constants.ZERO;
+        mass = Constants.ZERO;
+        acceleration = Constants.ZERO;
+        deltaTime = Constants.ZERO;
+        height = Constants.ZERO;
+        angle = Constants.ZERO;
+        gravity = Constants.ZERO;
+        objHeight = Constants.ZERO;
+        objDistance = Constants.ZERO;
+        focalPoint = Constants.ZERO;
+        imageHeight = Constants.ZERO;
+        imageDistance = Constants.ZERO;
+        costMake = Constants.ZERO;
+        costSetUp = Constants.ZERO;
+        priceBike = Constants.ZERO;
+        profit = Constants.ZERO;
+        units = Constants.ZERO;
+        lensType = Constants.EMPTY_STRING;
+        materialType = Constants.EMPTY_STRING;
+        thickness = Constants.ZERO;
+        waveLengthsConst = new ArrayList<Double>();
+        waveLengthsDest  = new ArrayList<Double>();
+        indexRefFilm = Constants.ZERO;
+        indexRefMaterial = Constants.ZERO;
+        base = Constants.ZERO;
+        coefficient = Constants.ZERO;
+        counter = Constants.ZERO;
+        exponent = Constants.ZERO;
+        projectileType = Constants.EMPTY_STRING;
+        gravityType = Constants.EMPTY_STRING;
+    }
+    
     public static double getVelocity() 
     {
         return velocity;
