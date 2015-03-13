@@ -1,6 +1,8 @@
 package sections;
 
 import Main.Constants;
+import Main.MainWindow;
+import calculations.Variables;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {
@@ -98,7 +101,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final ObservableList<String> materialList = Constants.MATERIAL_TYPE_LIST;
 	private final ComboBox<String> materialOptionBox = new ComboBox<String>(materialList);
 	
-	private final Label indexRefMatLabel = new Label("Index Of Refraction Of Material: ");
+	private final Label indexRefMatLabel = new Label(Constants.INDEX_REF_MAT_LABEL_TEXT);
 	
 	private final FlowPane thicknessFLowPane = new FlowPane();
 	private final Label thicknessLabel = new Label("Thickness: ");
@@ -150,8 +153,8 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label lensLabel = new Label("Lens Type: ");
 	
 	private final FlowPane coffiecientFLowPane = new FlowPane();
-	private final Label coffiecientLabel = new Label("Coefficient: ");
-	private final TextField coffiecientTextField = new TextField(){
+	private final Label coefficientLabel = new Label("Coefficient: ");
+	private final TextField coefficientTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches("^[0-9\\.]*$")) {
@@ -218,10 +221,34 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.costBikeFLowPane.getChildren().addAll(costBikeLabel, costBikeTextField);
 		this.costSetUpFLowPane.getChildren().addAll(costSetUpLabel, costSetUpTextField);
 		
-		this.coffiecientFLowPane.getChildren().addAll(coffiecientLabel, coffiecientTextField);
+		this.coffiecientFLowPane.getChildren().addAll(coefficientLabel, coefficientTextField);
 		this.baseFLowPane.getChildren().addAll(baseLabel, baseTextField);
 		this.exponentFLowPane.getChildren().addAll(exponentLabel, exponentTextField);
-		
+                
+                massTextField.setOnAction(this);
+                forceTextField.setOnAction(this);
+                
+                projectileOptionBox.setOnAction(this);
+                gravityOptionBox.setOnAction(this);
+                angleTextField.setOnAction(this);
+                initVelTextField.setOnAction(this);
+                
+                objectHeightTextField.setOnAction(this);
+                objectDistanceTextField.setOnAction(this);
+                focalDistTextField.setOnAction(this);
+                lensOptionBox.setOnAction(this);
+                
+                materialOptionBox.setOnAction(this);
+                thicknessTextField.setOnAction(this);
+		indexRefFilmTextField.setOnAction(this);
+                
+                costBikeTextField.setOnAction(this);
+                costSetUpTextField.setOnAction(this);
+                
+                coefficientTextField.setOnAction(this);
+                baseTextField.setOnAction(this);
+                exponentTextField.setOnAction(this);
+                
 	}
 	public void showNewtonLawControls()
 	{
@@ -261,7 +288,50 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	}
 
 	@Override
-	public void handle(ActionEvent arg0) 
-	{	
+	public void handle(ActionEvent event) 
+	{
+
+            
+            //handling each individual component
+            if(event.getSource() == materialOptionBox)
+            {
+                Variables.setMaterialType(((String)(materialOptionBox.getSelectionModel().getSelectedItem())));
+                MainWindow.getAnimSection().drawThinFlimFrame();
+                if(Variables.getMaterialType().equalsIgnoreCase("water"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_WATER);
+                }
+                else if(Variables.getMaterialType().equalsIgnoreCase("glycerin"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_GLYCERIN);
+                }
+                else if(Variables.getMaterialType().equalsIgnoreCase("oil"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_OIL);
+                }
+                else if(Variables.getMaterialType().equalsIgnoreCase("zircon"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_ZIRCON);
+                }
+                else if(Variables.getMaterialType().equalsIgnoreCase("diamond"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_DIAMOND);
+                }
+                else if(Variables.getMaterialType().equalsIgnoreCase("pyrex"))
+                {
+                    indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_PYREX);
+                }
+
+            }
+            else if(event.getSource() == thicknessTextField)//note: user has to press enter to make this work
+            {
+                Variables.setThickness(Double.valueOf(thicknessTextField.getText()));
+                MainWindow.getAnimSection().drawThinFlimFrame();
+            }
+            else if(event.getSource() == indexRefFilmTextField)//note: user has to press enter to make this work
+            {
+                Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
+                MainWindow.getAnimSection().drawThinFlimFrame();
+            }
 	}
 }

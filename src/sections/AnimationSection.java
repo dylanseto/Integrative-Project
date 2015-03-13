@@ -15,7 +15,7 @@ public class AnimationSection extends Canvas
 		@Override
 		public void handle(long arg0) 
 		{
-                    getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+                    
 			switch(MainWindow.getUserInterface())
 			{
 				case NO_CHOICE: 
@@ -34,7 +34,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case THIN_FILM:
-                                    drawThinFilmFrame();
+                                    drawThinFilmFrame(true);
                                     break;
                                     
 				case SPORTS_BIKE:
@@ -57,22 +57,23 @@ public class AnimationSection extends Canvas
 	}
 	public void drawNewtonFrame()
 	{
-		newtonLawCart.drawCart();
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            newtonLawCart.drawCart();
 	}
         
 	private void drawProjMotFrame()
 	{
-            
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 	}
         
 	private void drawOpticsFrame()
 	{
-		
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 	}
         
-	private void drawThinFilmFrame()
+	private void drawThinFilmFrame(boolean drawLines)
 	{
-            
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             if(Variables.getMaterialType().equalsIgnoreCase("water"))
             {
                 getGraphicsContext2D().setFill(Color.BLUE);
@@ -99,16 +100,41 @@ public class AnimationSection extends Canvas
             }
             
             getGraphicsContext2D().fillRect(0, 225, 300, 75);
+            
+            getGraphicsContext2D().setFill(Color.BLACK);
+            getGraphicsContext2D().fillRect(0, 225 - Variables.getThickness(), 300, Variables.getThickness());
+            
+            if(drawLines)
+            {
+                double topOfMaterial = 225, 
+                       topOfFilm = topOfMaterial - Variables.getThickness(), 
+                       middleOfFilm = 150,
+                       endPoint = 300;
+    
+                getGraphicsContext2D().setStroke(Color.RED);
+                getGraphicsContext2D().strokeLine(0, 0, middleOfFilm, topOfFilm);//line hitting film
+                double theta = Math.atan2(topOfFilm, middleOfFilm);
+                
+                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial);//line hitting material
+                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, endPoint, 0);//line rebounding off film
+                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, 0);//line rebounding off material FIX THIS!! Parallel
+            }
+            
 	}
+        
+        public void drawThinFlimFrame()
+        {
+            drawThinFilmFrame(false);
+        }
         
 	private void drawNewBikeFrame()
 	{
-		
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 	}
         
 	private void drawInfSeriesFrame()
 	{
-		
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 	}
         
 	public void start()

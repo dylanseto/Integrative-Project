@@ -78,7 +78,9 @@ public class MainWindow extends Application
                 switch(userInterface)
                 {
                     case NO_CHOICE:
+                        guiControlSection.getChildren().clear();
                         animSection.getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, animSection.getWidth(), animSection.getHeight());
+                        animSection.stop();
                         tableSection.clearRows();
                         if(topSplitPane.getItems().get(Constants.ONE) instanceof ChartSection)
                         {
