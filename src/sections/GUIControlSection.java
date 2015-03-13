@@ -50,12 +50,12 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane projectileFlowPane = new FlowPane();
 	private final ObservableList<String> projectileList = Constants.PROJECTILE_TYPE_LIST;
-	private final ComboBox<String> projectileOptionBox = new ComboBox(projectileList);
+	private final ComboBox<String> projectileOptionBox = new ComboBox<String>(projectileList);
 
     
 	private final FlowPane gravityFlowPane = new FlowPane();
 	private final ObservableList<String> GravityList = Constants.GRAVITY_TYPE_LIST;
-	private final ComboBox<String> gravityOptionBox = new ComboBox(GravityList);
+	private final ComboBox<String> gravityOptionBox = new ComboBox<String>(GravityList);
 	
 	private final FlowPane angleFLowPane = new FlowPane();
 	private final Label angleLabel = new Label("Angle: ");
@@ -96,7 +96,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane materialFlowPane = new FlowPane();
 	private final ObservableList<String> materialList = Constants.MATERIAL_TYPE_LIST;
-	private final ComboBox materialOptionBox = new ComboBox(materialList);
+	private final ComboBox<String> materialOptionBox = new ComboBox<String>(materialList);
 	
 	private final Label indexRefMatLabel = new Label("Index Of Refraction Of Material: ");
 	
@@ -214,6 +214,14 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.materialFlowPane.getChildren().add(materialOptionBox);
 		this.thicknessFLowPane.getChildren().addAll(thicknessLabel, thicknessTextField);
 		this.indexRefFilmFLowPane.getChildren().addAll(indexRefFilmLabel, indexRefFilmTextField);
+		
+		this.costBikeFLowPane.getChildren().addAll(costBikeLabel, costBikeTextField);
+		this.costSetUpFLowPane.getChildren().addAll(costSetUpLabel, costSetUpTextField);
+		
+		this.coffiecientFLowPane.getChildren().addAll(coffiecientLabel, coffiecientTextField);
+		this.baseFLowPane.getChildren().addAll(baseLabel, baseTextField);
+		this.exponentFLowPane.getChildren().addAll(exponentLabel, exponentTextField);
+		
 	}
 	public void showNewtonLawControls()
 	{
@@ -243,15 +251,17 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	public void showNewBikeControls()
 	{
 		this.getChildren().clear();
+		this.getChildren().addAll(costBikeFLowPane, costSetUpFLowPane);
 	}
 	
 	public void showInfSeriesControls()
 	{
 		this.getChildren().clear();
+		this.getChildren().addAll(coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
 	}
 
 	@Override
-	public void handle(ActionEvent arg0) {
-		
+	public void handle(ActionEvent arg0) 
+	{	
 	}
 }
