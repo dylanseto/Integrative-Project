@@ -95,10 +95,10 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane materialFlowPane = new FlowPane();
-	private final ComboBox materialOptionBox = new ComboBox();
 	private final ObservableList<String> materialList = Constants.MATERIAL_TYPE_LIST;
+	private final ComboBox materialOptionBox = new ComboBox(materialList);
 	
-	private final Label indexRefMatLabel = new Label();
+	private final Label indexRefMatLabel = new Label("Index Of Refraction Of Material: ");
 	
 	private final FlowPane thicknessFLowPane = new FlowPane();
 	private final Label thicknessLabel = new Label("Thickness: ");
@@ -134,7 +134,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane indexRefFilmFLowPane = new FlowPane();
-	private final Label indexRefFilmLabel = new Label("Index Of Refraction: ");
+	private final Label indexRefFilmLabel = new Label("Index Of Refraction Of Film: ");
 	private final TextField indexRefFilmTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -145,9 +145,9 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane lenslFlowPane = new FlowPane();
-	private final ComboBox lensOptionBox = new ComboBox();
+	private final ObservableList<String> lensList = Constants.LENS_TYPE_LIST;
+	private final ComboBox<String> lensOptionBox = new ComboBox<String>(lensList);
 	private final Label lensLabel = new Label("Lens Type: ");
-	//private final ObservableList<String> lensList = new ObservableList<String>();
 	
 	private final FlowPane coffiecientFLowPane = new FlowPane();
 	private final Label coffiecientLabel = new Label("Coefficient: ");
@@ -185,6 +185,17 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label infSumEquationLabel = new Label();
 	private final Label partSumEquationLabel = new Label();
 	
+	/*
+	 * COnstructor
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public GUIControlSection()
 	{
 		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
@@ -193,10 +204,16 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.projectileFlowPane.getChildren().add(projectileOptionBox);
 		this.gravityFlowPane.getChildren().add(gravityOptionBox);
 		this.angleFLowPane.getChildren().addAll(angleLabel, angleTextField);
+		this.initVelFLowPane.getChildren().addAll(initVelLabel, initVelTextField);
 		
 		this.objectHeightFLowPane.getChildren().addAll(objectHeightLabel, objectHeightTextField);
 		this.objectDistanceFLowPane.getChildren().addAll(objectDistanceLabel, objectDistanceTextField);
 		this.focalDistFLowPane.getChildren().addAll(focalDistLabel, focalDistTextField);
+		this.lenslFlowPane.getChildren().addAll(lensLabel, lensOptionBox);
+		
+		this.materialFlowPane.getChildren().add(materialOptionBox);
+		this.thicknessFLowPane.getChildren().addAll(thicknessLabel, thicknessTextField);
+		this.indexRefFilmFLowPane.getChildren().addAll(indexRefFilmLabel, indexRefFilmTextField);
 	}
 	public void showNewtonLawControls()
 	{
@@ -208,18 +225,19 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	public void showProjMotControls()
 	{
 		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, projectileFlowPane, gravityFlowPane, angleFLowPane);
+		this.getChildren().addAll(enterValuesLabel, projectileFlowPane, gravityFlowPane, angleFLowPane, initVelFLowPane);
 	}
 	
 	public void showOpticsControls()
 	{
 		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, objectHeightFLowPane, objectDistanceFLowPane, focalDistFLowPane);
+		this.getChildren().addAll(enterValuesLabel, objectHeightFLowPane, objectDistanceFLowPane, focalDistFLowPane, lenslFlowPane);
 	}
 	
 	public void showThinFilmControls()
 	{
 		this.getChildren().clear();
+		this.getChildren().addAll(materialFlowPane, indexRefMatLabel, thicknessFLowPane, indexRefFilmFLowPane);
 	}
 	
 	public void showNewBikeControls()
