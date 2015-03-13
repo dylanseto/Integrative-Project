@@ -118,7 +118,38 @@ public class AnimationSection extends Canvas
                 
                 double theta = Math.atan2(topOfFilm, middleOfFilm);
                 getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial);//line hitting material
-                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, Variables.getThickness()*( 1 + Math.tan(Math.PI/2 - theta) * Math.tan(theta)));//line rebounding off material
+                double yPosSecondRay = Variables.getThickness()*( 1 + Math.tan(Math.PI/2 - theta) * Math.tan(theta));
+                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, yPosSecondRay);//line rebounding off material
+                
+                //FIX THIS!!!!
+                double xPosSymbol = endPoint - 10,
+                       yPosSymbol_1 = 30,
+                       yPosSymbol_2 = yPosSecondRay + yPosSymbol_1;
+                
+                getGraphicsContext2D().setFill(Color.BLACK);
+                if(Variables.getIndexRefFilm() > Constants.INDEX_REF_AIR)
+                {
+                    getGraphicsContext2D().fillText("pi", xPosSymbol, yPosSymbol_1);
+                }
+                else
+                {
+                    getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), xPosSymbol, yPosSymbol_1);
+                }
+                
+                if(yPosSecondRay > topOfFilm)
+                {
+                    getGraphicsContext2D().setFill(Color.WHITE);
+                }
+                
+                if(Variables.getIndexRefMaterial() > Variables.getIndexRefFilm())
+                {
+                    getGraphicsContext2D().fillText("pi", xPosSymbol, yPosSymbol_2);
+                }
+                else
+                {
+                    getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), xPosSymbol, yPosSymbol_2);
+                }
+
             }
             
 	}

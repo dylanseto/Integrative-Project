@@ -149,6 +149,7 @@ public interface Constants
 	public final double FULL_ROTATION = 360;
         public final String SIGMA = "\u03A3";
         
+        //Cart class constants
         public final double[] Car_Polygon_X = {10, 20, 30, 50, 60, 70, 80, 10};
     	public final double[] Car_Polygon_Y = {20, 20, 10, 10, 20, 20, 40, 40};;
     	public final int POLYGON_SIDE_NUM = 8;
