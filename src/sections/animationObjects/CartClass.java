@@ -15,8 +15,8 @@ import javafx.util.Duration;
 public class CartClass
 {	
 	
-	private DoubleProperty x_property;
-	private DoubleProperty y_property;
+	private double x_property;
+	private double y_property;
 	private Timeline timeline;
 	private boolean isRunning;
 	
@@ -24,8 +24,8 @@ public class CartClass
 	
 	public CartClass(GraphicsContext graphics) 
 	{
-		this.x_property = new SimpleDoubleProperty();
-		this.y_property = new SimpleDoubleProperty();
+		this.x_property = 0;
+		this.y_property = 0;
 		
 		this.graphics = graphics;
 		this.isRunning = false;
@@ -63,7 +63,7 @@ public class CartClass
 	public void drawCart()
 	{
 		graphics.setFill(Color.BLACK);
-		graphics.strokeLine(0, 40, 300, 40);
+		graphics.strokeLine(0, 150, 300, 150);
 		
 		graphics.setFill(Color.BLUE);
 		double[] x = Constants.Car_Polygon_X.clone();
@@ -71,27 +71,27 @@ public class CartClass
 		
 		for(int i = Constants.ZERO; i < Constants.POLYGON_SIDE_NUM; i ++)
 		{
-			y[i] += (y_property.doubleValue());
-			x[i] += x_property.doubleValue();
+			y[i] += (y_property);
+			x[i] += x_property;
 		}
 		
 		graphics.fillPolygon(x, y, Constants.POLYGON_SIDE_NUM);
 		graphics.setFill(Color.BLACK);
-		graphics.fillOval(x_property.doubleValue()+Constants.CAR_WHEEL_ONE_INIT_X, y_property.doubleValue()+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
-		graphics.fillOval(x_property.doubleValue()+Constants.CAR_WHEEL_TWO_INIT_X, y_property.doubleValue()+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
+		graphics.fillOval(x_property+Constants.CAR_WHEEL_ONE_INIT_X, y_property+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
+		graphics.fillOval(x_property+Constants.CAR_WHEEL_TWO_INIT_X, y_property+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
 	}
-	public DoubleProperty getX() {
+	public double getX() {
 		return x_property;
 	}
 	public void setX(double x)
 	{
-		x_property.set(x);
+		x_property = x;
 	}
-	public DoubleProperty getY() {
+	public double getY() {
 		return y_property;
 	}
 	public void setY(double y)
 	{
-		y_property.set(y);
+		y_property = y;
 	}
 }

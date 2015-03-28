@@ -1,7 +1,11 @@
 package sections;
 
+import java.util.concurrent.TimeUnit;
+import java.lang.Math;
+
 import Main.Constants;
 import Main.MainWindow;
+import calculations.FormulaHelper;
 import calculations.Variables;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -11,9 +15,14 @@ import sections.animationObjects.CartClass;
 public class AnimationSection extends Canvas
 {
 	CartClass newtonLawCart;
+	long elapsedTime = System.nanoTime();
+	long initTime = System.nanoTime();
+	long previousTime = initTime;
+	double prevDistance;
+	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
-		public void handle(long arg0) 
+		public void handle(long time) 
 		{
                     
 			switch(MainWindow.getUserInterface())
@@ -22,7 +31,30 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case NEWTON_LAW:
-                                    drawNewtonFrame();
+									GUIControlSection gcs = MainWindow.getGUIControlSection();
+									Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
+									long totalTime = time - initTime;
+									
+									Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
+		
+									elapsedTime = time-previousTime;
+									previousTime = time;
+									
+									Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
+									//prevDistance = distance;
+									newtonLawCart.setX(Variables.getDisplacement());
+				
+							
+									if(totalTime % 100 == 1)
+									{
+										MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
+									}
+									/*if(Math.floor((double)(totalTime/1000000000)) == ((double)(totalTime/1000000000)))
+									{*/
+									//MainWindow.getChartSection().addDataPoint(totalTime, Variables.getVelocity()*1000);
+									//}
+						
+									drawNewtonFrame();
                                     break;
                                     
 				case PROJ_MOTION:
@@ -171,6 +203,7 @@ public class AnimationSection extends Canvas
         
 	public void start()
 	{
+		MainWindow.getChartSection().addDataPoint(0, 0);
 		this.animTimer.start();
 	}
         

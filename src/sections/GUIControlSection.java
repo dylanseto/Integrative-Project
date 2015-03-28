@@ -333,5 +333,13 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
                 MainWindow.getAnimSection().drawThinFlimFrame();
             }
+            else if(event.getSource() == this.forceTextField)
+            {
+            	Variables.setForce(Double.valueOf(forceTextField.getText()));
+            }
+            else if(event.getSource() == this.massTextField)
+            {
+            	Variables.setMass(Double.valueOf(massTextField.getText()));
+            }
 	}
 }

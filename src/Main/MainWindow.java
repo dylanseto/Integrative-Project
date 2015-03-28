@@ -113,8 +113,8 @@ public class MainWindow extends Application
                         {
                             case NEWTON_LAW:
                                 chartSection.setLabels(Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_TITLE_INDEX], 
-                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
-                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
+                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX], 
+                                               Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX]);
                                 guiControlSection.showNewtonLawControls();
                                 animSection.drawNewtonFrame(); //change this later
                                 break;

@@ -26,8 +26,8 @@ public interface Constants
         public final double MAX_VIS_LIGHT_LENGTH = 700;
         
 	//Sizing ratios
-	public final double METER_RATIO = 1/1000;
-	public final double SCREEN_SPLIT_RATIO = 1/2;
+	public final double METER_RATIO = 0.001;
+	public final double SCREEN_SPLIT_RATIO = 0.5;
 
 	//Combo Box options
 	public final String OPTION_MECHANICS = "Mechanics";
@@ -151,10 +151,10 @@ public interface Constants
         
         //Cart class constants
         public final double[] Car_Polygon_X = {10, 20, 30, 50, 60, 70, 80, 10};
-    	public final double[] Car_Polygon_Y = {20, 20, 10, 10, 20, 20, 40, 40};;
+    	public final double[] Car_Polygon_Y = {140, 140, 130, 130, 140, 140, 160, 160};;
     	public final int POLYGON_SIDE_NUM = 8;
     	public final int CAR_WHEEL_ONE_INIT_X = 20;
     	public final int CAR_WHEEL_TWO_INIT_X = 45;
-    	public final int CAR_WHEEL_INIT_Y = 30;
+    	public final int CAR_WHEEL_INIT_Y = 150;
     	public final int CAR_WHEEL_DIAMETER = 15;
 }

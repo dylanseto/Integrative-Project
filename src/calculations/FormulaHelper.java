@@ -12,9 +12,9 @@ public class FormulaHelper
 		return (force/mass);
 	}
 	
-	public static double computeVelocity(double deltaTime, double acceleration, double prevVelocity)
+	public static double computeVelocity(double deltaTime, double acceleration)
 	{
-		return ((deltaTime*acceleration)+prevVelocity);
+		return ((deltaTime*acceleration));
 	}
 	
 	public static double computeDisplacement(double deltaTime, double curVelocty, double prevDisplacement)
