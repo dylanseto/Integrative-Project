@@ -31,30 +31,30 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case NEWTON_LAW:
-									GUIControlSection gcs = MainWindow.getGUIControlSection();
-									Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
-									long totalTime = time - initTime;
-									
-									Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
-		
-									elapsedTime = time-previousTime;
-									previousTime = time;
-									
-									Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
-									//prevDistance = distance;
-									newtonLawCart.setX(Variables.getDisplacement());
-				
-							
-									if(totalTime % 100 == 1)
-									{
-										MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
-									}
-									/*if(Math.floor((double)(totalTime/1000000000)) == ((double)(totalTime/1000000000)))
-									{*/
-									//MainWindow.getChartSection().addDataPoint(totalTime, Variables.getVelocity()*1000);
-									//}
-						
-									drawNewtonFrame();
+                                    GUIControlSection gcs = MainWindow.getGUIControlSection();
+                                    Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
+                                    long totalTime = time - initTime;
+
+                                    Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
+
+                                    elapsedTime = time-previousTime;
+                                    previousTime = time;
+
+                                    Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
+                                    //prevDistance = distance;
+                                    newtonLawCart.setX(Variables.getDisplacement());
+
+
+                                    if(totalTime % 100 == 1)
+                                    {
+                                            MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
+                                    }
+                                    /*if(Math.floor((double)(totalTime/1000000000)) == ((double)(totalTime/1000000000)))
+                                    {*/
+                                    //MainWindow.getChartSection().addDataPoint(totalTime, Variables.getVelocity()*1000);
+                                    //}
+
+                                    drawNewtonFrame();
                                     break;
                                     
 				case PROJ_MOTION:
@@ -139,6 +139,7 @@ public class AnimationSection extends Canvas
             //so far it's drawing the lines automatically done; next step is to make it so that the user can actually watch the lines being drawn.
             if(drawLines)
             {
+                MainWindow.getTableSection().clearRows();
                 double topOfMaterial = 225, 
                        topOfFilm = topOfMaterial - Variables.getThickness(), 
                        middleOfFilm = 150,
@@ -181,7 +182,52 @@ public class AnimationSection extends Canvas
                 {
                     getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), xPosSymbol, yPosSymbol_2);
                 }
-
+                
+                Variables.setWaveLengthsDest(FormulaHelper.getWaveLengthsDestructive(Variables.getIndexRefFilm(), Variables.getThickness()));
+                Variables.setWaveLengthsConst(FormulaHelper.getWaveLengthsConstructive(Variables.getIndexRefFilm(), Variables.getThickness()));
+                
+                
+                if(Variables.getWaveLengthsDest().size() == Variables.getWaveLengthsConst().size())
+                {
+                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                    {
+                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                    }
+                }
+                if(Variables.getWaveLengthsDest().size() > Variables.getWaveLengthsConst().size())
+                {   
+                    int lastIndexDest = Constants.ZERO;
+                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                    {
+                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                        if(i == Variables.getWaveLengthsConst().size() - Constants.ONE)
+                        {
+                            lastIndexDest = i;
+                        }
+                    }
+                    for(int i = lastIndexDest; i < Variables.getWaveLengthsDest().size(); ++i)
+                    {
+                        MainWindow.getTableSection().addLeftValue(String.valueOf(Variables.getWaveLengthsDest().get(i)));
+                    }
+                }
+                else if(Variables.getWaveLengthsDest().size() < Variables.getWaveLengthsConst().size())
+                {
+                    int lastIndexDest = Constants.ZERO;
+                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsDest().size(); ++i)
+                    {
+                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                        if(i == Variables.getWaveLengthsDest().size() - Constants.ONE)
+                        {
+                            lastIndexDest = i;
+                        }
+                    }
+                    for(int i = lastIndexDest; i < Variables.getWaveLengthsConst().size(); ++i)
+                    {
+                        MainWindow.getTableSection().setRightValue(i, String.valueOf(Variables.getWaveLengthsDest().get(i)));
+                    }
+                }
+                
+                stop();
             }
             
 	}

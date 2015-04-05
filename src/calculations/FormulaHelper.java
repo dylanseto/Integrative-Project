@@ -2,6 +2,7 @@ package calculations;
 
 import Main.Constants;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FormulaHelper 
 {
@@ -61,18 +62,19 @@ public class FormulaHelper
         
         private static ArrayList<Double> getWaveLengthsThinFilm(double indexRefFilm, double thickness, boolean constructive)
         {
-            double waveLength = Constants.ZERO;
+            double waveLength;
             int m = (constructive)? Constants.ONE : Constants.ZERO;
             ArrayList<Double> waveLengthList = new ArrayList<Double>();
             
-            while(waveLength <= Constants.MAX_VIS_LIGHT_LENGTH)
+            do
             {
                 waveLength = computeWaveLengthThinFilm(indexRefFilm, thickness, m++, constructive);
                 if(waveLength >= Constants.MIN_VIS_LIGHT_LENGTH && waveLength <= Constants.MAX_VIS_LIGHT_LENGTH)
                 {
                     waveLengthList.add(waveLength);
                 }
-            }
+                
+            }while(waveLength >= Constants.MIN_VIS_LIGHT_LENGTH);
             
             return waveLengthList;
         }

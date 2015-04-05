@@ -291,7 +291,6 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	public void handle(ActionEvent event) 
 	{
 
-            
             //handling each individual component
             if(event.getSource() == materialOptionBox)
             {
@@ -300,26 +299,32 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 if(Variables.getMaterialType().equalsIgnoreCase("water"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_WATER);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_WATER);
                 }
                 else if(Variables.getMaterialType().equalsIgnoreCase("glycerin"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_GLYCERIN);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_GLYCERIN);
                 }
                 else if(Variables.getMaterialType().equalsIgnoreCase("oil"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_OIL);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_OIL);
                 }
                 else if(Variables.getMaterialType().equalsIgnoreCase("zircon"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_ZIRCON);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_ZIRCON);
                 }
                 else if(Variables.getMaterialType().equalsIgnoreCase("diamond"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_DIAMOND);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_DIAMOND);
                 }
                 else if(Variables.getMaterialType().equalsIgnoreCase("pyrex"))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_PYREX);
+                    Variables.setIndexRefMaterial(Constants.INDEX_REF_PYREX);
                 }
 
             }
