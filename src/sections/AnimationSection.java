@@ -7,6 +7,7 @@ import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
+import java.util.Arrays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -14,11 +15,15 @@ import sections.animationObjects.CartClass;
 
 public class AnimationSection extends Canvas
 {
-	CartClass newtonLawCart;
-	long elapsedTime = System.nanoTime();
-	long initTime = System.nanoTime();
-	long previousTime = initTime;
-	double prevDistance;
+	private CartClass newtonLawCart;
+	private long elapsedTime = System.nanoTime();
+	private long initTime = System.nanoTime();
+	private long previousTime = initTime;
+	private double prevDistance;
+        
+        //for thin film
+        private int clearRectLengthReduction = Constants.ZERO;
+        private int pi_zeroAlphaIncrease = Constants.ZERO;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -131,105 +136,125 @@ public class AnimationSection extends Canvas
                 getGraphicsContext2D().setFill(Color.LIGHTGRAY);//make an opaque grey
             }
             
-            getGraphicsContext2D().fillRect(0, 225, 300, 75);
+            getGraphicsContext2D().fillRect(Constants.ZERO, Constants.TOP_OF_MATERIAL_Y_POS, Constants.END_POINT_X_POS, Constants.MATERIAL_HEIGHT);//draws material
             
-            getGraphicsContext2D().setFill(Color.BLACK);
-            getGraphicsContext2D().fillRect(0, 225 - Variables.getThickness(), 300, Variables.getThickness());
+            getGraphicsContext2D().setFill(Color.BLACK);//drawing film
             
-            //so far it's drawing the lines automatically done; next step is to make it so that the user can actually watch the lines being drawn.
+            double filmHeight = Variables.getThickness()/Constants.MAX_FILM_HEIGHT;
+            
+            if(filmHeight > Constants.ZERO && filmHeight < Constants.MIN_FILM_HEIGHT)
+            {
+                filmHeight = Constants.MIN_FILM_HEIGHT;
+            }
+            else if(filmHeight > Constants.MAX_FILM_HEIGHT)
+            {
+                filmHeight = Constants.MAX_FILM_HEIGHT;
+            }
+            
+            double topOfFilm = Constants.TOP_OF_MATERIAL_Y_POS - filmHeight;
+            getGraphicsContext2D().fillRect(Constants.ZERO, topOfFilm, Constants.END_POINT_X_POS, filmHeight);
+            
             if(drawLines)
             {
                 MainWindow.getTableSection().clearRows();
-                double topOfMaterial = 225, 
-                       topOfFilm = topOfMaterial - Variables.getThickness(), 
-                       middleOfFilm = 150,
-                       endPoint = 300;
-    
+
                 getGraphicsContext2D().setStroke(Color.RED);
-                getGraphicsContext2D().strokeLine(0, 0, middleOfFilm, topOfFilm);//line hitting film
-                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, endPoint, 0);//line rebounding off film
+                getGraphicsContext2D().strokeLine(Constants.ZERO, Constants.ZERO, Constants.MIDDLE_OF_FILM_X_POS, topOfFilm);//line hitting film
+                getGraphicsContext2D().strokeLine(Constants.MIDDLE_OF_FILM_X_POS, topOfFilm, Constants.END_POINT_X_POS, Constants.ZERO);//line rebounding off film
                 
-                double theta = Math.atan2(topOfFilm, middleOfFilm);
-                getGraphicsContext2D().strokeLine(middleOfFilm, topOfFilm, middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial);//line hitting material
-                double yPosSecondRay = Variables.getThickness()*( 1 + Math.tan(Math.PI/2 - theta) * Math.tan(theta));
-                getGraphicsContext2D().strokeLine(middleOfFilm + Variables.getThickness() * Math.tan(Math.PI/2 - theta), topOfMaterial, endPoint, yPosSecondRay);//line rebounding off material
+                double theta = Math.atan2(topOfFilm, Constants.MIDDLE_OF_FILM_X_POS);
+                getGraphicsContext2D().strokeLine(Constants.MIDDLE_OF_FILM_X_POS, topOfFilm, Constants.MIDDLE_OF_FILM_X_POS + filmHeight * Math.tan(Constants.ONE_HALF * Math.PI - theta), Constants.TOP_OF_MATERIAL_Y_POS);//line hitting material
+                double yPosSecondRay = filmHeight*(Constants.ONE + Math.tan(Constants.ONE_HALF * Math.PI - theta) * Math.tan(theta));
+                getGraphicsContext2D().strokeLine(Constants.MIDDLE_OF_FILM_X_POS + filmHeight * Math.tan(Constants.ONE_HALF * Math.PI - theta), Constants.TOP_OF_MATERIAL_Y_POS, Constants.END_POINT_X_POS, yPosSecondRay);//line rebounding off material
                 
-                //FIX THIS!!!!
-                double xPosSymbol = endPoint - 10,
-                       yPosSymbol_1 = 30,
-                       yPosSymbol_2 = yPosSecondRay + yPosSymbol_1;
-                
-                getGraphicsContext2D().setFill(Color.BLACK);
-                if(Variables.getIndexRefFilm() > Constants.INDEX_REF_AIR)
+                if(clearRectLengthReduction < (int)Constants.END_POINT_X_POS)
                 {
-                    getGraphicsContext2D().fillText("pi", xPosSymbol, yPosSymbol_1);
+                    getGraphicsContext2D().clearRect(clearRectLengthReduction, Constants.ZERO, Constants.END_POINT_X_POS - clearRectLengthReduction, topOfFilm);
+                    getGraphicsContext2D().setFill(Color.BLACK);
+                    getGraphicsContext2D().fillRect(clearRectLengthReduction, topOfFilm, Constants.END_POINT_X_POS - clearRectLengthReduction, Constants.TOP_OF_MATERIAL_Y_POS - topOfFilm);
+                    ++clearRectLengthReduction;
                 }
-                else
+                else if(clearRectLengthReduction >= (int)Constants.END_POINT_X_POS)
                 {
-                    getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), xPosSymbol, yPosSymbol_1);
-                }
-                
-                if(yPosSecondRay > topOfFilm)
-                {
-                    getGraphicsContext2D().setFill(Color.WHITE);
-                }
-                
-                if(Variables.getIndexRefMaterial() > Variables.getIndexRefFilm())
-                {
-                    getGraphicsContext2D().fillText("pi", xPosSymbol, yPosSymbol_2);
-                }
-                else
-                {
-                    getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), xPosSymbol, yPosSymbol_2);
-                }
-                
-                Variables.setWaveLengthsDest(FormulaHelper.getWaveLengthsDestructive(Variables.getIndexRefFilm(), Variables.getThickness()));
-                Variables.setWaveLengthsConst(FormulaHelper.getWaveLengthsConstructive(Variables.getIndexRefFilm(), Variables.getThickness()));
-                
-                
-                if(Variables.getWaveLengthsDest().size() == Variables.getWaveLengthsConst().size())
-                {
-                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                    double yPosSymbol_2 = yPosSecondRay + Constants.Y_POS_SHIFT_SYMBOL_2;
+                    
+                    getGraphicsContext2D().setFill(Color.rgb(Constants.ZERO, Constants.ZERO, Constants.ZERO, (double)(pi_zeroAlphaIncrease)/Constants.MAX_PI_ZERO_ALPHA));
+                    if(Variables.getIndexRefFilm() > Constants.INDEX_REF_AIR)
                     {
-                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                        getGraphicsContext2D().fillText(Constants.PI_TEXT, Constants.X_POS_SYMBOL_1, Constants.Y_POS_SYMBOL_1);
                     }
-                }
-                if(Variables.getWaveLengthsDest().size() > Variables.getWaveLengthsConst().size())
-                {   
-                    int lastIndexDest = Constants.ZERO;
-                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                    else
                     {
-                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
-                        if(i == Variables.getWaveLengthsConst().size() - Constants.ONE)
+                        getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), Constants.X_POS_SYMBOL_1, Constants.Y_POS_SYMBOL_1);
+                    }
+
+                    if(Variables.getIndexRefMaterial() > Variables.getIndexRefFilm())
+                    {
+                        getGraphicsContext2D().fillText(Constants.PI_TEXT, Constants.X_POS_SYMBOL_2, yPosSymbol_2);
+                    }
+                    else
+                    {
+                        getGraphicsContext2D().fillText(String.valueOf(Constants.ZERO), Constants.X_POS_SYMBOL_2, yPosSymbol_2);
+                    }
+                    
+                    
+                    if(pi_zeroAlphaIncrease < Constants.MAX_PI_ZERO_ALPHA)
+                    {
+                        ++pi_zeroAlphaIncrease;
+                    }
+                    else if(pi_zeroAlphaIncrease >= Constants.MAX_PI_ZERO_ALPHA)
+                    {
+                        Variables.setWaveLengthsDest(FormulaHelper.getWaveLengthsDestructive(Variables.getIndexRefFilm(), Variables.getThickness()));
+                        Variables.setWaveLengthsConst(FormulaHelper.getWaveLengthsConstructive(Variables.getIndexRefFilm(), Variables.getThickness()));
+
+                        if(Variables.getWaveLengthsDest().size() == Variables.getWaveLengthsConst().size())
                         {
-                            lastIndexDest = i;
+                            for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                            {
+                                MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                            }
                         }
-                    }
-                    for(int i = lastIndexDest; i < Variables.getWaveLengthsDest().size(); ++i)
-                    {
-                        MainWindow.getTableSection().addLeftValue(String.valueOf(Variables.getWaveLengthsDest().get(i)));
-                    }
-                }
-                else if(Variables.getWaveLengthsDest().size() < Variables.getWaveLengthsConst().size())
-                {
-                    int lastIndexDest = Constants.ZERO;
-                    for(int i = Constants.ZERO; i < Variables.getWaveLengthsDest().size(); ++i)
-                    {
-                        MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
-                        if(i == Variables.getWaveLengthsDest().size() - Constants.ONE)
+                        if(Variables.getWaveLengthsDest().size() > Variables.getWaveLengthsConst().size())
+                        {   
+                            int lastIndexConst = Constants.ZERO;
+                            for(int i = Constants.ZERO; i < Variables.getWaveLengthsConst().size(); ++i)
+                            {
+                                MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+                                if(i == Variables.getWaveLengthsConst().size() - Constants.ONE)
+                                {
+                                    lastIndexConst = i + Constants.ONE;
+                                }
+                            }
+                            for(int i = lastIndexConst; i < Variables.getWaveLengthsDest().size(); ++i)
+                            {
+                                MainWindow.getTableSection().addLeftValue(String.valueOf(Variables.getWaveLengthsDest().get(i)));
+                            }
+                        }
+                        else if(Variables.getWaveLengthsDest().size() < Variables.getWaveLengthsConst().size())
                         {
-                            lastIndexDest = i;
+                            int lastIndexDest = Constants.ZERO;
+                            for(int i = Constants.ZERO; i < Variables.getWaveLengthsDest().size(); ++i)
+                            {
+                                MainWindow.getTableSection().addRow(Variables.getWaveLengthsDest().get(i), Variables.getWaveLengthsConst().get(i));
+
+                                if(i == Variables.getWaveLengthsDest().size() - Constants.ONE)
+                                {
+                                    lastIndexDest = i + Constants.ONE;
+                                }
+                            }
+                            for(int i = lastIndexDest; i < Variables.getWaveLengthsConst().size(); ++i)
+                            {
+                                MainWindow.getTableSection().addRow(Constants.EMPTY_STRING, String.valueOf(Variables.getWaveLengthsConst().get(i)));
+                            }
                         }
-                    }
-                    for(int i = lastIndexDest; i < Variables.getWaveLengthsConst().size(); ++i)
-                    {
-                        MainWindow.getTableSection().setRightValue(i, String.valueOf(Variables.getWaveLengthsDest().get(i)));
+
+                        clearRectLengthReduction = Constants.ZERO;
+                        pi_zeroAlphaIncrease = Constants.ZERO;
+                        MainWindow.getGUIControlSection().setDisable(false);
+                        stop();
                     }
                 }
-                
-                stop();
             }
-            
 	}
         
         public void drawThinFlimFrame()

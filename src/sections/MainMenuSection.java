@@ -136,7 +136,10 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
             else if(event.getSource() == startButton || event.getSource() == continueButton)
             {
-                MainWindow.getAnimSection().start();
+                if(MainWindow.getGUIControlSection().getValues())
+                {
+                    MainWindow.getAnimSection().start();
+                }
             }
             else if(event.getSource() == pauseButton)
             {

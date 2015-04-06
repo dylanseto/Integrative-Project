@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {
@@ -188,17 +187,9 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label infSumEquationLabel = new Label();
 	private final Label partSumEquationLabel = new Label();
 	
-	/*
-	 * COnstructor
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
+	/**
+         * Constructor
+         */
 	public GUIControlSection()
 	{
 		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
@@ -286,6 +277,42 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.getChildren().clear();
 		this.getChildren().addAll(coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
 	}
+        
+        public boolean getValues()
+        {
+            boolean disableSection = true;
+            switch(MainWindow.getUserInterface())
+            {
+                
+                case NEWTON_LAW:
+                    if(massTextField.getText().isEmpty()
+                            || forceTextField.getText().isEmpty())
+                    {
+                        disableSection = false;
+                    }
+                    Variables.setMass(Double.valueOf(massTextField.getText()));
+                    Variables.setForce(Double.valueOf(forceTextField.getText()));
+                    break;
+                    
+                case THIN_FILM:
+                    if(((String)(materialOptionBox.getSelectionModel().getSelectedItem())) == null
+                            || thicknessTextField.getText().isEmpty()
+                            || indexRefFilmTextField.getText().isEmpty())
+                    {
+                        disableSection = false;
+                    }
+                    Variables.setThickness(Double.valueOf(thicknessTextField.getText()));
+                    Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
+                    MainWindow.getAnimSection().drawThinFlimFrame();
+                    break;
+                    
+                default:
+                    disableSection = false;
+                    break;
+            }
+            setDisable(disableSection);
+            return disableSection;
+        }
 
 	@Override
 	public void handle(ActionEvent event) 
@@ -331,12 +358,10 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             else if(event.getSource() == thicknessTextField)//note: user has to press enter to make this work
             {
                 Variables.setThickness(Double.valueOf(thicknessTextField.getText()));
-                MainWindow.getAnimSection().drawThinFlimFrame();
             }
             else if(event.getSource() == indexRefFilmTextField)//note: user has to press enter to make this work
             {
                 Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
-                MainWindow.getAnimSection().drawThinFlimFrame();
             }
             else if(event.getSource() == this.forceTextField)
             {

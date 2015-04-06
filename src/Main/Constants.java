@@ -148,6 +148,7 @@ public interface Constants
 	public final double TWO_PI = 2*Math.PI;
 	public final double FULL_ROTATION = 360;
         public final String SIGMA = "\u03A3";
+        public final String PI_TEXT = "\u03C0";
         
         //Cart class constants
         public final double[] Car_Polygon_X = {10, 20, 30, 50, 60, 70, 80, 10};
@@ -157,4 +158,21 @@ public interface Constants
     	public final int CAR_WHEEL_TWO_INIT_X = 45;
     	public final int CAR_WHEEL_INIT_Y = 150;
     	public final int CAR_WHEEL_DIAMETER = 15;
+        
+        //thin film animation constants
+            //film rectangle dimensions
+        public final double MIN_FILM_HEIGHT = 5;
+        public final double MAX_FILM_HEIGHT = 50;
+        public final double MATERIAL_HEIGHT = 75;
+            //rectangle/line drawing positions
+        public final double END_POINT_X_POS = 300;
+        public final double TOP_OF_MATERIAL_Y_POS = 225;
+        public final double MIDDLE_OF_FILM_X_POS = 150;
+            //pi/zero drawing positions
+        public final double X_POS_SYMBOL_1 = END_POINT_X_POS - 30;
+        public final double X_POS_SYMBOL_2 = END_POINT_X_POS - 10;
+        public final double Y_POS_SYMBOL_1 = 20;
+        public final double Y_POS_SHIFT_SYMBOL_2 = 30;
+            //pi/zero max alpha value
+        public final int MAX_PI_ZERO_ALPHA = 100;
 }
