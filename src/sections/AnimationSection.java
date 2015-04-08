@@ -104,60 +104,162 @@ public class AnimationSection extends Canvas
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             getGraphicsContext2D().setStroke(Color.BLACK);
-            getGraphicsContext2D().strokeLine(Constants.ZERO, getHeight()/Constants.TWO, getWidth(), getHeight()/Constants.TWO);
-            getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO, getHeight() - 75);
+            //drawing the horizontal line
+            getGraphicsContext2D().strokeLine(Constants.ZERO, 
+                                              getHeight()/Constants.TWO, 
+                                              getWidth(), 
+                                              getHeight()/Constants.TWO);
+            //drawing the lens - the 2 and 4th parameters represent its height
+            getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO,
+                                              75, 
+                                              getWidth()/Constants.TWO, 
+                                              getHeight() - 75);
+            
+            //drawing arrow head depending on lens type
             if(Variables.getLensType().equalsIgnoreCase("diverging"))
             {
-                //top part
+                //top part of arrow head
+                    //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, 60, getWidth()/Constants.TWO, 75);
+                    //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO + 15, 60);
                 //bottom part
+                    //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, getHeight() - 60, getWidth()/Constants.TWO, getHeight() - 75);
+                    //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, getHeight() - 75, getWidth()/Constants.TWO + 15, getHeight() - 60);                
                 
             }
             else if(Variables.getLensType().equalsIgnoreCase("converging"))
             {
-                //top part
+                //top part of arrow head
+                    //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, 90, getWidth()/Constants.TWO, 75);
+                    //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO + 15, 90);
-                //bottom part
+                //bottom part of the arrow head
+                    //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, getHeight() - 90, getWidth()/Constants.TWO, getHeight() - 75);
+                    //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, getHeight() - 75, getWidth()/Constants.TWO + 15, getHeight() - 90);
             }
             
+            //drawing focal points, with "F" below each one
             if(Variables.getFocalPoint() > Constants.ZERO)
             {
                 getGraphicsContext2D().setFill(Color.BLACK);
+                //drawing the first focal point (left of lens)
+                    //drawing the first focal line
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), getHeight()/Constants.TWO - 5, getWidth()/Constants.TWO - Variables.getFocalPoint(), getHeight()/Constants.TWO + 5);
+                    //drawing the first "F"
                 getGraphicsContext2D().fillText("F", getWidth()/Constants.TWO - Variables.getFocalPoint() - 3, getHeight()/Constants.TWO + 17);
+                //drawing the second focal point (right of lens)
+                    //drawing the second focal line
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), getHeight()/Constants.TWO - 5, getWidth()/Constants.TWO + Variables.getFocalPoint(), getHeight()/Constants.TWO + 5);
+                    //drawing the second "F:
                 getGraphicsContext2D().fillText("F", getWidth()/Constants.TWO + Variables.getFocalPoint() - 3, getHeight()/Constants.TWO + 17);
             }
             
+            //drawing object
             if(Variables.getObjDistance()> Constants.ZERO)
             {
                 if(Variables.getObjHeight()> Constants.ZERO)
                 {
                     getGraphicsContext2D().setStroke(Color.BLUE);
+                    //drawing the object itself
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO, getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight());
+                    //drawing the left part of the arrow head
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance() - 5, getHeight()/Constants.TWO - Variables.getObjHeight() + 5, getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight());
+                    //drawing the right part of the arrow head
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight(), getWidth()/Constants.TWO - Variables.getObjDistance() + 5, getHeight()/Constants.TWO - Variables.getObjHeight() + 5);
                 }
             }
             //Keep drawing these lines
             if(drawLines)
             {
-                //calculate angle things, and then draw lines in appropriate places
                 Variables.setImageDistance(FormulaHelper.computeImageDistance(Variables.getFocalPoint(), Variables.getObjDistance()));
                 Variables.setImageHeight(FormulaHelper.computeImageHeight(Variables.getObjHeight(), Variables.getImageDistance(), Variables.getObjDistance()));
                 
                 getGraphicsContext2D().setStroke(Color.GREEN);
                 if(Variables.getLensType().equalsIgnoreCase("converging"))
                 {
-                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight(), getWidth()/Constants.TWO, getHeight()/Constants.TWO);
+                    if(Variables.getObjDistance() > Variables.getFocalPoint())
+                    {
+                        //line going through middle
+                        double thetaCenter = Math.atan(Variables.getObjHeight()/Variables.getObjDistance());
+                        //first part - line going to middle
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO);
+                        //second part - line going out of middle
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO, 
+                                                          getWidth(), 
+                                                          getHeight()/Constants.TWO + Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
+                        
+                        //line going through first focal point
+                        //angle btw obj height and distance from obj to focal point
+                        double thetaFocal_1 = Math.atan(Variables.getObjHeight()/(Variables.getObjDistance() - Variables.getFocalPoint()));
+                        //first part, part a - line going to focal point
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO - Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO);
+                        //first part, part b - line going out of focal point and hitting lens
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO, 
+                                                          getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
+                        //second part - parallel line going out of lens and hitting the end of canvas
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint(), 
+                                                          getWidth(), 
+                                                          getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
+                        
+                        //line going through second focal point
+                        //angle btw obj height and second focal point (as if obj is placed right on lens)
+                        double thetaFocal_2 = Math.atan(Variables.getObjHeight()/Variables.getFocalPoint());
+                        //first part - parallel line hitting lens
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO , 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight());
+                        //second part, part a - line going to second focal point
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO + Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO);
+                        //second part, part b - line going through second focal point and hitting the bottom
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO, 
+                                                          getWidth()/Constants.TWO + Variables.getFocalPoint() + (getHeight()/Constants.TWO)/Math.tan(thetaFocal_2), 
+                                                          getHeight());
+                    }
                     
                 }
+                
+                //drawing image
+                //set color to red
+                getGraphicsContext2D().setStroke(Color.RED);
+                //drawing the image itself
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getImageDistance(), 
+                                                  getHeight()/Constants.TWO, 
+                                                  getWidth()/Constants.TWO + Variables.getImageDistance(),
+                                                  getHeight()/Constants.TWO - Variables.getImageHeight());
+                //drawing the image's arrow head
+                    //drawing the left part of arrow head
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getImageDistance() - 5,
+                                                  getHeight()/Constants.TWO - Variables.getImageHeight() + ((Variables.getImageHeight() > Constants.ZERO)? 5 : -5),
+                                                  getWidth()/Constants.TWO + Variables.getImageDistance(),
+                                                  getHeight()/Constants.TWO - Variables.getImageHeight());
+                    //drawing the right part of the arrow head
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getImageDistance(),
+                                                  getHeight()/Constants.TWO - Variables.getImageHeight(),
+                                                  getWidth()/Constants.TWO + Variables.getImageDistance() + 5,
+                                                  getHeight()/Constants.TWO - Variables.getImageHeight() + ((Variables.getImageHeight() > Constants.ZERO)? 5 : -5));
+                
+                stop();
             }
             
 	}

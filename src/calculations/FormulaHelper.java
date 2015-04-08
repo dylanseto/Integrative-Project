@@ -42,12 +42,12 @@ public class FormulaHelper
 	//mainformula
 	public static double computeImageDistance(double focalPoint, double objectDistance)
 	{
-		return (Constants.ONE/((Constants.ONE/focalPoint)+(Constants.ONE/objectDistance)));
+		return (Constants.ONE/((Constants.ONE/focalPoint)-(Constants.ONE/objectDistance)));
 	}
 	
 	public static double computeImageHeight(double objectHeight, double imagedistance, double objectDistance)
 	{
-		return ((imagedistance/objectDistance)*objectHeight);
+		return -((imagedistance/objectDistance)*objectHeight);
 	}
         
 	private static double toRadians(double angleInDegrees)
