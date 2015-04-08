@@ -302,10 +302,12 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     {
                         disableSection = false;
                     }
+                    Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
                     Variables.setObjHeight(Double.valueOf(objectHeightTextField.getText()));
                     Variables.setObjDistance(Double.valueOf(objectDistanceTextField.getText()));
-                    Variables.setFocalPoint(Double.valueOf(focalDistTextField.getText()));
-                    Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
+                    Variables.setFocalPoint(((Variables.getLensType().equalsIgnoreCase("diverging"))
+                                            ? -Double.valueOf(focalDistTextField.getText())
+                                            : Double.valueOf(focalDistTextField.getText())));
                     MainWindow.getAnimSection().drawOpticsFrame();
                     break;
                     

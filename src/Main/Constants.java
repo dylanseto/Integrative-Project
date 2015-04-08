@@ -175,4 +175,16 @@ public interface Constants
         public final double Y_POS_SHIFT_SYMBOL_2 = 30;
             //pi/zero max alpha value
         public final int MAX_PI_ZERO_ALPHA = 100;
+        
+        //optics animation constants
+            //drawing lens
+        public final int LENS_HALF_LENGTH = 75;
+        public final int LENS_ARROW_HEAD_LENGTH = 15;
+            //drawing focal point
+        public final int FOCAL_LINE_HALF_LENGH = 5;
+        public final int FOCAL_LETTER_VERT_ADJ = 17;
+        public final int FOCAL_LETTER_HOR_ADJ = 3;
+        public final String FOCAL_LETTER_STRING = "F";
+            //drawing object/image
+        public final int OBJ_IMG_ARROW_HEAD_LENGTH = 5;
 }
