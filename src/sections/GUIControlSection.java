@@ -263,19 +263,19 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	public void showThinFilmControls()
 	{
 		this.getChildren().clear();
-		this.getChildren().addAll(materialFlowPane, indexRefMatLabel, thicknessFLowPane, indexRefFilmFLowPane);
+		this.getChildren().addAll(enterValuesLabel, materialFlowPane, indexRefMatLabel, thicknessFLowPane, indexRefFilmFLowPane);
 	}
 	
 	public void showNewBikeControls()
 	{
 		this.getChildren().clear();
-		this.getChildren().addAll(costBikeFLowPane, costSetUpFLowPane);
+		this.getChildren().addAll(enterValuesLabel, costBikeFLowPane, costSetUpFLowPane);
 	}
 	
 	public void showInfSeriesControls()
 	{
 		this.getChildren().clear();
-		this.getChildren().addAll(coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
+		this.getChildren().addAll(enterValuesLabel, coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
 	}
         
         public boolean getValues()
@@ -292,6 +292,21 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     }
                     Variables.setMass(Double.valueOf(massTextField.getText()));
                     Variables.setForce(Double.valueOf(forceTextField.getText()));
+                    break;
+                    
+                case OPTICS:
+                    if(((String)(lensOptionBox.getSelectionModel().getSelectedItem())) == null
+                            || objectHeightTextField.getText().isEmpty()
+                            || objectDistanceTextField.getText().isEmpty()
+                            || focalDistTextField.getText().isEmpty())
+                    {
+                        disableSection = false;
+                    }
+                    Variables.setObjHeight(Double.valueOf(objectHeightTextField.getText()));
+                    Variables.setObjDistance(Double.valueOf(objectDistanceTextField.getText()));
+                    Variables.setFocalPoint(Double.valueOf(focalDistTextField.getText()));
+                    Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
+                    MainWindow.getAnimSection().drawOpticsFrame();
                     break;
                     
                 case THIN_FILM:
@@ -359,7 +374,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             {
                 Variables.setThickness(Double.valueOf(thicknessTextField.getText()));
             }
-            else if(event.getSource() == indexRefFilmTextField)//note: user has to press enter to make this work
+            else if(event.getSource() == indexRefFilmTextField)
             {
                 Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
             }
@@ -370,6 +385,23 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             else if(event.getSource() == this.massTextField)
             {
             	Variables.setMass(Double.valueOf(massTextField.getText()));
+            }
+            else if(event.getSource() == objectHeightTextField)
+            {
+                Variables.setObjHeight(Double.valueOf(objectHeightTextField.getText()));
+            }
+            else if(event.getSource() == objectDistanceTextField)
+            {
+                Variables.setObjDistance(Double.valueOf(objectDistanceTextField.getText()));
+            }
+            else if(event.getSource() == focalDistTextField)
+            {
+                Variables.setFocalPoint(Double.valueOf(focalDistTextField.getText()));
+            }
+            else if(event.getSource() == lensOptionBox)
+            {
+                Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
+                //MainWindow.getAnimSection().drawOpticsFrame();
             }
 	}
 }

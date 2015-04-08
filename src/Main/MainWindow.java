@@ -168,7 +168,7 @@ public class MainWindow extends Application
                                 tableSection.addLeftValue(Constants.IMG_HEIGHT_LABEL_TEXT);
                                 tableSection.addLeftValue(Constants.MAGNIFICATION_LABEL_TEXT);
                                 tableSection.addLeftValue(Constants.REAL_OR_VIRT_LABEL_TEXT);
-
+                                animSection.drawOpticsFrame();
                                 guiControlSection.showOpticsControls();
                                 break;
                                 

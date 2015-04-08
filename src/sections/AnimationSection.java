@@ -1,13 +1,10 @@
 package sections;
 
-import java.util.concurrent.TimeUnit;
-import java.lang.Math;
 
 import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
-import java.util.Arrays;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -67,7 +64,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case OPTICS:
-                                    drawOpticsFrame();
+                                    drawOpticsFrame(true);
                                     break;
                                     
 				case THIN_FILM:
@@ -103,10 +100,72 @@ public class AnimationSection extends Canvas
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 	}
         
-	private void drawOpticsFrame()
+	private void drawOpticsFrame(boolean drawLines)
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            getGraphicsContext2D().setStroke(Color.BLACK);
+            getGraphicsContext2D().strokeLine(Constants.ZERO, getHeight()/Constants.TWO, getWidth(), getHeight()/Constants.TWO);
+            getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO, getHeight() - 75);
+            if(Variables.getLensType().equalsIgnoreCase("diverging"))
+            {
+                //top part
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, 60, getWidth()/Constants.TWO, 75);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO + 15, 60);
+                //bottom part
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, getHeight() - 60, getWidth()/Constants.TWO, getHeight() - 75);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, getHeight() - 75, getWidth()/Constants.TWO + 15, getHeight() - 60);                
+                
+            }
+            else if(Variables.getLensType().equalsIgnoreCase("converging"))
+            {
+                //top part
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, 90, getWidth()/Constants.TWO, 75);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 75, getWidth()/Constants.TWO + 15, 90);
+                //bottom part
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - 15, getHeight() - 90, getWidth()/Constants.TWO, getHeight() - 75);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, getHeight() - 75, getWidth()/Constants.TWO + 15, getHeight() - 90);
+            }
+            
+            if(Variables.getFocalPoint() > Constants.ZERO)
+            {
+                getGraphicsContext2D().setFill(Color.BLACK);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), getHeight()/Constants.TWO - 5, getWidth()/Constants.TWO - Variables.getFocalPoint(), getHeight()/Constants.TWO + 5);
+                getGraphicsContext2D().fillText("F", getWidth()/Constants.TWO - Variables.getFocalPoint() - 3, getHeight()/Constants.TWO + 17);
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), getHeight()/Constants.TWO - 5, getWidth()/Constants.TWO + Variables.getFocalPoint(), getHeight()/Constants.TWO + 5);
+                getGraphicsContext2D().fillText("F", getWidth()/Constants.TWO + Variables.getFocalPoint() - 3, getHeight()/Constants.TWO + 17);
+            }
+            
+            if(Variables.getObjDistance()> Constants.ZERO)
+            {
+                if(Variables.getObjHeight()> Constants.ZERO)
+                {
+                    getGraphicsContext2D().setStroke(Color.BLUE);
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO, getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight());
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance() - 5, getHeight()/Constants.TWO - Variables.getObjHeight() + 5, getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight());
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight(), getWidth()/Constants.TWO - Variables.getObjDistance() + 5, getHeight()/Constants.TWO - Variables.getObjHeight() + 5);
+                }
+            }
+            //Keep drawing these lines
+            if(drawLines)
+            {
+                //calculate angle things, and then draw lines in appropriate places
+                Variables.setImageDistance(FormulaHelper.computeImageDistance(Variables.getFocalPoint(), Variables.getObjDistance()));
+                Variables.setImageHeight(FormulaHelper.computeImageHeight(Variables.getObjHeight(), Variables.getImageDistance(), Variables.getObjDistance()));
+                
+                getGraphicsContext2D().setStroke(Color.GREEN);
+                if(Variables.getLensType().equalsIgnoreCase("converging"))
+                {
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), getHeight()/Constants.TWO - Variables.getObjHeight(), getWidth()/Constants.TWO, getHeight()/Constants.TWO);
+                    
+                }
+            }
+            
 	}
+        
+        public void drawOpticsFrame()
+        {
+            drawOpticsFrame(false);
+        }
         
 	private void drawThinFilmFrame(boolean drawLines)
 	{
