@@ -224,21 +224,26 @@ public class AnimationSection extends Canvas
                 Variables.setImageDistance(FormulaHelper.computeImageDistance(Variables.getFocalPoint(), Variables.getObjDistance()));
                 Variables.setImageHeight(FormulaHelper.computeImageHeight(Variables.getObjHeight(), Variables.getImageDistance(), Variables.getObjDistance()));
                 
-                getGraphicsContext2D().setStroke(Color.GREEN);
+                //line going through middle
+                double thetaCenter = Math.atan(Variables.getObjHeight()/Variables.getObjDistance());
+                //angle btw obj height and distance from obj to focal point
+                double thetaFocal_1 = Math.atan(Variables.getObjHeight()/(Variables.getObjDistance() - Variables.getFocalPoint()));
+                //angle btw obj height and second focal point (as if obj is placed right on lens)
+                double thetaFocal_2 = Math.atan(Variables.getObjHeight()/Variables.getFocalPoint());
+                
+                getGraphicsContext2D().setStroke(Color.GREEN);//green for dring the rays
+                //first part - line going to middle (is good for both converging and diverging
+                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                  getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                  getWidth()/Constants.TWO, 
+                                                  getHeight()/Constants.TWO);
+                
                 if(Variables.getLensType().equalsIgnoreCase("converging"))
                 {
-                    /*Variables.getObjDistance() > Variables.getFocalPoint()*/
-                        //line going through middle
-                    double thetaCenter = Math.atan(Variables.getObjHeight()/Variables.getObjDistance());
-                    //first part - line going to middle
-                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
-                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                      getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO);
-                    
-                    //second part - line going out of middle
+
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
                     {
+                        //second part - line going out of middle (for do > f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                           getHeight()/Constants.TWO, 
                                                           getWidth(), 
@@ -246,14 +251,14 @@ public class AnimationSection extends Canvas
                     }
                     else if(Variables.getObjDistance() <= Variables.getFocalPoint())
                     {
+                        //second part - line going from obj to left end of screen (for do < f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
                                                           getHeight()/Constants.TWO - Variables.getObjHeight(), 
                                                           Constants.ZERO, 
                                                           getHeight()/Constants.TWO - Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
                     }
+                    
                     //line going through first focal point
-                    //angle btw obj height and distance from obj to focal point
-                    double thetaFocal_1 = Math.atan(Variables.getObjHeight()/(Variables.getObjDistance() - Variables.getFocalPoint()));
                     //first part, part a - line going to focal point
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
                                                       getHeight()/Constants.TWO - Variables.getObjHeight(), 
@@ -264,9 +269,10 @@ public class AnimationSection extends Canvas
                                                       getHeight()/Constants.TWO, 
                                                       getWidth()/Constants.TWO, 
                                                       getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
-                    //second part - parallel line going out of lens and hitting the end of canvas (or left end if do < f)
+                    
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
                     {
+                        //second part - parallel line going out of lens and hitting the right end of canvas (for do > f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                       getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint(), 
                                                       getWidth(), 
@@ -274,6 +280,7 @@ public class AnimationSection extends Canvas
                     }
                     else if(Variables.getObjDistance() <= Variables.getFocalPoint())
                     {
+                        //second part - parallel line going out of lens and hitting the left end of canvas (for do <= f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                       getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint(), 
                                                       Constants.ZERO, 
@@ -282,8 +289,7 @@ public class AnimationSection extends Canvas
                     
 
                     //line going through second focal point
-                    //angle btw obj height and second focal point (as if obj is placed right on lens)
-                    double thetaFocal_2 = Math.atan(Variables.getObjHeight()/Variables.getFocalPoint());
+                    
                     //first part - parallel line hitting lens
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
                                                       getHeight()/Constants.TWO - Variables.getObjHeight(), 
@@ -292,12 +298,12 @@ public class AnimationSection extends Canvas
                     
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
                     {
-                        //second part, part a - line going to second focal point
+                        //second part, part a - line going to second focal point (do > f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                           getHeight()/Constants.TWO - Variables.getObjHeight(), 
                                                           getWidth()/Constants.TWO + Variables.getFocalPoint(), 
                                                           getHeight()/Constants.TWO);
-                        //second part, part b - line going through second focal point and hitting the bottom
+                        //second part, part b - line going through second focal point and hitting the bottom (do > f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), 
                                                           getHeight()/Constants.TWO, 
                                                           getWidth()/Constants.TWO + Variables.getFocalPoint() + (getHeight()/Constants.TWO)/Math.tan(thetaFocal_2), 
@@ -305,13 +311,41 @@ public class AnimationSection extends Canvas
                     }
                     else if(Variables.getObjDistance() <= Variables.getFocalPoint())
                     {
-                        System.out.println(Variables.getImageHeight());
-                        //second part - line going from lens and hitting the left end of the canvas
-                        getGraphicsContext2D().strokeLine(Constants.ZERO, 
-                                                          getHeight()/Constants.TWO - Math.tan(thetaFocal_2) * getWidth(), 
-                                                          getWidth()/Constants.TWO, 
-                                                          getHeight()/Constants.TWO - Variables.getObjHeight());
+                        //second part - line going from lens and hitting the left end of the canvas (do <= f)
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(),
+                                                          Constants.ZERO,
+                                                          getHeight()/Constants.TWO - Math.tan(thetaFocal_2) * getWidth()/Constants.TWO - Variables.getObjHeight());
                     }
+                    
+                }
+                else if(Variables.getLensType().equalsIgnoreCase("diverging"))
+                {
+                    //first ray second part - line going out of middle (for do > f)
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                      getHeight()/Constants.TWO, 
+                                                      getWidth(), 
+                                                      getHeight()/Constants.TWO + Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
+                    
+                    //if(Variables.getObjDistance() > Variables.getFocalPoint())
+                    //second ray part one - line going from obj to lens parallel to ground
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                      getWidth()/Constants.TWO, 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight());
+                    
+                    //second ray part two - line going from lens to focal point
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                      getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint()), 
+                                                      getHeight()/Constants.TWO);
+                    //second ray part three - line going from lens to focal point
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint()), 
+                                                      getHeight()/Constants.TWO,
+                                                      Constants.ZERO,
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * (getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint())));
+                    System.out.println(getHeight()/Constants.TWO - Math.tan(thetaFocal_1) * (getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint())));
+                    
                     
                 }
                 
