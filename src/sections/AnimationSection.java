@@ -21,6 +21,7 @@ public class AnimationSection extends Canvas
         //for thin film
         private int clearRectLengthReduction = Constants.ZERO;
         private int pi_zeroAlphaIncrease = Constants.ZERO;
+        private Color materialColor = null;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -304,11 +305,12 @@ public class AnimationSection extends Canvas
                     }
                     else if(Variables.getObjDistance() <= Variables.getFocalPoint())
                     {
-                        //second part, part b - line going from lens and hitting the left end of the canvas
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                          Constants.ZERO, 
-                                                          );
+                        System.out.println(Variables.getImageHeight());
+                        //second part - line going from lens and hitting the left end of the canvas
+                        getGraphicsContext2D().strokeLine(Constants.ZERO, 
+                                                          getHeight()/Constants.TWO - Math.tan(thetaFocal_2) * getWidth(), 
+                                                          getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight());
                     }
                     
                 }
@@ -349,28 +351,30 @@ public class AnimationSection extends Canvas
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             if(Variables.getMaterialType().equalsIgnoreCase("water"))
             {
-                getGraphicsContext2D().setFill(Color.BLUE);
+                materialColor = Color.BLUE;
             }
             else if(Variables.getMaterialType().equalsIgnoreCase("glycerin"))
             {
-                getGraphicsContext2D().setFill(Color.GREY);//make different shade of grey
+                materialColor = Color.GREY;//make different shade of grey
             }
             else if(Variables.getMaterialType().equalsIgnoreCase("oil"))
             {
-                getGraphicsContext2D().setFill(Color.GREY);//make different shade of grey
+                materialColor = Color.GREY;//make different shade of grey
             }
             else if(Variables.getMaterialType().equalsIgnoreCase("zircon"))
             {
-                getGraphicsContext2D().setFill(Color.LIGHTBLUE);//make bright blue
+                materialColor = Color.LIGHTBLUE;//make bright blue
             }
             else if(Variables.getMaterialType().equalsIgnoreCase("diamond"))
             {
-                getGraphicsContext2D().setFill(Color.LIGHTGRAY);//make bright shade of grey
+                materialColor = Color.LIGHTGRAY;//make bright shade of grey
             }
             else if(Variables.getMaterialType().equalsIgnoreCase("pyrex"))
             {
-                getGraphicsContext2D().setFill(Color.LIGHTGRAY);//make an opaque grey
+                materialColor = Color.LIGHTGRAY;//make an opaque grey
             }
+            
+            getGraphicsContext2D().setFill(materialColor);
             
             getGraphicsContext2D().fillRect(Constants.ZERO, Constants.TOP_OF_MATERIAL_Y_POS, Constants.END_POINT_X_POS, Constants.MATERIAL_HEIGHT);//draws material
             
@@ -405,9 +409,14 @@ public class AnimationSection extends Canvas
                 
                 if(clearRectLengthReduction < (int)Constants.END_POINT_X_POS)
                 {
+                    //clear rect for the top part
                     getGraphicsContext2D().clearRect(clearRectLengthReduction, Constants.ZERO, Constants.END_POINT_X_POS - clearRectLengthReduction, topOfFilm);
                     getGraphicsContext2D().setFill(Color.BLACK);
+                    //black rect for film
                     getGraphicsContext2D().fillRect(clearRectLengthReduction, topOfFilm, Constants.END_POINT_X_POS - clearRectLengthReduction, Constants.TOP_OF_MATERIAL_Y_POS - topOfFilm);
+                    //material color for that little red dot that shouldn't be showing
+                    getGraphicsContext2D().setFill(materialColor);
+                    getGraphicsContext2D().fillRect(clearRectLengthReduction, Constants.TOP_OF_MATERIAL_Y_POS, Constants.END_POINT_X_POS - clearRectLengthReduction, Constants.ONE);
                     ++clearRectLengthReduction;
                 }
                 else if(clearRectLengthReduction >= (int)Constants.END_POINT_X_POS)
