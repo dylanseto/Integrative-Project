@@ -569,6 +569,7 @@ public class AnimationSection extends Canvas
 	private void drawNewBikeFrame()
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            
 	}
         
 	private void drawInfSeriesFrame()

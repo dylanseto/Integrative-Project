@@ -323,6 +323,16 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     MainWindow.getAnimSection().drawThinFlimFrame();
                     break;
                     
+                case SPORTS_BIKE:
+                    if(costBikeTextField.getText().isEmpty()
+                            || costSetUpTextField.getText().isEmpty())
+                    {
+                        disableSection = false;
+                    }
+                    Variables.setCostMake(Double.valueOf(costBikeTextField.getText()));
+                    Variables.setCostSetUp(Double.valueOf(costSetUpTextField.getText()));
+                    break;
+                    
                 default:
                     disableSection = false;
                     break;
@@ -404,6 +414,14 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             {
                 Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
                 //MainWindow.getAnimSection().drawOpticsFrame();
+            }
+            else if(event.getSource() == costBikeTextField)
+            {
+                Variables.setCostMake(Double.valueOf(costBikeTextField.getText()));
+            }
+            else if(event.getSource() == costSetUpTextField)
+            {
+                Variables.setCostSetUp(Double.valueOf(costSetUpTextField.getText()));
             }
 	}
 }
