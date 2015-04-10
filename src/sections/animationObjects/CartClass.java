@@ -7,6 +7,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -15,8 +16,8 @@ import javafx.util.Duration;
 public class CartClass
 {	
 	
-	private double x_property;
-	private double y_property;
+	private SimpleDoubleProperty x_property;
+	private SimpleDoubleProperty y_property;
 	private Timeline timeline;
 	private boolean isRunning;
 	
@@ -24,32 +25,30 @@ public class CartClass
 	
 	public CartClass(GraphicsContext graphics) 
 	{
-		this.x_property = 0;
-		this.y_property = 0;
+		this.x_property = new SimpleDoubleProperty(0); 
+		this.y_property = new SimpleDoubleProperty(0);
 		
 		this.graphics = graphics;
 		this.isRunning = false;
 		
-		/*timeline = new Timeline(
-	            new KeyFrame(Duration.seconds(Constants.ZERO),
-	                    new KeyValue(x_property, Constants.ZERO),
-	                    new KeyValue(y_property, Constants.ZERO)
-	            ),
-	            new KeyFrame(Duration.seconds(rand.nextInt(Constants.MAX_SPEED)+Constants.MAX_SPEED),
-	            		new KeyValue(x_property, Constants.ANIMATION_POINT),
-	                    new KeyValue(y_property, Constants.ZERO)
-	            )
-	        );*/
+		timeline = new Timeline();
 		
-		//timeline.setAutoReverse(true);
-                //timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.setAutoReverse(false);
+        timeline.setCycleCount(Timeline.INDEFINITE);
 	}
 	public void setTimeline(Timeline timeline) {
 		this.timeline = timeline;
 	}
+	public Timeline getTimeline() {
+		return this.timeline;
+	}
+	public void addKeyFrame(KeyFrame key)
+	{
+		this.timeline.stop();
+		this.timeline.getKeyFrames().add(key);
+	}
 	public void startCart()
 	{
-		this.isRunning = true;
 		timeline.play();
 	}
 	public void stopCart()
@@ -71,27 +70,27 @@ public class CartClass
 		
 		for(int i = Constants.ZERO; i < Constants.POLYGON_SIDE_NUM; i ++)
 		{
-			y[i] += (y_property);
-			x[i] += x_property;
+			y[i] += (y_property.doubleValue());
+			x[i] += x_property.doubleValue();
 		}
 		
 		graphics.fillPolygon(x, y, Constants.POLYGON_SIDE_NUM);
 		graphics.setFill(Color.BLACK);
-		graphics.fillOval(x_property+Constants.CAR_WHEEL_ONE_INIT_X, y_property+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
-		graphics.fillOval(x_property+Constants.CAR_WHEEL_TWO_INIT_X, y_property+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
+		graphics.fillOval(x_property.doubleValue()+Constants.CAR_WHEEL_ONE_INIT_X, y_property.doubleValue()+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
+		graphics.fillOval(x_property.doubleValue()+Constants.CAR_WHEEL_TWO_INIT_X, y_property.doubleValue()+Constants.CAR_WHEEL_INIT_Y, Constants.CAR_WHEEL_DIAMETER, Constants.CAR_WHEEL_DIAMETER);
 	}
-	public double getX() {
+	public SimpleDoubleProperty getX() {
 		return x_property;
 	}
 	public void setX(double x)
 	{
-		x_property = x;
+		x_property.set(x);
 	}
-	public double getY() {
+	public SimpleDoubleProperty getY() {
 		return y_property;
 	}
 	public void setY(double y)
 	{
-		y_property = y;
+		y_property.set(y);
 	}
 }

@@ -1,13 +1,18 @@
 package sections;
 
 
+import java.util.concurrent.TimeUnit;
+
 import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import sections.animationObjects.CartClass;
 
 public class AnimationSection extends Canvas
@@ -45,13 +50,14 @@ public class AnimationSection extends Canvas
 
                                     Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
                                     //prevDistance = distance;
-                                    newtonLawCart.setX(Variables.getDisplacement());
+                                    //newtonLawCart.setX(Variables.getDisplacement());
+                                    newtonLawCart.addKeyFrame(new KeyFrame(new Duration(TimeUnit.NANOSECONDS.toMillis(totalTime)), new KeyValue(newtonLawCart.getX(), Variables.getDisplacement()*40)));
+                                    //System.out.println(newtonLawCart.getTimeline().getKeyFrames().size());
+                                    newtonLawCart.getTimeline().play();
+  
 
 
-                                    if(totalTime % 100 == 1)
-                                    {
-                                            MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
-                                    }
+                                    MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
                                     /*if(Math.floor((double)(totalTime/1000000000)) == ((double)(totalTime/1000000000)))
                                     {*/
                                     //MainWindow.getChartSection().addDataPoint(totalTime, Variables.getVelocity()*1000);
