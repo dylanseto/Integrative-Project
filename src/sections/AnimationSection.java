@@ -584,7 +584,7 @@ public class AnimationSection extends Canvas
             double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
                    yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
             
-            if(xAddPoint - priceX_Intercept_1 < 10)
+            if(xAddPoint - priceX_Intercept_1 < 100)
             {
               if(yAddPoint < Constants.ZERO)
               {
@@ -595,6 +595,10 @@ public class AnimationSection extends Canvas
             }
             else
             {
+                MainWindow.getGUIControlSection().setDisable(false);
+                deltaX_AddPoint = Constants.ZERO;
+                priceX_Intercept_1 = Constants.ZERO;
+                priceX_Intercept_2 = Constants.ZERO;
                 stop();
             }
             
