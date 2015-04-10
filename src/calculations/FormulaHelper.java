@@ -2,7 +2,6 @@ package calculations;
 
 import Main.Constants;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FormulaHelper 
 {

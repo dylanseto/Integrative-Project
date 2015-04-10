@@ -27,6 +27,11 @@ public class AnimationSection extends Canvas
         private int clearRectLengthReduction = Constants.ZERO;
         private int pi_zeroAlphaIncrease = Constants.ZERO;
         private Color materialColor = null;
+        
+        //for new bike
+        private double priceX_Intercept_1 = Constants.ZERO,
+                       priceX_Intercept_2 = Constants.ZERO;
+        private int deltaX_AddPoint = 0;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -570,7 +575,30 @@ public class AnimationSection extends Canvas
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             
-	}
+            if(priceX_Intercept_1 <= Constants.ZERO || priceX_Intercept_2 <= Constants.ZERO)
+            {
+                priceX_Intercept_1 = ((-70000 - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
+                priceX_Intercept_2 = ((-70000 - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
+            }
+            
+            double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
+                   yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
+            
+            if(xAddPoint - priceX_Intercept_1 < 10)
+            {
+              if(yAddPoint < Constants.ZERO)
+              {
+                  yAddPoint = Constants.ZERO;
+              }
+              MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
+              ++deltaX_AddPoint;
+            }
+            else
+            {
+                stop();
+            }
+            
+        }
         
 	private void drawInfSeriesFrame()
 	{
