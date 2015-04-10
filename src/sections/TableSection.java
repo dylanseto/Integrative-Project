@@ -94,7 +94,10 @@ public class TableSection extends TableView
     {
         if(index >= Constants.ZERO && index < dataList.size())
         {
-            dataList.get(index).setRightValue(rightValue);
+            TableEntry tableEntryToModify = new TableEntry(dataList.get(index).getLeftValue(), rightValue);
+            dataList.remove(index);
+            dataList.add(index, tableEntryToModify);
+            
         }
     }
     

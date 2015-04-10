@@ -230,13 +230,16 @@ public class AnimationSection extends Canvas
                 Variables.setImageDistance(FormulaHelper.computeImageDistance(Variables.getFocalPoint(), Variables.getObjDistance()));
                 Variables.setImageHeight(FormulaHelper.computeImageHeight(Variables.getObjHeight(), Variables.getImageDistance(), Variables.getObjDistance()));
                 
-                //line going through middle
+                //angles
                 double thetaCenter = Math.atan(Variables.getObjHeight()/Variables.getObjDistance());
                 //angle btw obj height and distance from obj to focal point
-                double thetaFocal_1 = Math.atan(Variables.getObjHeight()/(Variables.getObjDistance() - Variables.getFocalPoint()));
+                double thetaFocal_1_A = Math.atan(Variables.getObjHeight()/(Variables.getObjDistance() - Variables.getFocalPoint()));
+                //angle btw obj height and focal point, given that x = focal length
+                double thetaFocal_1_B = Math.atan(Variables.getObjHeight()/(Math.abs(Variables.getFocalPoint())));
                 //angle btw obj height and second focal point (as if obj is placed right on lens)
                 double thetaFocal_2 = Math.atan(Variables.getObjHeight()/Variables.getFocalPoint());
                 
+                //line going through middle
                 getGraphicsContext2D().setStroke(Color.GREEN);//green for dring the rays
                 //first part - line going to middle (is good for both converging and diverging
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
@@ -274,23 +277,23 @@ public class AnimationSection extends Canvas
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), 
                                                       getHeight()/Constants.TWO, 
                                                       getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
                     
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
                     {
                         //second part - parallel line going out of lens and hitting the right end of canvas (for do > f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint(), 
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
                                                       getWidth(), 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
                     }
                     else if(Variables.getObjDistance() <= Variables.getFocalPoint())
                     {
                         //second part - parallel line going out of lens and hitting the left end of canvas (for do <= f)
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint(), 
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
                                                       Constants.ZERO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * Variables.getFocalPoint());
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
                     }
                     
 
@@ -304,7 +307,7 @@ public class AnimationSection extends Canvas
                     
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
                     {
-                        //second part, part a - line going to second focal point (do > f)
+                        //second part, part a - line going to second focal point
                         getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                           getHeight()/Constants.TWO - Variables.getObjHeight(), 
                                                           getWidth()/Constants.TWO + Variables.getFocalPoint(), 
@@ -345,14 +348,24 @@ public class AnimationSection extends Canvas
                                                       getHeight()/Constants.TWO - Variables.getObjHeight(), 
                                                       getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint()), 
                                                       getHeight()/Constants.TWO);
+                    
                     //second ray part three - line going from lens to focal point
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint()), 
                                                       getHeight()/Constants.TWO,
                                                       Constants.ZERO,
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1) * (getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint())));
-                    System.out.println(getHeight()/Constants.TWO - Math.tan(thetaFocal_1) * (getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint())));
+                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_B) * (getWidth()/Constants.TWO - Math.abs(Variables.getFocalPoint())));
                     
+                    //third ray part one - line going from obj to lens
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                      getWidth()/Constants.TWO, 
+                                                      getHeight()/Constants.TWO - Variables.getImageHeight());
                     
+                    //third ray part two - line going from lens to left end of canvas, parallel
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                      getHeight()/Constants.TWO - Variables.getImageHeight(),
+                                                      Constants.ZERO,
+                                                      getHeight()/Constants.TWO - Variables.getImageHeight());
                 }
                 
                 //drawing image
@@ -369,11 +382,16 @@ public class AnimationSection extends Canvas
                                                   getHeight()/Constants.TWO - Variables.getImageHeight() + ((Variables.getImageHeight() > Constants.ZERO)? Constants.OBJ_IMG_ARROW_HEAD_LENGTH : -Constants.OBJ_IMG_ARROW_HEAD_LENGTH),
                                                   getWidth()/Constants.TWO + Variables.getImageDistance(),
                                                   getHeight()/Constants.TWO - Variables.getImageHeight());
-                    //drawing the right part of the arrow head
+                //drawing the right part of the arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getImageDistance(),
                                                   getHeight()/Constants.TWO - Variables.getImageHeight(),
                                                   getWidth()/Constants.TWO + Variables.getImageDistance() + Constants.OBJ_IMG_ARROW_HEAD_LENGTH,
                                                   getHeight()/Constants.TWO - Variables.getImageHeight() + ((Variables.getImageHeight() > Constants.ZERO)? Constants.OBJ_IMG_ARROW_HEAD_LENGTH : -Constants.OBJ_IMG_ARROW_HEAD_LENGTH));
+                
+                MainWindow.getTableSection().setRightValue(Constants.ZERO, Variables.getImageDistance());
+                MainWindow.getTableSection().setRightValue(Constants.ONE, Variables.getImageHeight());
+                MainWindow.getTableSection().setRightValue(Constants.TWO, -Variables.getImageDistance()/Variables.getObjDistance());
+                MainWindow.getTableSection().setRightValue(3, ((Variables.getImageDistance() < Constants.ZERO)?Constants.VIRTUAL_LABEL_TEXT:Constants.REAL_LABEL_TEXT));//make the '3' a constant
                 
                 MainWindow.getGUIControlSection().setDisable(false);
                 stop();
@@ -491,6 +509,7 @@ public class AnimationSection extends Canvas
                     {
                         Variables.setWaveLengthsDest(FormulaHelper.getWaveLengthsDestructive(Variables.getIndexRefFilm(), Variables.getThickness()));
                         Variables.setWaveLengthsConst(FormulaHelper.getWaveLengthsConstructive(Variables.getIndexRefFilm(), Variables.getThickness()));
+                        
 
                         if(Variables.getWaveLengthsDest().size() == Variables.getWaveLengthsConst().size())
                         {
