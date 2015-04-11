@@ -1,5 +1,9 @@
 package sections;
 
+import java.net.URISyntaxException;
+
+import javax.print.DocFlavor.URL;
+
 import Main.Constants;
 import Main.MainWindow;
 import javafx.collections.FXCollections;
@@ -9,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -115,6 +121,18 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_PROJ_MOT))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
+                   // URL u = getClass().getResource("src/res/testCannon.png");
+                    final String dir = System.getProperty("user.dir");
+                    Image img = new Image("file:/" + dir + "/src/res/testCannon.png");
+                    Image img2 = new Image("file:/" + dir + "/src/res/testCannonStand.png");
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 43, 200);
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 20, 200);
+                    
+                    //new Image("src/res/testCannon.png");
+                   
+                    //final String dir = System.getProperty("user.dir");
+                    System.out.println("current dir = " + dir);
+                    //MainWindow.getAnimSection().getGraphicsContext2D().fillText("HIIIIII", 20, 20);
                 }
                 else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
                 {

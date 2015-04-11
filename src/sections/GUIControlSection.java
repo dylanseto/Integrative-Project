@@ -9,8 +9,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Rotate;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {
@@ -423,6 +425,22 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             else if(event.getSource() == costSetUpTextField)
             {
                 Variables.setCostSetUp(Double.valueOf(costSetUpTextField.getText()));
+            }
+            else if(event.getSource() == angleTextField)
+            {
+            	Variables.setAngle(Double.valueOf(angleTextField.getText()));
+            	
+            	MainWindow.getAnimSection().getGraphicsContext2D().clearRect(0, 0, 1000, 1000);
+            	final String dir = System.getProperty("user.dir");
+                Image img = new Image("file:/" + dir + "/src/res/testCannon.png");
+                Image img2 = new Image("file:/" + dir + "/src/res/testCannonStand.png");
+                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 43, 200);
+                
+                MainWindow.getAnimSection().getGraphicsContext2D().save();
+                Rotate r = new Rotate(-Variables.getAngle(), 20 + img.getWidth() / 2, 200 + img.getHeight() / 2);
+                MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 20, 200);
+                MainWindow.getAnimSection().getGraphicsContext2D().restore();
             }
 	}
 }
