@@ -432,15 +432,17 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             	
             	MainWindow.getAnimSection().getGraphicsContext2D().clearRect(0, 0, 1000, 1000);
             	final String dir = System.getProperty("user.dir");
-                Image img = new Image("file:/" + dir + "/src/res/testCannon.png");
-                Image img2 = new Image("file:/" + dir + "/src/res/testCannonStand.png");
-                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 43, 200);
+                Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
+                Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
+                
                 
                 MainWindow.getAnimSection().getGraphicsContext2D().save();
-                Rotate r = new Rotate(-Variables.getAngle(), 20 + img.getWidth() / 2, 200 + img.getHeight() / 2);
+                Rotate r = new Rotate(-Variables.getAngle(), 11 + img.getWidth() / 2, 200 + img.getHeight() / 2);
                 MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 20, 200);
+                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 200);
                 MainWindow.getAnimSection().getGraphicsContext2D().restore();
+                
+                MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 200);
             }
 	}
 }

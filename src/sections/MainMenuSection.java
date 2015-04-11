@@ -123,16 +123,11 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
                    // URL u = getClass().getResource("src/res/testCannon.png");
                     final String dir = System.getProperty("user.dir");
-                    Image img = new Image("file:/" + dir + "/src/res/testCannon.png");
-                    Image img2 = new Image("file:/" + dir + "/src/res/testCannonStand.png");
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 43, 200);
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 20, 200);
+                    Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
+                    Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 200);
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 200);
                     
-                    //new Image("src/res/testCannon.png");
-                   
-                    //final String dir = System.getProperty("user.dir");
-                    System.out.println("current dir = " + dir);
-                    //MainWindow.getAnimSection().getGraphicsContext2D().fillText("HIIIIII", 20, 20);
                 }
                 else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
                 {
