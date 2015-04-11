@@ -360,6 +360,7 @@ public class AnimationSection extends Canvas
                                                       getWidth()/Constants.TWO, 
                                                       getHeight()/Constants.TWO - Variables.getImageHeight());
                     
+
                     //third ray part two - line going from lens to left end of canvas, parallel
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
                                                       getHeight()/Constants.TWO - Variables.getImageHeight(),
@@ -578,11 +579,12 @@ public class AnimationSection extends Canvas
             double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
                    yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
             
-            if(xAddPoint - priceX_Intercept_1 < 100)
+            if(xAddPoint - priceX_Intercept_1 < 20)
             {
               if(yAddPoint < Constants.ZERO)
               {
                   yAddPoint = Constants.ZERO;
+                  xAddPoint = priceX_Intercept_1;
               }
               MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
               ++deltaX_AddPoint;
