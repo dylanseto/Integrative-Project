@@ -44,31 +44,25 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case NEWTON_LAW:
-                                    GUIControlSection gcs = MainWindow.getGUIControlSection();
-                                    Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
-                                    long totalTime = time - initTime;
+					GUIControlSection gcs = MainWindow.getGUIControlSection();
+			        Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
+			        long totalTime = time - initTime;
 
-                                    Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
+			        Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
 
-                                    elapsedTime = time-previousTime;
-                                    previousTime = time;
+			        elapsedTime = time-previousTime;
+			        previousTime = time;
 
-                                    Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
-                                    //prevDistance = distance;
-                                    //newtonLawCart.setX(Variables.getDisplacement());
-                                    newtonLawCart.addKeyFrame(new KeyFrame(new Duration(TimeUnit.NANOSECONDS.toMillis(totalTime)), new KeyValue(newtonLawCart.getX(), Variables.getDisplacement()*40)));
-                                    //System.out.println(newtonLawCart.getTimeline().getKeyFrames().size());
-                                    newtonLawCart.getTimeline().play();
-  
+			        Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
+
+			        newtonLawCart.addKeyFrame(new KeyFrame(new Duration(TimeUnit.NANOSECONDS.toMillis(totalTime)), new KeyValue(newtonLawCart.getX(), Variables.getDisplacement()*40)));
+			        //System.out.println(newtonLawCart.getTimeline().getKeyFrames().size());
+			        newtonLawCart.getTimeline().play();
 
 
-                                    MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
-                                    /*if(Math.floor((double)(totalTime/1000000000)) == ((double)(totalTime/1000000000)))
-                                    {*/
-                                    //MainWindow.getChartSection().addDataPoint(totalTime, Variables.getVelocity()*1000);
-                                    //}
 
-                                    drawNewtonFrame();
+			        MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
+                                    drawNewtonFrame(time);
                                     break;
                                     
 				case PROJ_MOTION:
@@ -101,8 +95,8 @@ public class AnimationSection extends Canvas
 	{
 		newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
 	}
-	public void drawNewtonFrame()
-	{
+	public void drawNewtonFrame(long time)
+	{		
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             newtonLawCart.drawCart();
 	}
