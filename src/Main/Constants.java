@@ -9,8 +9,10 @@ public interface Constants
 	public final int ZERO = 0;
 	public final int ONE = 1;
         public final int TWO = 2;
+        public final int ONE_HUNDRED = 100;
 	public final double ONE_HALF = 0.5;
         public final String EMPTY_STRING = "";
+        public final int MAX_RGB_VALUE = 255;
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -173,12 +175,11 @@ public interface Constants
         public final double X_POS_SYMBOL_2 = END_POINT_X_POS - 10;
         public final double Y_POS_SYMBOL_1 = 20;
         public final double Y_POS_SHIFT_SYMBOL_2 = 30;
-            //pi/zero max alpha value
-        public final int MAX_PI_ZERO_ALPHA = 100;
+            
         
         //optics animation constants
             //drawing lens
-        public final int LENS_HALF_LENGTH = 75;
+        public final int LENS_MIN_HALF_LENGTH = 75;
         public final int LENS_ARROW_HEAD_LENGTH = 15;
             //drawing focal point
         public final int FOCAL_LINE_HALF_LENGH = 5;
@@ -187,4 +188,8 @@ public interface Constants
         public final String FOCAL_LETTER_STRING = "F";
             //drawing object/image
         public final int OBJ_IMG_ARROW_HEAD_LENGTH = 5;
+            //lens type
+        public final String LENS_DIVERGING  = "diverging";
+        public final String LENS_CONVERGING = "converging";
+        
 }

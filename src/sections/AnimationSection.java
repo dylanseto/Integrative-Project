@@ -25,8 +25,13 @@ public class AnimationSection extends Canvas
         
         //for thin film
         private int clearRectLengthReduction = Constants.ZERO;
-        private int pi_zeroAlphaIncrease = Constants.ZERO;
         private Color materialColor = null;
+        
+        //for optics
+        private int rayGrowthIncrease = Constants.ZERO;
+        
+        //for all waves things (thin film and optics)
+        private int alphaIncrease = Constants.ZERO;
         
         //for new bike
         private double priceX_Intercept_1 = Constants.ZERO,
@@ -115,63 +120,85 @@ public class AnimationSection extends Canvas
                                               getHeight()/Constants.TWO, 
                                               getWidth(), 
                                               getHeight()/Constants.TWO);
+            
             //drawing the lens - the 2 and 4th parameters represent its height
+            double heightPoint;
+            
+            if(Variables.getObjHeight() >= getHeight()/Constants.TWO)
+            {
+                //make the lens height the height of the canvas
+                heightPoint = Constants.ZERO + ((Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
+                                  ? Constants.LENS_ARROW_HEAD_LENGTH
+                                  : Constants.ZERO);
+            }
+            else if(Variables.getObjHeight() >= Constants.LENS_MIN_HALF_LENGTH)
+            {
+                //make the lens height the size of the object
+                heightPoint = getHeight()/Constants.TWO - Variables.getObjHeight();
+            }
+            else
+            {
+                //make the lens height the constant height
+                heightPoint = Constants.LENS_MIN_HALF_LENGTH;
+                
+            }
+            //draw the line with the decided positions
             getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO,
-                                              Constants.LENS_HALF_LENGTH, 
+                                              heightPoint, 
                                               getWidth()/Constants.TWO, 
-                                              getHeight() - Constants.LENS_HALF_LENGTH);
+                                              getHeight() - heightPoint);
             
             //drawing arrow head depending on lens type
-            if(Variables.getLensType().equalsIgnoreCase("diverging"))
+            if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
             {
                 //top part of arrow head
                     //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  Constants.LENS_HALF_LENGTH - Constants.LENS_ARROW_HEAD_LENGTH,
+                                                  heightPoint - Constants.LENS_ARROW_HEAD_LENGTH,
                                                   getWidth()/Constants.TWO,
-                                                  Constants.LENS_HALF_LENGTH);
+                                                  heightPoint);
                     //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO,
-                                                  Constants.LENS_HALF_LENGTH,
+                                                  heightPoint,
                                                   getWidth()/Constants.TWO + Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  Constants.LENS_HALF_LENGTH - Constants.LENS_ARROW_HEAD_LENGTH);
+                                                  heightPoint - Constants.LENS_ARROW_HEAD_LENGTH);
                 //bottom part
                     //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  getHeight() - (Constants.LENS_HALF_LENGTH - Constants.LENS_ARROW_HEAD_LENGTH),
+                                                  getHeight() - (heightPoint - Constants.LENS_ARROW_HEAD_LENGTH),
                                                   getWidth()/Constants.TWO,
-                                                  getHeight() - Constants.LENS_HALF_LENGTH);
+                                                  getHeight() - heightPoint);
                     //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO,
-                                                  getHeight() - Constants.LENS_HALF_LENGTH,
+                                                  getHeight() - heightPoint,
                                                   getWidth()/Constants.TWO + Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  getHeight() - (Constants.LENS_HALF_LENGTH - Constants.LENS_ARROW_HEAD_LENGTH));                
+                                                  getHeight() - (heightPoint - Constants.LENS_ARROW_HEAD_LENGTH));                
                 
             }
-            else if(Variables.getLensType().equalsIgnoreCase("converging"))
+            else if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_CONVERGING))
             {
                 //top part of arrow head
                     //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  Constants.LENS_HALF_LENGTH + Constants.LENS_ARROW_HEAD_LENGTH,
+                                                  heightPoint + Constants.LENS_ARROW_HEAD_LENGTH,
                                                   getWidth()/Constants.TWO,
-                                                  Constants.LENS_HALF_LENGTH);
+                                                  heightPoint);
                     //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO,
-                                                  Constants.LENS_HALF_LENGTH,
+                                                  heightPoint,
                                                   getWidth()/Constants.TWO + Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  (Constants.LENS_HALF_LENGTH + Constants.LENS_ARROW_HEAD_LENGTH));
+                                                  (heightPoint + Constants.LENS_ARROW_HEAD_LENGTH));
                 //bottom part of the arrow head
                     //left part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Constants.LENS_ARROW_HEAD_LENGTH,
-                                                  getHeight() - (Constants.LENS_HALF_LENGTH + Constants.LENS_ARROW_HEAD_LENGTH), 
+                                                  getHeight() - (heightPoint + Constants.LENS_ARROW_HEAD_LENGTH), 
                                                   getWidth()/Constants.TWO, 
-                                                  getHeight() - Constants.LENS_HALF_LENGTH);
+                                                  getHeight() - heightPoint);
                     //right part of arrow head
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                  getHeight() - Constants.LENS_HALF_LENGTH, 
+                                                  getHeight() - heightPoint, 
                                                   getWidth()/Constants.TWO + Constants.LENS_ARROW_HEAD_LENGTH, 
-                                                  getHeight() - (Constants.LENS_HALF_LENGTH + Constants.LENS_ARROW_HEAD_LENGTH));
+                                                  getHeight() - (heightPoint + Constants.LENS_ARROW_HEAD_LENGTH));
             }
             
             //drawing focal points, with "F" below each one
@@ -223,7 +250,7 @@ public class AnimationSection extends Canvas
                                                       getHeight()/Constants.TWO - Variables.getObjHeight() + Constants.OBJ_IMG_ARROW_HEAD_LENGTH);
                 }
             }
-            //Keep drawing these lines
+            
             if(drawLines)
             {
                 Variables.setImageDistance(FormulaHelper.computeImageDistance(Variables.getFocalPoint(), Variables.getObjDistance()));
@@ -240,13 +267,30 @@ public class AnimationSection extends Canvas
                 
                 //line going through middle
                 getGraphicsContext2D().setStroke(Color.GREEN);//green for dring the rays
-                //first part - line going to middle (is good for both converging and diverging
-                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
-                                                  getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                  getWidth()/Constants.TWO, 
-                                                  getHeight()/Constants.TWO);
                 
-                if(Variables.getLensType().equalsIgnoreCase("converging"))
+                double partOnePercent = (((double)(rayGrowthIncrease)) * (Variables.getObjDistance())/Constants.ONE_HUNDRED)/Constants.ONE_HUNDRED;
+
+                if(partOnePercent <= Constants.ONE)
+                {
+                   //first part - line going to middle (is good for both converging and diverging
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                      getWidth()/Constants.TWO - Variables.getObjDistance() +
+                                                      ((double)(rayGrowthIncrease)) * (Variables.getObjDistance())/Constants.ONE_HUNDRED,
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight() +
+                                                      ((double)(rayGrowthIncrease)) * (Variables.getObjHeight())/Constants.ONE_HUNDRED); 
+                }
+                else
+                {
+                    //first part - line going to middle (is good for both converging and diverging
+                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                      getWidth()/Constants.TWO,
+                                                      getHeight()/Constants.TWO); 
+                }
+
+                ++rayGrowthIncrease;
+                if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_CONVERGING))
                 {
 
                     if(Variables.getObjDistance() > Variables.getFocalPoint())
@@ -265,6 +309,7 @@ public class AnimationSection extends Canvas
                                                           Constants.ZERO, 
                                                           getHeight()/Constants.TWO - Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
                     }
+                    
                     
                     //line going through first focal point
                     //first part, part a - line going to focal point
@@ -294,7 +339,6 @@ public class AnimationSection extends Canvas
                                                       Constants.ZERO, 
                                                       getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
                     }
-                    
 
                     //line going through second focal point
                     
@@ -327,7 +371,7 @@ public class AnimationSection extends Canvas
                     }
                     
                 }
-                else if(Variables.getLensType().equalsIgnoreCase("diverging"))
+                else if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
                 {
                     //first ray second part - line going out of middle (for do > f)
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
@@ -369,8 +413,15 @@ public class AnimationSection extends Canvas
                 }
                 
                 //drawing image
-                //set color to red
-                getGraphicsContext2D().setStroke(Color.RED);
+                
+                //set color to red (with fade)
+                getGraphicsContext2D().setStroke(Color.rgb(Constants.MAX_RGB_VALUE, Constants.ZERO, Constants.ZERO, ((double)alphaIncrease)/Constants.ONE_HUNDRED));
+                
+                //set fade value for next frame
+                if(alphaIncrease < Constants.ONE_HUNDRED)
+                {
+                    ++alphaIncrease;
+                }
                 //drawing the image itself
                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getImageDistance(), 
                                                   getHeight()/Constants.TWO, 
@@ -393,8 +444,14 @@ public class AnimationSection extends Canvas
                 MainWindow.getTableSection().setRightValue(Constants.TWO, -Variables.getImageDistance()/Variables.getObjDistance());
                 MainWindow.getTableSection().setRightValue(3, ((Variables.getImageDistance() < Constants.ZERO)?Constants.VIRTUAL_LABEL_TEXT:Constants.REAL_LABEL_TEXT));//make the '3' a constant
                 
-                MainWindow.getGUIControlSection().setDisable(false);
-                stop();
+                if(alphaIncrease >= Constants.ONE_HUNDRED)
+                {
+                   alphaIncrease = Constants.ZERO;
+                   rayGrowthIncrease = Constants.ZERO;
+                   MainWindow.getGUIControlSection().setDisable(false);
+                   stop(); 
+                }
+                
             }
             
 	}
@@ -481,7 +538,7 @@ public class AnimationSection extends Canvas
                 {
                     double yPosSymbol_2 = yPosSecondRay + Constants.Y_POS_SHIFT_SYMBOL_2;
                     
-                    getGraphicsContext2D().setFill(Color.rgb(Constants.ZERO, Constants.ZERO, Constants.ZERO, (double)(pi_zeroAlphaIncrease)/Constants.MAX_PI_ZERO_ALPHA));
+                    getGraphicsContext2D().setFill(Color.rgb(Constants.ZERO, Constants.ZERO, Constants.ZERO, (double)(alphaIncrease)/Constants.ONE_HUNDRED));
                     if(Variables.getIndexRefFilm() > Constants.INDEX_REF_AIR)
                     {
                         getGraphicsContext2D().fillText(Constants.PI_TEXT, Constants.X_POS_SYMBOL_1, Constants.Y_POS_SYMBOL_1);
@@ -501,11 +558,11 @@ public class AnimationSection extends Canvas
                     }
                     
                     
-                    if(pi_zeroAlphaIncrease < Constants.MAX_PI_ZERO_ALPHA)
+                    if(alphaIncrease < Constants.ONE_HUNDRED)
                     {
-                        ++pi_zeroAlphaIncrease;
+                        ++alphaIncrease;
                     }
-                    else if(pi_zeroAlphaIncrease >= Constants.MAX_PI_ZERO_ALPHA)
+                    else if(alphaIncrease >= Constants.ONE_HUNDRED)
                     {
                         Variables.setWaveLengthsDest(FormulaHelper.getWaveLengthsDestructive(Variables.getIndexRefFilm(), Variables.getThickness()));
                         Variables.setWaveLengthsConst(FormulaHelper.getWaveLengthsConstructive(Variables.getIndexRefFilm(), Variables.getThickness()));
@@ -553,7 +610,7 @@ public class AnimationSection extends Canvas
                         }
 
                         clearRectLengthReduction = Constants.ZERO;
-                        pi_zeroAlphaIncrease = Constants.ZERO;
+                        alphaIncrease = Constants.ZERO;
                         MainWindow.getGUIControlSection().setDisable(false);
                         stop();
                     }
