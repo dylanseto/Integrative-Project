@@ -290,7 +290,6 @@ public class AnimationSection extends Canvas
                 
                 if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_CONVERGING))
                 {
-                    System.out.println(rayGrowthIncrease);
                     if(rayGrowthIncrease >= Constants.ONE_HUNDRED && rayGrowthIncrease <= Constants.TWO_HUNDRED)
                     {
                         if(Variables.getObjDistance() > Variables.getFocalPoint())
@@ -317,12 +316,13 @@ public class AnimationSection extends Canvas
                         {
                             if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
                             {
-                                //second part - line going from obj to left end of screen (for do < f)
+                                //the whole line going from obj to lens
                                 getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
                                                                   (getHeight()/Constants.TWO - Variables.getObjHeight()), 
                                                                   getWidth()/Constants.TWO - Variables.getObjDistance()
-                                                                   - (double)(rayGrowthIncrease - Constants.ONE_HUNDRED)* (getWidth()/Constants.TWO - Variables.getObjDistance())/Constants.ONE_HUNDRED, 
-                                                                 5);//FIX THIS!
+                                                                   - (double)(rayGrowthIncrease - Constants.ONE_HUNDRED)* (getWidth()/Constants.TWO - Variables.getObjDistance())/Constants.ONE_HUNDRED,
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight() - 
+                                                                 (double)(rayGrowthIncrease - Constants.ONE_HUNDRED)*(Math.tan(thetaCenter) * (getWidth()/Constants.TWO - Variables.getObjDistance()))/Constants.ONE_HUNDRED);
                             }
                             else
                             {
@@ -334,68 +334,167 @@ public class AnimationSection extends Canvas
                             }
                         }
                     }
-                    ++rayGrowthIncrease;
+                    
                     
                     //line going through first focal point
-                    //first part, part a - line going to focal point
-                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
-                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                      getWidth()/Constants.TWO - Variables.getFocalPoint(), 
-                                                      getHeight()/Constants.TWO);
-                    //first part, part b - line going out of focal point and hitting lens
-                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), 
-                                                      getHeight()/Constants.TWO, 
-                                                      getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                    if(rayGrowthIncrease <= Constants.ONE_HUNDRED)
+                    {
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(),
+                                                          getWidth()/Constants.TWO - Variables.getObjDistance()
+                                                          + ((double)(rayGrowthIncrease)) * (Variables.getObjDistance()/Constants.ONE_HUNDRED), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight()
+                                           + ((double)(rayGrowthIncrease)) * (Math.tan(thetaFocal_1_A) * Variables.getObjDistance())/Constants.ONE_HUNDRED);
                     
-                    if(Variables.getObjDistance() > Variables.getFocalPoint())
-                    {
-                        //second part - parallel line going out of lens and hitting the right end of canvas (for do > f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
-                                                      getWidth(), 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                        
+                        if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                        {
+                            //first part, part a - line going to focal point (for do < f)
+                            getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                              getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                              getWidth()/Constants.TWO - Variables.getObjDistance()
+                                                          - ((double)(rayGrowthIncrease)) * ((Variables.getFocalPoint() - Variables.getObjDistance())/Constants.ONE_HUNDRED), 
+                                                              getHeight()/Constants.TWO - Variables.getObjHeight()
+                                                          + ((double)(rayGrowthIncrease)) * (Variables.getObjHeight()/Constants.ONE_HUNDRED));
+                        }
+                        
+                    
                     }
-                    else if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                    else
                     {
-                        //second part - parallel line going out of lens and hitting the left end of canvas (for do <= f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
-                                                      Constants.ZERO, 
-                                                      getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
-                    }
 
+                        //first part, part a - line going to focal point
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO - Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO);
+
+                        
+                        //first part, part b - line going out of focal point and hitting lens
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getFocalPoint(), 
+                                                          getHeight()/Constants.TWO, 
+                                                          getWidth()/Constants.TWO, 
+                                                          getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                    }
+                    
+                    if(rayGrowthIncrease >= Constants.ONE_HUNDRED && rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                    {
+                        if(Variables.getObjDistance() > Variables.getFocalPoint())
+                        {
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                //second part - parallel line going out of lens and hitting the right end of canvas (for do > f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
+                                                              getWidth()/Constants.TWO
+                                        + ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * (getWidth()/Constants.TWO)/Constants.ONE_HUNDRED, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                            }
+                            else
+                            {
+                                //second part - parallel line going out of lens and hitting the right end of canvas (for do > f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
+                                                              getWidth(), 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                            }
+                        }
+                        else if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                        {
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                //second part - parallel line going out of lens and hitting the left end of canvas (for do <= f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
+                                                              getWidth()/Constants.TWO
+                                        - ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * (getWidth()/Constants.TWO)/Constants.ONE_HUNDRED, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                            }
+                            else
+                            {
+                                //second part - parallel line going out of lens and hitting the left end of canvas (for do <= f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint(), 
+                                                              Constants.ZERO, 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaFocal_1_A) * Variables.getFocalPoint());
+                            }
+                        }
+                    }
+                    
                     //line going through second focal point
                     
-                    //first part - parallel line hitting lens
-                    getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
-                                                      getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                      getWidth()/Constants.TWO , 
-                                                      getHeight()/Constants.TWO - Variables.getObjHeight());
-                    
-                    if(Variables.getObjDistance() > Variables.getFocalPoint())
+                    if(rayGrowthIncrease <= Constants.ONE_HUNDRED)
                     {
-                        //second part, part a - line going to second focal point
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                        //first part - parallel line hitting lens
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
                                                           getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                          getWidth()/Constants.TWO + Variables.getFocalPoint(), 
-                                                          getHeight()/Constants.TWO);
-                        //second part, part b - line going through second focal point and hitting the bottom (do > f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), 
-                                                          getHeight()/Constants.TWO, 
-                                                          getWidth()/Constants.TWO + Variables.getFocalPoint() + (getHeight()/Constants.TWO)/Math.tan(thetaFocal_2), 
-                                                          getHeight());
+                                                          getWidth()/Constants.TWO - Variables.getObjDistance()
+                                + ((double)(rayGrowthIncrease)) * (Variables.getObjDistance())/Constants.ONE_HUNDRED, 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight());
                     }
-                    else if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                    else
                     {
-                        //second part - line going from lens and hitting the left end of the canvas (do <= f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                          getHeight()/Constants.TWO - Variables.getObjHeight(),
-                                                          Constants.ZERO,
-                                                          getHeight()/Constants.TWO - Math.tan(thetaFocal_2) * getWidth()/Constants.TWO - Variables.getObjHeight());
+                        //first part - parallel line hitting lens
+                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                          getWidth()/Constants.TWO , 
+                                                          getHeight()/Constants.TWO - Variables.getObjHeight());
                     }
+                    
+                    if(rayGrowthIncrease >= Constants.ONE_HUNDRED && rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                    {
+                        if(Variables.getObjDistance() > Variables.getFocalPoint())
+                        {
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                //line going from lens directly to bottom
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                                  getWidth()/Constants.TWO
+                                        + ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * ((getHeight()/Constants.TWO + Variables.getObjHeight())/Math.tan(thetaFocal_2))/Constants.ONE_HUNDRED, 
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight()
+                                + ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * (getHeight()/Constants.TWO + Variables.getObjHeight())/Constants.ONE_HUNDRED);
+                            }
+                            else
+                            {
+                                //second part, part a - line going to second focal point
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                                  getWidth()/Constants.TWO + Variables.getFocalPoint(), 
+                                                                  getHeight()/Constants.TWO);
+                                //second part, part b - line going through second focal point and hitting the bottom (do > f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO + Variables.getFocalPoint(), 
+                                                                  getHeight()/Constants.TWO, 
+                                                                  getWidth()/Constants.TWO + Variables.getFocalPoint() + (getHeight()/Constants.TWO)/Math.tan(thetaFocal_2), 
+                                                                  getHeight());
+                            }
+                        }
+                        else if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                        {
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                //second part - line going from lens and hitting the left end of the canvas (do <= f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight(),
+                                                                  getWidth()/Constants.TWO
+                                        - ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * (getWidth()/Constants.TWO)/Constants.ONE_HUNDRED,
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight()
+                                        - ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED)) * (Math.tan(thetaFocal_2) * getWidth()/Constants.TWO)/Constants.ONE_HUNDRED);
+                            }
+                            else
+                            {
+                                //second part - line going from lens and hitting the left end of the canvas (do <= f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                                  getHeight()/Constants.TWO - Variables.getObjHeight(),
+                                                                  Constants.ZERO,
+                                                                  getHeight()/Constants.TWO - Math.tan(thetaFocal_2) * getWidth()/Constants.TWO - Variables.getObjHeight());
+                            }
+                        }
+                    }
+                    ++rayGrowthIncrease;
                     
                 }
+                //ANIMATE DIVERGING LINES!!
                 else if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
                 {
                     //first ray second part - line going out of middle (for do > f)
