@@ -267,10 +267,8 @@ public class AnimationSection extends Canvas
                 
                 //line going through middle
                 getGraphicsContext2D().setStroke(Color.GREEN);//green for dring the rays
-                
-                double partOnePercent = (((double)(rayGrowthIncrease)) * (Variables.getObjDistance())/Constants.ONE_HUNDRED)/Constants.ONE_HUNDRED;
 
-                if(partOnePercent <= Constants.ONE)
+                if(rayGrowthIncrease <= Constants.ONE_HUNDRED)
                 {
                    //first part - line going to middle (is good for both converging and diverging
                     getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
@@ -289,27 +287,54 @@ public class AnimationSection extends Canvas
                                                       getHeight()/Constants.TWO); 
                 }
 
-                ++rayGrowthIncrease;
+                
                 if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_CONVERGING))
                 {
-
-                    if(Variables.getObjDistance() > Variables.getFocalPoint())
+                    System.out.println(rayGrowthIncrease);
+                    if(rayGrowthIncrease >= Constants.ONE_HUNDRED && rayGrowthIncrease <= Constants.TWO_HUNDRED)
                     {
-                        //second part - line going out of middle (for do > f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
-                                                          getHeight()/Constants.TWO, 
-                                                          getWidth(), 
-                                                          getHeight()/Constants.TWO + Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
+                        if(Variables.getObjDistance() > Variables.getFocalPoint())
+                        {
+                            //second part - line going out of middle (for do > f)
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO, 
+                                                              getWidth()/Constants.TWO + 
+                                                              ((double)(rayGrowthIncrease - Constants.ONE_HUNDRED))*((getWidth()/Constants.TWO)/Constants.ONE_HUNDRED), 
+                                                              getHeight()/Constants.TWO + 
+                                                              (double)(rayGrowthIncrease - Constants.ONE_HUNDRED)*(Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth())/Constants.ONE_HUNDRED);
+                            }
+                            else
+                            {
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO, 
+                                                              getHeight()/Constants.TWO, 
+                                                              getWidth(), 
+                                                              getHeight()/Constants.TWO + Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
+                            }
+                        }
+                        else if(Variables.getObjDistance() <= Variables.getFocalPoint())
+                        {
+                            if(rayGrowthIncrease <= Constants.TWO_HUNDRED)
+                            {
+                                //second part - line going from obj to left end of screen (for do < f)
+                                getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                                  (getHeight()/Constants.TWO - Variables.getObjHeight()), 
+                                                                  getWidth()/Constants.TWO - Variables.getObjDistance()
+                                                                   - (double)(rayGrowthIncrease - Constants.ONE_HUNDRED)* (getWidth()/Constants.TWO - Variables.getObjDistance())/Constants.ONE_HUNDRED, 
+                                                                 5);//FIX THIS!
+                            }
+                            else
+                            {
+                            //second part - line going from obj to left end of screen (for do < f)
+                            getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
+                                                              getHeight()/Constants.TWO - Variables.getObjHeight(), 
+                                                              Constants.ZERO, 
+                                                              getHeight()/Constants.TWO - Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
+                            }
+                        }
                     }
-                    else if(Variables.getObjDistance() <= Variables.getFocalPoint())
-                    {
-                        //second part - line going from obj to left end of screen (for do < f)
-                        getGraphicsContext2D().strokeLine(getWidth()/Constants.TWO - Variables.getObjDistance(), 
-                                                          getHeight()/Constants.TWO - Variables.getObjHeight(), 
-                                                          Constants.ZERO, 
-                                                          getHeight()/Constants.TWO - Math.tan(thetaCenter) * Constants.ONE_HALF * getWidth());
-                    }
-                    
+                    ++rayGrowthIncrease;
                     
                     //line going through first focal point
                     //first part, part a - line going to focal point
@@ -444,7 +469,7 @@ public class AnimationSection extends Canvas
                 MainWindow.getTableSection().setRightValue(Constants.TWO, -Variables.getImageDistance()/Variables.getObjDistance());
                 MainWindow.getTableSection().setRightValue(3, ((Variables.getImageDistance() < Constants.ZERO)?Constants.VIRTUAL_LABEL_TEXT:Constants.REAL_LABEL_TEXT));//make the '3' a constant
                 
-                if(alphaIncrease >= Constants.ONE_HUNDRED)
+                if(alphaIncrease >= Constants.ONE_HUNDRED && rayGrowthIncrease >= Constants.TWO_HUNDRED)
                 {
                    alphaIncrease = Constants.ZERO;
                    rayGrowthIncrease = Constants.ZERO;

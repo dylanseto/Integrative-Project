@@ -10,6 +10,9 @@ public interface Constants
 	public final int ONE = 1;
         public final int TWO = 2;
         public final int ONE_HUNDRED = 100;
+        public final int TWO_HUNDRED = 200;
+        public final int THREE_HUNDRED = 300;
+        public final int FOUR_HUNDRED = 400;
 	public final double ONE_HALF = 0.5;
         public final String EMPTY_STRING = "";
         public final int MAX_RGB_VALUE = 255;
