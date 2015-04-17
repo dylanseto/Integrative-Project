@@ -11,7 +11,9 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import sections.animationObjects.CartClass;
 
@@ -67,11 +69,11 @@ public class AnimationSection extends Canvas
 
 
 			        MainWindow.getChartSection().addDataPoint(((double)(totalTime))/1000000000, Variables.getVelocity(), true);
-                                    drawNewtonFrame(time);
+                                    drawNewtonFrame();
                                     break;
                                     
 				case PROJ_MOTION:
-                                    drawProjMotFrame();
+								drawProjMotFrame();
                                     break;
                                     
 				case OPTICS:
@@ -100,7 +102,7 @@ public class AnimationSection extends Canvas
 	{
 		newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
 	}
-	public void drawNewtonFrame(long time)
+	public void drawNewtonFrame()
 	{		
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             newtonLawCart.drawCart();
@@ -109,6 +111,26 @@ public class AnimationSection extends Canvas
 	private void drawProjMotFrame()
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            
+            final String dir = System.getProperty("user.dir");
+            Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
+            Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
+            Image img3 = new Image("file:/" + dir + "/src/res/star.png");
+            
+            double initwidth = 21+(23*Math.cos(Math.toRadians((Variables.getAngle()))));
+            double initHeight = 203-(23*Math.sin(Math.toRadians((Variables.getAngle()))));
+            
+            getGraphicsContext2D().drawImage(img3, initwidth, initHeight);
+         
+            MainWindow.getAnimSection().getGraphicsContext2D().save();
+            Rotate r = new Rotate(-Variables.getAngle(), 11 + img.getWidth() / 2, 200 + img.getHeight() / 2);
+            MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+            MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 200);
+            MainWindow.getAnimSection().getGraphicsContext2D().restore();
+            
+            MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 200);
+            //MainWindow.getGUIControlSection().setDisable(false);//chnage later
+            
 	}
         
 	private void drawOpticsFrame(boolean drawLines)

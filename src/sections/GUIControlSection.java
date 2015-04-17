@@ -296,6 +296,15 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     Variables.setForce(Double.valueOf(forceTextField.getText()));
                     break;
                     
+                case PROJ_MOTION:
+                	/*if(massTextField.getText().isEmpty()
+                            || forceTextField.getText().isEmpty())
+                    {
+                        disableSection = false;
+                    }*/
+                	//Variables.
+                	break;
+                    
                 case OPTICS:
                     if(((String)(lensOptionBox.getSelectionModel().getSelectedItem())) == null
                             || objectHeightTextField.getText().isEmpty()

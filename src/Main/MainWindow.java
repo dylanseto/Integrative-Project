@@ -117,7 +117,7 @@ public class MainWindow extends Application
                                                Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX], 
                                                Constants.NEWTON_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX]);
                                 guiControlSection.showNewtonLawControls();
-                                animSection.drawNewtonFrame(0); //change this later
+                                animSection.drawNewtonFrame(); 
                                 break;
                             
                             case PROJ_MOTION:

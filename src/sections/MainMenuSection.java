@@ -96,7 +96,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_NEWTON))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.NEWTON_LAW);
-                    MainWindow.getAnimSection().drawNewtonFrame(0);
+                    MainWindow.getAnimSection().drawNewtonFrame();
                 }
                 else if(subChoiceOneButton.getText().equalsIgnoreCase(Constants.OPTION_OPTICS))
                 {
@@ -121,7 +121,6 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_PROJ_MOT))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
-                   // URL u = getClass().getResource("src/res/testCannon.png");
                     final String dir = System.getProperty("user.dir");
                     Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
                     Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
