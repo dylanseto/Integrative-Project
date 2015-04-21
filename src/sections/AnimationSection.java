@@ -10,6 +10,7 @@ import calculations.Variables;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -146,7 +147,11 @@ public class AnimationSection extends Canvas
             //drawing the lens - the 2 and 4th parameters represent its height
             double heightPoint;
             
-            if(Variables.getObjHeight() >= getHeight()/Constants.TWO)
+            if(Math.abs(Variables.getImageHeight()) > Constants.LENS_MIN_HALF_LENGTH)
+            {
+                heightPoint = getHeight()/Constants.TWO - Math.abs(Variables.getImageHeight());
+            }
+            else if(Variables.getObjHeight() >= getHeight()/Constants.TWO)
             {
                 //make the lens height the height of the canvas
                 heightPoint = Constants.ZERO + ((Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
@@ -880,8 +885,11 @@ public class AnimationSection extends Canvas
         
 	public void start()
 	{
-		MainWindow.getChartSection().addDataPoint(0, 0);
-		this.animTimer.start();
+            if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+            {
+                MainWindow.getChartSection().addDataPoint(0, 0);
+            }
+            this.animTimer.start();
 	}
         
 	public void stop()

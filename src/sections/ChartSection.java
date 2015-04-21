@@ -4,7 +4,6 @@ package sections;
 import Main.Constants;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.layout.StackPane;
