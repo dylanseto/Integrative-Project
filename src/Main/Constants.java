@@ -9,6 +9,7 @@ public interface Constants
 	public final int ZERO = 0;
 	public final int ONE = 1;
         public final int TWO = 2;
+        public final int THREE = 3;
         public final int ONE_HUNDRED = 100;
         public final int TWO_HUNDRED = 200;
 	public final double ONE_HALF = 0.5;
