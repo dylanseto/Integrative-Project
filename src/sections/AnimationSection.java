@@ -7,10 +7,10 @@ import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -39,7 +39,10 @@ public class AnimationSection extends Canvas
         //for new bike
         private double priceX_Intercept_1 = Constants.ZERO,
                        priceX_Intercept_2 = Constants.ZERO;
-        private int deltaX_AddPoint = 0;
+        private int deltaX_AddPoint = Constants.ZERO,
+                    numFrames = Constants.ZERO;
+        private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
+        
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -113,10 +116,10 @@ public class AnimationSection extends Canvas
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             
-            final String dir = System.getProperty("user.dir");
-            Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
-            Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
-            Image img3 = new Image("file:/" + dir + "/src/res/star.png");
+            
+            Image img = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
+            Image img2 = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+            Image img3 = new Image("file:/" + Constants.DIR + "/src/res/star.png");
             
             double initwidth = 21+(23*Math.cos(Math.toRadians((Variables.getAngle()))));
             double initHeight = 203-(23*Math.sin(Math.toRadians((Variables.getAngle()))));
@@ -846,7 +849,8 @@ public class AnimationSection extends Canvas
         
 	private void drawNewBikeFrame()
 	{
-            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());  
+            getGraphicsContext2D().drawImage(bikeGif, (getWidth() - bikeGif.getWidth())/Constants.TWO, (getHeight()- bikeGif.getHeight())/Constants.TWO);
             
             if(priceX_Intercept_1 <= Constants.ZERO || priceX_Intercept_2 <= Constants.ZERO)
             {
@@ -854,26 +858,31 @@ public class AnimationSection extends Canvas
                 priceX_Intercept_2 = ((-70000 - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
             }
             
-            double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
-                   yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
             
-            if(xAddPoint - priceX_Intercept_1 < 20)
+            if((numFrames++)%20 == Constants.ZERO)
             {
-              if(yAddPoint < Constants.ZERO)
-              {
-                  yAddPoint = Constants.ZERO;
-                  xAddPoint = priceX_Intercept_1;
-              }
-              MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
-              ++deltaX_AddPoint;
-            }
-            else
-            {
-                MainWindow.getGUIControlSection().setDisable(false);
-                deltaX_AddPoint = Constants.ZERO;
-                priceX_Intercept_1 = Constants.ZERO;
-                priceX_Intercept_2 = Constants.ZERO;
-                stop();
+                double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
+                       yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
+
+                if(xAddPoint - priceX_Intercept_1 < 20)
+                {
+                  if(yAddPoint < Constants.ZERO)
+                  {
+                      yAddPoint = Constants.ZERO;
+                      xAddPoint = priceX_Intercept_1;
+                  }
+                  MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
+                  ++deltaX_AddPoint;
+                }
+                else
+                {
+                    MainWindow.getGUIControlSection().setDisable(false);
+                    deltaX_AddPoint = Constants.ZERO;
+                    priceX_Intercept_1 = Constants.ZERO;
+                    priceX_Intercept_2 = Constants.ZERO;
+                    getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());  
+                    stop();
+                }
             }
             
         }

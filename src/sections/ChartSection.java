@@ -2,12 +2,15 @@
 package sections;
 
 import Main.Constants;
+import Main.MainWindow;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 
 public class ChartSection extends LineChart<Number, Number>
@@ -42,18 +45,25 @@ public class ChartSection extends LineChart<Number, Number>
     	
     	if(hover)
     	{
-    		data.setNode(new HoverDetector());
+                //made a change to constructor of HoverDetector
+    		data.setNode(new HoverDetector(x, y));
     	}
     	
         getData().get(Constants.ZERO).getData().add(data);
     }
     private class HoverDetector extends StackPane
     {
-    	HoverDetector()
+        //made a change to constructor here
+    	HoverDetector(final double data_x, final double data_y)
     	{	
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
     	          System.out.println("mouse over"); //hover over
+                    if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+                    {
+                        //getChildren().add(new Rectangle(10, 10));
+                        getChildren().add(new Text("X = " + (int)data_x + "\nY = " + (int)data_y));
+                    }
     	          setCursor(Cursor.NONE);
     	          toFront();
     	        }
@@ -61,6 +71,10 @@ public class ChartSection extends LineChart<Number, Number>
     		setOnMouseExited(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
     	          System.out.println("mouse exit"); //hovers away
+                    if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+                    {
+                        getChildren().clear();
+                    }
     	          setCursor(Cursor.CROSSHAIR);
     	          toFront();
     	        }

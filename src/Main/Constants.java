@@ -15,6 +15,7 @@ public interface Constants
 	public final double ONE_HALF = 0.5;
         public final String EMPTY_STRING = "";
         public final int MAX_RGB_VALUE = 255;
+        public final String DIR = System.getProperty("user.dir");
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
