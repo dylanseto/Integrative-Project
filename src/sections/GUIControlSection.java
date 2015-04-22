@@ -291,29 +291,37 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                             || forceTextField.getText().isEmpty())
                     {
                         disableSection = false;
+                        break;
                     }
                     Variables.setMass(Double.valueOf(massTextField.getText()));
                     Variables.setForce(Double.valueOf(forceTextField.getText()));
                     break;
                     
                 case PROJ_MOTION:
-                	/*if(massTextField.getText().isEmpty()
-                            || forceTextField.getText().isEmpty())
-                    {
-                        disableSection = false;
-                    }*/
-                	//Variables.
+                	if(gravityOptionBox.getSelectionModel().getSelectedItem() == null
+                			|| projectileOptionBox.getSelectionModel().getSelectedItem().isEmpty()
+                			|| initVelTextField.getText().isEmpty()
+                			|| angleTextField.getText().isEmpty())
+                	{
+                		disableSection = false;
+                		break;
+                	}
+                	Variables.setGravityType(gravityOptionBox.getSelectionModel().getSelectedItem());
+                	Variables.setProjectileType(projectileOptionBox.getSelectionModel().getSelectedItem());
+                	Variables.setVelocity(Double.valueOf(initVelTextField.getText()));
+                	Variables.setAngle(Double.valueOf(angleTextField.getText()));
                 	break;
                     
                 case OPTICS:
-                    if(((String)(lensOptionBox.getSelectionModel().getSelectedItem())) == null
+                    if(lensOptionBox.getSelectionModel().getSelectedItem().isEmpty()
                             || objectHeightTextField.getText().isEmpty()
                             || objectDistanceTextField.getText().isEmpty()
                             || focalDistTextField.getText().isEmpty())
                     {
                         disableSection = false;
+                        break;
                     }
-                    Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
+                    Variables.setLensType(lensOptionBox.getSelectionModel().getSelectedItem());
                     Variables.setObjHeight(Double.valueOf(objectHeightTextField.getText()));
                     Variables.setObjDistance(Double.valueOf(objectDistanceTextField.getText()));
                     Variables.setFocalPoint(((Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))

@@ -81,7 +81,9 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case PROJ_MOTION:
-								drawProjMotFrame();
+								elapsedTime = time-previousTime;
+								previousTime = time;
+								drawProjMotFrame(((double)((elapsedTime))/1000000000));
                                     break;
                                     
 				case OPTICS:
@@ -116,7 +118,7 @@ public class AnimationSection extends Canvas
             newtonLawCart.drawCart();
 	}
         
-	private void drawProjMotFrame()
+	private void drawProjMotFrame(double time)
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             
@@ -128,7 +130,18 @@ public class AnimationSection extends Canvas
             double initwidth = 21+(23*Math.cos(Math.toRadians((Variables.getAngle()))));
             double initHeight = 203-(23*Math.sin(Math.toRadians((Variables.getAngle()))));
             
-            getGraphicsContext2D().drawImage(img3, initwidth, initHeight);
+            double HortVel = FormulaHelper.getHorVel(Variables.getAngle(), Variables.getVelocity());
+            double VertVel = FormulaHelper.getVertVel(Variables.getAngle(), Variables.getVelocity());
+            double height = FormulaHelper.computeCurrentHeight(time, HortVel, Variables.getHeight(), 10000000);
+            double displacement = FormulaHelper.computeDisplacement(time, VertVel, Variables.getDisplacement());
+            Variables.setDisplacement(displacement);
+            Variables.setHeight(height);
+            
+            //getGraphicsContext2D().drawImage(img3, initwidth, initHeight);
+            System.out.println("Displacement: "+ displacement + " Heihg: " + height + "Time: " + time);
+            //getGraphicsContext2D().drawImage(img3, initwidth+displacement, initHeight+height);
+            
+            getGraphicsContext2D().drawImage(img3, initwidth+displacement, initHeight);
          
             MainWindow.getAnimSection().getGraphicsContext2D().save();
             Rotate r = new Rotate(-Variables.getAngle(), 11 + img.getWidth() / 2, 200 + img.getHeight() / 2);
