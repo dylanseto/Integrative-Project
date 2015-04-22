@@ -7,7 +7,7 @@ import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
+import java.text.DecimalFormat;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -41,7 +41,11 @@ public class AnimationSection extends Canvas
                        priceX_Intercept_2 = Constants.ZERO;
         private int deltaX_AddPoint = Constants.ZERO,
                     numFrames = Constants.ZERO;
-        private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
+        //private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
+        private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
+        
+        //for drawing text
+        private final DecimalFormat formatter = new DecimalFormat("#0.00");
         
 	
 	AnimationTimer animTimer = new AnimationTimer(){
@@ -89,7 +93,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case SPORTS_BIKE:
-                                    drawNewBikeFrame();
+                                    drawNewBikeFrame(true);
                                     break;
                                     
 				case INF_GEOM_SERIES: 
@@ -847,44 +851,82 @@ public class AnimationSection extends Canvas
             drawThinFilmFrame(false);
         }
         
-	private void drawNewBikeFrame()
+	private void drawNewBikeFrame(boolean isGraphRunning)
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());  
-            getGraphicsContext2D().drawImage(bikeGif, (getWidth() - bikeGif.getWidth())/Constants.TWO, (getHeight()- bikeGif.getHeight())/Constants.TWO);
-            
-            if(priceX_Intercept_1 <= Constants.ZERO || priceX_Intercept_2 <= Constants.ZERO)
+            //getGraphicsContext2D().drawImage(bikeGif, (getWidth() - bikeGif.getWidth())/Constants.TWO, (getHeight()- bikeGif.getHeight())/Constants.TWO);
+            if(isGraphRunning)
             {
-                priceX_Intercept_1 = ((-70000 - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
-                priceX_Intercept_2 = ((-70000 - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
-            }
-            
-            
-            if((numFrames++)%20 == Constants.ZERO)
-            {
-                double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
-                       yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
+                if(priceX_Intercept_1 <= Constants.ZERO || priceX_Intercept_2 <= Constants.ZERO)
+                {
+                    priceX_Intercept_1 = ((-70000 - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
+                    priceX_Intercept_2 = ((-70000 - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
+                }
 
-                if(xAddPoint - priceX_Intercept_1 < 20)
+
+                if((numFrames++)%20 == Constants.ZERO)
                 {
-                  if(yAddPoint < Constants.ZERO)
-                  {
-                      yAddPoint = Constants.ZERO;
-                      xAddPoint = priceX_Intercept_1;
-                  }
-                  MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
-                  ++deltaX_AddPoint;
-                }
-                else
-                {
-                    MainWindow.getGUIControlSection().setDisable(false);
-                    deltaX_AddPoint = Constants.ZERO;
-                    priceX_Intercept_1 = Constants.ZERO;
-                    priceX_Intercept_2 = Constants.ZERO;
-                    getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());  
-                    stop();
+                    double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_2,
+                           yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
+
+                    if(xAddPoint - priceX_Intercept_1 < 20)
+                    {
+                      if(yAddPoint < Constants.ZERO)
+                      {
+                          yAddPoint = Constants.ZERO;
+                          xAddPoint = priceX_Intercept_1;
+                      }
+                      MainWindow.getChartSection().addDataPoint(xAddPoint, yAddPoint, true);
+                      ++deltaX_AddPoint;
+                    }
+                    else
+                    {
+                        MainWindow.getGUIControlSection().setDisable(false);
+                        deltaX_AddPoint = Constants.ZERO;
+                        priceX_Intercept_1 = Constants.ZERO;
+                        priceX_Intercept_2 = Constants.ZERO;
+                        //MainWindow.getChartSection().getData().get(Constants.ZERO) -> this returns the observable list carrying the series plotted
+                        //.getData().size() -> this returns the observable list carrying the data points of said series
+                        for(int i = Constants.ZERO; i < MainWindow.getChartSection().getData().get(Constants.ZERO).getData().size(); ++i)
+                        {
+                            double profitOfThisPoint = MainWindow.getChartSection().getData().get(Constants.ZERO).getData().get(i).getYValue().doubleValue();
+                            if(Variables.getMaxProfit() < profitOfThisPoint)
+                            {
+                                Variables.setMaxProfit(profitOfThisPoint);
+                            }
+                        }
+
+                        getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+                        drawNewBikeFrame();
+                        stop();
+                    }
                 }
             }
+            else
+            {
+                getGraphicsContext2D().drawImage(hoverOverPoint, Constants.ZERO, Constants.ZERO);
+            }
             
+        }
+        
+        
+        public void drawNewBikeFrame(double salePrice, double profit)
+        {
+            getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            
+            //draw money pile
+            double profitRatio = profit/Variables.getMaxProfit();
+            Image moneyImage = new Image("file:/" + Constants.DIR + "/src/res/moneyPile.png", profitRatio * Constants.MONEY_PILE_MAX_WIDTH, profitRatio * Constants.MONEY_PILE_MAX_HEIGHT, false, true);
+            getGraphicsContext2D().drawImage(moneyImage, (getWidth() - moneyImage.getRequestedWidth())/Constants.TWO, getHeight() - moneyImage.getRequestedHeight());
+            
+            //draw text at the top
+            getGraphicsContext2D().setFill(Color.BLACK);
+            getGraphicsContext2D().fillText("Sale price = " + formatter.format(salePrice) + "$\nPotential profit = " + formatter.format(profit) + "$", 75, 25);
+        }
+        
+        public void drawNewBikeFrame()
+        {
+            drawNewBikeFrame(false);
         }
         
 	private void drawInfSeriesFrame()

@@ -195,4 +195,11 @@ public interface Constants
         public final String LENS_DIVERGING  = "diverging";
         public final String LENS_CONVERGING = "converging";
         
+        //for new bike
+            //original height and width of money pile
+        public final double MONEY_PILE_MAX_WIDTH = 300;
+        public final double MONEY_PILE_MAX_HEIGHT = 250;
+        //public final double MONEY_PILE_OG_WIDTH = 400;
+        //public final double MONEY_PILE_OG_HEIGHT = 341;
+
 }

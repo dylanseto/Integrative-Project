@@ -58,23 +58,26 @@ public class ChartSection extends LineChart<Number, Number>
     	{	
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
-    	          System.out.println("mouse over"); //hover over
+    	          //System.out.println("mouse over "); //hover over
+                  
                     if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
                     {
-                        //getChildren().add(new Rectangle(10, 10));
-                        getChildren().add(new Text("X = " + (int)data_x + "\nY = " + (int)data_y));
+                        MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
                     }
+                  
     	          setCursor(Cursor.NONE);
     	          toFront();
     	        }
     	      });
     		setOnMouseExited(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
-    	          System.out.println("mouse exit"); //hovers away
+    	          //System.out.println("mouse exit"); //hovers away
+                  
                     if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
                     {
-                        getChildren().clear();
+                        MainWindow.getAnimSection().drawNewBikeFrame();
                     }
+                  
     	          setCursor(Cursor.CROSSHAIR);
     	          toFront();
     	        }

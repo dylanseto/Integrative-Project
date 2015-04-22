@@ -25,9 +25,9 @@ public class Variables
     private static double imageDistance;
     private static double costMake;
     private static double costSetUp;
-    private static double priceBike;
-    private static double profit;
-    private static int    units;
+    private static double priceBike;//useless so far
+    private static double maxProfit;
+    private static int    units;//useless so far
     private static String lensType;
     private static String materialType;
     private static double thickness;
@@ -61,7 +61,7 @@ public class Variables
         costMake = Constants.ZERO;
         costSetUp = Constants.ZERO;
         priceBike = Constants.ZERO;
-        profit = Constants.ZERO;
+        maxProfit = Constants.ZERO;
         units = Constants.ZERO;
         lensType = Constants.EMPTY_STRING;
         materialType = Constants.EMPTY_STRING;
@@ -248,14 +248,14 @@ public class Variables
         priceBike = price;
     }
 
-    public static double getProfit() 
+    public static double getMaxProfit() 
     {
-        return profit;
+        return maxProfit;
     }
 
-    public static void setProfit(double p) 
+    public static void setMaxProfit(double p) 
     {
-        profit = p;
+        maxProfit = p;
     }
 
     public static int getUnits() 
