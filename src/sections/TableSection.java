@@ -72,7 +72,7 @@ public class TableSection extends TableView
     
     public void addRow(double leftValue, double rightValue)
     {
-        addRow(String.valueOf(leftValue), String.valueOf(rightValue));
+        addRow(String.valueOf(leftValue), Constants.FORMATTER.format(rightValue));
     }
     
     public void addRow(String leftValue, String rightValue)
@@ -87,7 +87,7 @@ public class TableSection extends TableView
     
     public void setRightValue(int index, double rightValue)
     {
-        setRightValue(index, String.valueOf(rightValue));
+        setRightValue(index, Constants.FORMATTER.format(rightValue));
     }
     
     public void setRightValue(int index, String rightValue)

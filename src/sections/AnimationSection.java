@@ -43,10 +43,6 @@ public class AnimationSection extends Canvas
                     numFrames = Constants.ZERO;
         //private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
         private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
-        
-        //for drawing text
-        private final DecimalFormat formatter = new DecimalFormat("#0.00");
-        
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -934,7 +930,7 @@ public class AnimationSection extends Canvas
             
             //draw text at the top
             getGraphicsContext2D().setFill(Color.BLACK);
-            getGraphicsContext2D().fillText("Sale price = " + formatter.format(salePrice) + "$\nPotential profit = " + formatter.format(profit) + "$", 75, 25);
+            getGraphicsContext2D().fillText("Sale price = " + Constants.FORMATTER.format(salePrice) + "$\nPotential profit = " + Constants.FORMATTER.format(profit) + "$", 75, 25);
         }
         
         public void drawNewBikeFrame()

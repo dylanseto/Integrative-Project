@@ -336,6 +336,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                             || indexRefFilmTextField.getText().isEmpty())
                     {
                         disableSection = false;
+                        break;
                     }
                     Variables.setThickness(Double.valueOf(thicknessTextField.getText()));
                     Variables.setIndexRefFilm(Double.valueOf(indexRefFilmTextField.getText()));
@@ -347,6 +348,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                             || costSetUpTextField.getText().isEmpty())
                     {
                         disableSection = false;
+                        break;
                     }
                     Variables.setMaxProfit(Constants.ZERO);
                     MainWindow.getChartSection().clearData();

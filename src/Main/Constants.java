@@ -1,5 +1,6 @@
 package Main;
 
+import java.text.DecimalFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,6 +17,7 @@ public interface Constants
         public final String EMPTY_STRING = "";
         public final int MAX_RGB_VALUE = 255;
         public final String DIR = System.getProperty("user.dir");
+        public final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;

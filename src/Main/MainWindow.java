@@ -1,6 +1,5 @@
 package Main;
 
-import calculations.FormulaHelper;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
