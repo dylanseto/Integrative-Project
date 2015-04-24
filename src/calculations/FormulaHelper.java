@@ -25,16 +25,16 @@ public class FormulaHelper
 	//Projectile motion
 	public static double computeCurrentHeight(double deltaTime, double curVelocty_y, double prevHeight, double gravity)
 	{
-		return ((curVelocty_y*deltaTime)+(Constants.ONE_HALF*gravity*Math.pow(deltaTime, 2)) + prevHeight);
+		return ((curVelocty_y*deltaTime)+(Constants.ONE_HALF*-1*gravity*Math.pow(deltaTime, Constants.TWO)));
 	}
 	
 	public static double getVertVel(double angleDegrees, double initVel)
 	{
-		return (initVel * Math.sin(toRadians(angleDegrees)));
+		return (initVel * Math.sin(Math.toRadians(angleDegrees)));
 	}
 	public static double getHorVel(double angleDegrees, double initVel)
 	{
-		return (initVel * Math.cos(toRadians(angleDegrees)));
+		return (initVel * Math.cos(Math.toRadians(angleDegrees)));
 	}
 	//Optics
 	
@@ -49,10 +49,7 @@ public class FormulaHelper
 		return -((imagedistance/objectDistance)*objectHeight);
 	}
         
-	private static double toRadians(double angleInDegrees)
-	{
-		return (angleInDegrees*Constants.TWO_PI)/Constants.FULL_ROTATION;
-	}
+
         
         private static double computeWaveLengthThinFilm(double indexRefFilm, double thickness, int m, boolean constructive)
         {

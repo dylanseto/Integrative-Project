@@ -121,11 +121,14 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_PROJ_MOT))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
-                    final String dir = System.getProperty("user.dir");
-                    Image img = new Image("file:/" + dir + "/src/res/Cannon.png");
-                    Image img2 = new Image("file:/" + dir + "/src/res/CannonStand2.png");
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 200);
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 200);
+
+                    
+                    Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(backImage, 0, 0);
+                    Image img = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
+                    Image img2 = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 196);
+                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 196);
                     
                 }
                 else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
