@@ -76,6 +76,7 @@ public class MainWindow extends Application
 	public static void setUserInterface(Constants.UserInterface ui)
 	{
 		userInterface = ui;
+                bottomSplitPane.getStylesheets().clear();
                 
                 switch(userInterface)
                 {
@@ -126,6 +127,7 @@ public class MainWindow extends Application
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
                                 guiControlSection.showProjMotControls();
+                                bottomSplitPane.getStylesheets().add("/res/styles/projMotStyle.css");
                                 break;
                                 
                             case SPORTS_BIKE:
