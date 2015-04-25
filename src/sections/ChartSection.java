@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Data;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -64,6 +65,18 @@ public class ChartSection extends LineChart<Number, Number>
                     {
                         MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
                     }
+                    else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+                    {
+                    	Label label = new Label("Time: " + data_x + "s\nVelocty: " + data_y + "m/s");
+                    	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
+                    	getChildren().add(label);
+                    }
+                    else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                    {
+                    	Label label = new Label("Time: s\nVelocty: ");
+                    	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
+                    	getChildren().add(label);
+                    }
                   
     	          setCursor(Cursor.NONE);
     	          toFront();
@@ -77,6 +90,7 @@ public class ChartSection extends LineChart<Number, Number>
                     {
                         MainWindow.getAnimSection().drawNewBikeFrame();
                     }
+                    getChildren().clear();
                   
     	          setCursor(Cursor.CROSSHAIR);
     	          toFront();

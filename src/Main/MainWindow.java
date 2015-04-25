@@ -64,7 +64,9 @@ public class MainWindow extends Application
         mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
 		
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
-                //scene.getStylesheets().add("/res/styles/style.css");
+                
+                scene.getStylesheets().add("file:/" + Constants.DIR + "/src/res/styles/style.css");
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

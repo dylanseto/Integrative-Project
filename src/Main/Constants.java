@@ -11,6 +11,11 @@ public interface Constants
 	public final int ONE = 1;
         public final int TWO = 2;
         public final int THREE = 3;
+        public final int FOUR = 4;
+        public final int FIVE = 5;
+        public final int SIX = 6;
+        public final int SEVEN = 7;
+        public final int EIGHT = 8;
         public final int ONE_HUNDRED = 100;
         public final int TWO_HUNDRED = 200;
 	public final double ONE_HALF = 0.5;
@@ -203,5 +208,7 @@ public interface Constants
         public final double MONEY_PILE_MAX_HEIGHT = 250;
         //public final double MONEY_PILE_OG_WIDTH = 400;
         //public final double MONEY_PILE_OG_HEIGHT = 341;
+        
+        public final double NANOSECOND_RATIO = (1.0)/(1000000000.0);
 
 }

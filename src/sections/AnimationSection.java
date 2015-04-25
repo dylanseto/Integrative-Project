@@ -64,32 +64,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case NEWTON_LAW:
-			        Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
-			        elapsedTime = time-previousTime;
-			        System.out.println(((double)(elapsedTime))/100000000);
-
-			        Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))/1000000000, Variables.getAcceleration()));
-			        
-			        if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
-			        {
-			        	
-			        	
-			        	MainWindow.getChartSection().addDataPoint(TimeUnit.NANOSECONDS.toSeconds(totalTime), Variables.getVelocity(), true);
-			        	
-			        }
-			        previousTime = time;
-			        
-			        Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
-			        //System.out.println(Variables.getDisplacement());
-			        newtonLawCart.setX(Variables.getDisplacement()*40);
-			        System.out.println("time: "+ ((double)(elapsedTime))/1000000000 + "velocity: " + Variables.getVelocity() + "prev: " + Variables.getDisplacement());
-			        
-			        if(Variables.getDisplacement()*40 > 300)
-			        {
-			        	this.stop();
-			        }
-
-			        drawNewtonFrame();
+								drawNewtonFrame(time);
                                     break;
                                     
 				case PROJ_MOTION:
@@ -122,6 +97,35 @@ public class AnimationSection extends Canvas
 	{
 		newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
 	}
+	private void drawNewtonFrame(long time)
+	{
+		Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
+        elapsedTime = time-previousTime;
+        System.out.println(((double)(elapsedTime))*Constants.NANOSECOND_RATIO);
+
+        Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))*Constants.NANOSECOND_RATIO, Variables.getAcceleration()));
+        
+        if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
+        {
+        	
+        	
+        	MainWindow.getChartSection().addDataPoint(TimeUnit.NANOSECONDS.toSeconds(totalTime), Variables.getVelocity(), true);
+        	
+        }
+        previousTime = time;
+        
+        Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
+        //System.out.println(Variables.getDisplacement());
+        newtonLawCart.setX(Variables.getDisplacement()*40);
+        System.out.println("time: "+ ((double)(elapsedTime))*Constants.NANOSECOND_RATIO + "velocity: " + Variables.getVelocity() + "prev: " + Variables.getDisplacement());
+        
+        if(Variables.getDisplacement()*40 > 300)
+        {
+        	this.stop();
+        }
+
+        drawNewtonFrame();
+	}
 	public void drawNewtonFrame()
 	{		
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
@@ -137,6 +141,8 @@ public class AnimationSection extends Canvas
 		Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
 		getGraphicsContext2D().drawImage(backImage, 0, 0);
          
+		
+		//Make all of these constants.
 		 Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
          Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
          
@@ -174,20 +180,18 @@ public class AnimationSection extends Canvas
 	        }
          previousTime = time;
     
-         System.out.println("time: "+ ((double)(elapsedTime))/1000000000 + "velocity: " + VertVel + "prev: " + Variables.getHeight());
-         Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, HortVel, Variables.getDisplacement()));
-         Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))/1000000000, VertVel, Variables.getHeight(), 9.18));
-         getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight())));
+         Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))*Constants.NANOSECOND_RATIO, HortVel, Variables.getDisplacement()));
+         Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), 9.18));
+         getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*10)));
          
-         if(initwidth+(Variables.getDisplacement()) > 1000 || initwidth+(Variables.getDisplacement()) > 1000)
+         if(initwidth+(Variables.getDisplacement()) > 1000 || initwidth+(Variables.getHeight()) < -300)
          {
         	 this.stop();
          }
          
          
-         //////////////////////////////////////////////////////////////////////////////////////////////////////
          MainWindow.getAnimSection().getGraphicsContext2D().save();
-         Rotate r = new Rotate(-Variables.getAngle(), 11 + canonImage.getWidth() / 2, 196 + canonImage.getHeight() / 2);
+         Rotate r = new Rotate(-Variables.getAngle(), 11 + canonImage.getWidth() / Constants.TWO, 196 + canonImage.getHeight() / Constants.TWO);
          MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
          MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, 11, 196);
          MainWindow.getAnimSection().getGraphicsContext2D().restore();
