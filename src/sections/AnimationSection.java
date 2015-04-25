@@ -1,6 +1,7 @@
 package sections;
 
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import Main.Constants;
@@ -14,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import sections.animationObjects.CartClass;
 
@@ -44,6 +46,10 @@ public class AnimationSection extends Canvas
                     numFrames = Constants.ZERO;
         //private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
         private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
+        
+        //For Inifnite Geomtric series
+        private ArrayList<Circle> circles;
+        private int interation;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -128,7 +134,7 @@ public class AnimationSection extends Canvas
 	public void drawNewtonFrame()
 	{		
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-            newtonLawCart.drawCart();
+            newtonLawCart.draw();
 	}
         
 	public void drawProjMotFrame()
@@ -1074,6 +1080,16 @@ public class AnimationSection extends Canvas
 			
 			this.drawProjMotFrame();
         }
+	}
+	class CircleCreationThread implements Runnable
+	{
+
+		@Override
+		public void run() 
+		{
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 }
