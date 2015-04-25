@@ -52,12 +52,12 @@ public interface Constants
 	public final String OPTION_EXIT = "Exit";
         
         //Button options
-        public final String OPTION_NEWTON = "Newton's Second Law";
+        public final String OPTION_NEWTON = "Newton's Second\nLaw";
         public final String OPTION_PROJ_MOT = "Projectile Motion";
         public final String OPTION_OPTICS = "Optics";
         public final String OPTION_THIN_FILM = "Thin Film";
         public final String OPTION_NEW_BIKE = "New Sports Bike";
-        public final String OPTION_INF_GEOM = "Infinite Geometric Series";
+        public final String OPTION_INF_GEOM = "Infinite Geometric\nSeries";
         public final String CONFIRM_EXIT_MSG = "Are you sure you want to exit?";
         public final String OPTION_YES = "Yes"; 
         public final String OPTION_NO = "No";
