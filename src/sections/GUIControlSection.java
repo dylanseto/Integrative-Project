@@ -402,6 +402,20 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     Variables.setCostMake(Double.valueOf(costBikeTextField.getText()));
                     Variables.setCostSetUp(Double.valueOf(costSetUpTextField.getText()));
                     break;
+                case INF_GEOM_SERIES:
+                	if(this.coefficientTextField.getText().isEmpty()
+                			|| this.baseTextField.getText().isEmpty()
+                			|| this.exponentTextField.getText().isEmpty())
+                	{
+                		disableSection = false;
+                        break;
+                	}
+                	Variables.setCoefficient(Double.valueOf(this.coefficientTextField.getText()));
+                	MainWindow.getChartSection().clearData();
+                	Variables.setBase(Double.valueOf(this.baseTextField.getText()));
+                	Variables.setExponent(Integer.valueOf(this.exponentTextField.getText()));
+                	 System.out.println("GUI");
+                	 break;
                     
                 default:
                     disableSection = false;

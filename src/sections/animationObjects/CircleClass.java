@@ -18,9 +18,11 @@ public class CircleClass extends AnimationObject
 		super(graphics);
 		
 		this.rand = new Random();
-		this.color = Color.rgb(rand.nextInt(), rand.nextInt(), rand.nextInt());
-		this.angle = rand.nextInt(180);
+		this.color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+		this.angle = rand.nextInt(180); //change to constants ------------------------------
 		this.negative = rand.nextBoolean();
+		this.setX(rand.nextInt(200));
+		this.setY(rand.nextInt(200));
 	}
 
 	public Color getColor() {
@@ -48,7 +50,7 @@ public class CircleClass extends AnimationObject
 	}
 
 	@Override
-	void draw() {
+	public void draw() {
 		Paint temp = this.graphics.getFill();
 		this.graphics.setFill(this.color);
 		this.graphics.fillOval(x_property.get(), y_property.get(), 10, 10);

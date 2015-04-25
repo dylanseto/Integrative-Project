@@ -1,6 +1,5 @@
 package sections;
 
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import sections.animationObjects.CartClass;
+import sections.animationObjects.CircleClass;
 
 public class AnimationSection extends Canvas
 {
@@ -48,8 +48,8 @@ public class AnimationSection extends Canvas
         private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
         
         //For Inifnite Geomtric series
-        private ArrayList<Circle> circles;
-        private int interation;
+        private ArrayList<CircleClass> circles;
+        private int iteration;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -1005,10 +1005,22 @@ public class AnimationSection extends Canvas
 	private void drawInfSeriesFrame()
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+            for(CircleClass circle : this.circles)
+            {
+            	if(circle == null)
+            	{
+            		continue;
+            	}
+            	else
+            	{
+            		circle.draw();
+            	}
+            }
 	}
         
 	public void start()
 	{
+		System.out.println("animation");
             if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
             		||MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
             {
@@ -1035,9 +1047,12 @@ public class AnimationSection extends Canvas
                 	this.player.play();
                 }
    
-                System.out.println("deg");
             }
-            
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+            {
+            	circles = new ArrayList<CircleClass>();
+            	new Thread(new CircleCreationThread()).start();
+            }
             MainWindow.getGUIControlSection().getValues();
             this.animTimer.start();
 	}
@@ -1083,11 +1098,31 @@ public class AnimationSection extends Canvas
 	}
 	class CircleCreationThread implements Runnable
 	{
-
+		private boolean running;
+		
+		public CircleCreationThread()
+		{
+			running = true;
+		}
 		@Override
 		public void run() 
 		{
-			// TODO Auto-generated method stub
+			try{
+				while(running)
+				{
+					System.out.println("like");
+					AnimationSection.this.iteration++;
+		            int num = (int) FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), AnimationSection.this.iteration);
+		            for(int i = Constants.ZERO; i < num; i++)
+		            {
+		            	AnimationSection.this.circles.add(new CircleClass(AnimationSection.this.getGraphicsContext2D()));
+		            }
+		            Thread.sleep(3000);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		

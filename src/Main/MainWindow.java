@@ -1,5 +1,7 @@
 package Main;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Group;
@@ -65,7 +67,11 @@ public class MainWindow extends Application
 		
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
-                scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
+
+               scene.getStylesheets().add(new File(Constants.DIR + "/src/res/style.css").toURI().toString());
+
+               // scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
+
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
