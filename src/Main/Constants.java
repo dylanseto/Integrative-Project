@@ -1,8 +1,12 @@
 package Main;
 
+import java.io.File;
+import java.net.URL;
 import java.text.DecimalFormat;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.media.Media;
 
 public interface Constants
 {
@@ -38,7 +42,7 @@ public interface Constants
         public final double MAX_VIS_LIGHT_LENGTH = 700;
         
 	//Sizing ratios
-	public final double METER_RATIO = 0.001;
+	public final double METER_RATIO = 0.01;
 	public final double SCREEN_SPLIT_RATIO = 0.5;
 
 	//Combo Box options
@@ -209,6 +213,12 @@ public interface Constants
         //public final double MONEY_PILE_OG_WIDTH = 400;
         //public final double MONEY_PILE_OG_HEIGHT = 341;
         
+        //For Newton's Law and Projectile motion
         public final double NANOSECOND_RATIO = (1.0)/(1000000000.0);
+        public final int SPEED_RATIO = 40;
+        public final int X_BOUDARY = 300;
+        public final int Y_BOUNDARY = -30;
+        
+        public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
 
 }

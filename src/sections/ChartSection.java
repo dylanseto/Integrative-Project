@@ -57,6 +57,7 @@ public class ChartSection extends LineChart<Number, Number>
         //made a change to constructor here
     	HoverDetector(final double data_x, final double data_y)
     	{	
+    		setPrefSize(15, 15);
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
     	          //System.out.println("mouse over "); //hover over
@@ -67,13 +68,13 @@ public class ChartSection extends LineChart<Number, Number>
                     }
                     else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
                     {
-                    	Label label = new Label("Time: " + data_x + "s\nVelocty: " + data_y + "m/s");
+                    	Label label = new Label("X: " + data_x + "s\ny: " + Constants.FORMATTER.format(data_y) + "m/s");
                     	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
                     	getChildren().add(label);
                     }
                     else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
                     {
-                    	Label label = new Label("Time: s\nVelocty: ");
+                    	Label label = new Label("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m");
                     	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
                     	getChildren().add(label);
                     }

@@ -496,6 +496,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             else if(event.getSource() == angleTextField)
             {
             	Variables.setAngle(Double.valueOf(angleTextField.getText()));
+            	MainWindow.getAnimSection().drawProjMotFrame();
             	
             }
 	}

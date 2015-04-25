@@ -170,6 +170,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
             else if(event.getSource() == doneButton)
             {
+            	MainWindow.getAnimSection().reset();
                 MainWindow.setUserInterface(Constants.UserInterface.NO_CHOICE);
                 showComboBoxMenu();
             }

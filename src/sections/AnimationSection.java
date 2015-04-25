@@ -7,12 +7,15 @@ import Main.Constants;
 import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
+
 import java.text.DecimalFormat;
+
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -23,10 +26,10 @@ public class AnimationSection extends Canvas
 	//Newton's law and projectile Motion
 	private CartClass newtonLawCart;
 	private long elapsedTime = System.nanoTime();
-	private long initTime = 0;
-	private long previousTime = initTime;
-	private double prevDistance;
+	private long initTime;
+	private long previousTime;
 	private long totalTime;
+	private MediaPlayer player;
         
         //for thin film
         private int clearRectLengthReduction = Constants.ZERO;
@@ -51,10 +54,10 @@ public class AnimationSection extends Canvas
 		public void handle(long time) 
 		{
          
-			if(initTime == 0.000000)
+			if(initTime == Constants.ZERO)
 			{
 				initTime = time;
-				previousTime = time;
+				previousTime = initTime;
 			}
 			totalTime = time - initTime;
 			
@@ -95,7 +98,10 @@ public class AnimationSection extends Canvas
 	
 	public AnimationSection()
 	{
-		newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
+		this.newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
+		this.initTime = Constants.ZERO;
+		this.previousTime = initTime;
+		this.player = new MediaPlayer(Constants.maMiaSound);
 	}
 	private void drawNewtonFrame(long time)
 	{
@@ -116,10 +122,10 @@ public class AnimationSection extends Canvas
         
         Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
         //System.out.println(Variables.getDisplacement());
-        newtonLawCart.setX(Variables.getDisplacement()*40);
+        newtonLawCart.setX(Variables.getDisplacement()/Constants.METER_RATIO);
         System.out.println("time: "+ ((double)(elapsedTime))*Constants.NANOSECOND_RATIO + "velocity: " + Variables.getVelocity() + "prev: " + Variables.getDisplacement());
         
-        if(Variables.getDisplacement()*40 > 300)
+        if(Variables.getDisplacement()/Constants.METER_RATIO > Constants.X_BOUDARY)
         {
         	this.stop();
         }
@@ -132,35 +138,49 @@ public class AnimationSection extends Canvas
             newtonLawCart.drawCart();
 	}
         
+	public void drawProjMotFrame()
+	{
+		getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+		Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
+		getGraphicsContext2D().drawImage(backImage, 0, 0);
+		
+		Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
+        Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+        
+        MainWindow.getAnimSection().getGraphicsContext2D().save();
+        Rotate r = new Rotate(-Variables.getAngle(), 11 + canonImage.getWidth() / Constants.TWO, 196 + canonImage.getHeight() / Constants.TWO);
+        MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, 11, 196);
+        MainWindow.getAnimSection().getGraphicsContext2D().restore();
+        
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonStandImage, 10, 196);
+	}
 	private void drawProjMotFrame(long time)
 	{   
 		elapsedTime = time-previousTime;
         
         
-		getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-		Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
-		getGraphicsContext2D().drawImage(backImage, 0, 0);
+		drawProjMotFrame();
          
-		
+
 		//Make all of these constants.
-		 Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
-         Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+	
          
          Image projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
          
-         if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(0)) // Mario
+         if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
          {
         	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
          }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(1)) //mushroom
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
          {
         	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
          }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(2)) //Goomba
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //Goomba
          {
         	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
          }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(3)) //star
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
          {
         	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
          }
@@ -184,19 +204,11 @@ public class AnimationSection extends Canvas
          Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), 9.18));
          getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*10)));
          
-         if(initwidth+(Variables.getDisplacement()) > 1000 || initwidth+(Variables.getHeight()) < -300)
+         if(initwidth+(Variables.getDisplacement()) > Constants.X_BOUDARY || initwidth+(Variables.getHeight()) < Constants.Y_BOUNDARY)
          {
         	 this.stop();
          }
-         
-         
-         MainWindow.getAnimSection().getGraphicsContext2D().save();
-         Rotate r = new Rotate(-Variables.getAngle(), 11 + canonImage.getWidth() / Constants.TWO, 196 + canonImage.getHeight() / Constants.TWO);
-         MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-         MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, 11, 196);
-         MainWindow.getAnimSection().getGraphicsContext2D().restore();
-         
-         MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonStandImage, 10, 196);
+        
 	}
         
 	private void drawOpticsFrame(boolean drawLines)
@@ -943,7 +955,7 @@ public class AnimationSection extends Canvas
                     }
                     else
                     {
-                        MainWindow.getGUIControlSection().setDisable(false);
+                        MainWindow.getGUIControlSection().setDisable(true);
                         deltaX_AddPoint = Constants.ZERO;
                         priceX_Intercept_2 = Constants.ZERO;
                         priceX_Intercept_1 = Constants.ZERO;
@@ -999,20 +1011,53 @@ public class AnimationSection extends Canvas
         
 	public void start()
 	{
-            if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+            if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
+            		||MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
             {
-                MainWindow.getChartSection().addDataPoint(0, 0);
+                MainWindow.getChartSection().addDataPoint(Constants.ZERO, Constants.ZERO);
+                this.player.play();
             }
+
             this.animTimer.start();
 	}
         
 	public void stop()
 	{
 		this.animTimer.stop();
+		MainWindow.getGUIControlSection().setDisable(false);
+		
+		this.initTime = Constants.ZERO;
+		this.previousTime = initTime;
+		
 	}
         
 	public void reset()
 	{
-		this.newtonLawCart.setX(0);
+		if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+        {
+			MainWindow.getChartSection().clearData();
+			
+			//Reset all Variables to default values.
+			Variables.setAcceleration(Constants.ZERO);
+			Variables.setDisplacement(Constants.ZERO);
+			Variables.setVelocity(Constants.ZERO);
+			this.newtonLawCart.setX(Constants.ZERO);
+			
+			this.drawNewtonFrame();
+        }
+		else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+        {
+			MainWindow.getChartSection().clearData();
+			
+			//Reset all Variables to default values.
+			Variables.setAcceleration(Constants.ZERO);
+			Variables.setDisplacement(Constants.ZERO);
+			Variables.setVelocity(Constants.ZERO);
+			Variables.setHeight(Constants.ZERO);
+			Variables.setAngle(0);
+			
+			this.drawProjMotFrame();
+        }
+		
 	}
 }
