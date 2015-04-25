@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sections.AnimationSection;
 import sections.ChartSection;
@@ -65,7 +66,7 @@ public class MainWindow extends Application
 		
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
-                scene.getStylesheets().add("file:/" + Constants.DIR + "/src/res/styles/style.css");
+                scene.getStylesheets().add("/res/styles/style.css");
 
 		primaryStage.setScene(scene);
 		primaryStage.show();

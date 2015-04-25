@@ -113,7 +113,7 @@ public interface Constants
         public final int GRAPH_Y_AXIS_INDEX = 1;
         public final int GRAPH_X_AXIS_INDEX = 2;
         public final String[] NEWTON_GRAPH_LABELS = {"Velocity vs. Time", "Velocity (m/s)", "Time (s)"};
-        public final String[] PROJ_MOT_GRAPH_LABELS = {"Vertical Displacement vs. Time", "Vertical Displacement (m)", "Time (s)"};
+        public final String[] PROJ_MOT_GRAPH_LABELS = {"Vertical Displacement vs. Time", "Time (s)", "Vertical Displacement (m)"};
         public final String[] NEW_BIKE_GRAPH_LABELS = {"Profit vs. Sale Price", "Sale Price ($)", "Profit ($)"};
         public final String[] INF_GEOM_GRAPH_LABELS = {"Partial Sum vs. Term Number", "Partial Sum", "Term Number"};
         
