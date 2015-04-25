@@ -8,17 +8,13 @@ import Main.MainWindow;
 import calculations.FormulaHelper;
 import calculations.Variables;
 
-import java.text.DecimalFormat;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
 import sections.animationObjects.CartClass;
 
 public class AnimationSection extends Canvas

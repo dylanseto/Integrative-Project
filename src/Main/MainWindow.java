@@ -6,7 +6,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sections.AnimationSection;
 import sections.ChartSection;
@@ -66,7 +65,7 @@ public class MainWindow extends Application
 		
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
-                scene.getStylesheets().add("/res/styles/style.css");
+                scene.getStylesheets().add("/res/style.css");
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -79,7 +78,6 @@ public class MainWindow extends Application
 	public static void setUserInterface(Constants.UserInterface ui)
 	{
 		userInterface = ui;
-                bottomSplitPane.getStylesheets().clear();
                 
                 switch(userInterface)
                 {
@@ -130,7 +128,6 @@ public class MainWindow extends Application
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_Y_AXIS_INDEX], 
                                                Constants.PROJ_MOT_GRAPH_LABELS[Constants.GRAPH_X_AXIS_INDEX]);
                                 guiControlSection.showProjMotControls();
-                                bottomSplitPane.getStylesheets().add("/res/styles/projMotStyle.css");
                                 break;
                                 
                             case SPORTS_BIKE:
