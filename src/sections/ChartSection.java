@@ -6,12 +6,9 @@ import Main.MainWindow;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.chart.*;
-import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 
 public class ChartSection extends LineChart<Number, Number>
@@ -20,7 +17,7 @@ public class ChartSection extends LineChart<Number, Number>
     {
         super(new NumberAxis(), new NumberAxis());
         this.setLegendVisible(false);
-        getData().add(new XYChart.Series());
+        getData().add(new XYChart.Series<Number, Number>());
         setCursor(Cursor.CROSSHAIR);
     }
     

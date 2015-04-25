@@ -306,40 +306,40 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 		disableSection = false;
                 		break;
                 	}
-                	System.out.println(Variables.getDisplacement());
+                	//System.out.println(Variables.getDisplacement());
                 	Variables.setGravityType(gravityOptionBox.getSelectionModel().getSelectedItem());
-                	
-                	if(Constants.GRAVITY_TYPE_LIST.get(Constants.ZERO) == Constants.GRAVITY_TYPE_LIST.get(Constants.ZERO))
+
+                	if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.ZERO))
                 	{
                 		//No gravity
                 		Variables.setGravity(Constants.GRAVITY_NOTHING);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.ONE) == Constants.GRAVITY_TYPE_LIST.get(Constants.ONE))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.ONE))
                 	{
                 		//Earth
                 		Variables.setGravity(Constants.GRAVITY_EARTH);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.TWO) == Constants.GRAVITY_TYPE_LIST.get(Constants.TWO))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.TWO))
                 	{
                 		//Super Mario
                 		Variables.setGravity(Constants.GRAVITY_SUPERMARIO);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.THREE) == Constants.GRAVITY_TYPE_LIST.get(Constants.TWO))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.TWO))
                 	{
                 		//Super Mario 2
                 		Variables.setGravity(Constants.GRAVITY_SUPERMARIO2);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.FOUR) == Constants.GRAVITY_TYPE_LIST.get(Constants.FOUR))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.FOUR))
                 	{
                 		//Super Mario 3
                 		Variables.setGravity(Constants.GRAVITY_SUPERMARIO3);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.FIVE) == Constants.GRAVITY_TYPE_LIST.get(Constants.FIVE))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.FIVE))
                 	{
                 		//Super Mario World
                 		Variables.setGravity(Constants.GRAVITY_SUPERWORLD);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.SIX) == Constants.GRAVITY_TYPE_LIST.get(Constants.SIX))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.SIX))
                 	{
                 		//Super Mario Sunshine
                 		Variables.setGravity(Constants.GRAVITY_MARIOSUNSHINE);
@@ -349,7 +349,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 		//Super Paper Mario 
                 		Variables.setGravity(Constants.GRAVITY_SUPERPAPER);
                 	}
-                	else if(Constants.GRAVITY_TYPE_LIST.get(Constants.EIGHT) == Constants.GRAVITY_TYPE_LIST.get(Constants.EIGHT))
+                	else if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.EIGHT))
                 	{
                 		//Super  Mario 64 
                 		Variables.setGravity(Constants.GRAVITY_SUPERMARIO64);

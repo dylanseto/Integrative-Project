@@ -107,7 +107,6 @@ public class AnimationSection extends Canvas
 	{
 		Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
         elapsedTime = time-previousTime;
-        System.out.println(((double)(elapsedTime))*Constants.NANOSECOND_RATIO);
 
         Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))*Constants.NANOSECOND_RATIO, Variables.getAcceleration()));
         
@@ -121,9 +120,7 @@ public class AnimationSection extends Canvas
         previousTime = time;
         
         Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
-        //System.out.println(Variables.getDisplacement());
         newtonLawCart.setX(Variables.getDisplacement()/Constants.METER_RATIO);
-        System.out.println("time: "+ ((double)(elapsedTime))*Constants.NANOSECOND_RATIO + "velocity: " + Variables.getVelocity() + "prev: " + Variables.getDisplacement());
         
         if(Variables.getDisplacement()/Constants.METER_RATIO > Constants.X_BOUDARY)
         {
@@ -148,12 +145,12 @@ public class AnimationSection extends Canvas
         Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
         
         MainWindow.getAnimSection().getGraphicsContext2D().save();
-        Rotate r = new Rotate(-Variables.getAngle(), 11 + canonImage.getWidth() / Constants.TWO, 196 + canonImage.getHeight() / Constants.TWO);
+        Rotate r = new Rotate(-Variables.getAngle(), Constants.canonPos_X + canonImage.getWidth() / Constants.TWO, Constants.canonPos_Y + canonImage.getHeight() / Constants.TWO);
         MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, 11, 196);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, Constants.canonPos_X, Constants.canonPos_Y);
         MainWindow.getAnimSection().getGraphicsContext2D().restore();
         
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonStandImage, 10, 196);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonStandImage, 11, 196);
 	}
 	private void drawProjMotFrame(long time)
 	{   
@@ -185,8 +182,8 @@ public class AnimationSection extends Canvas
         	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
          }
          
-		 double initwidth = 21+(23*Math.cos(Math.toRadians((Variables.getAngle()))));
-         double initHeight = 199-(23*Math.sin(Math.toRadians((Variables.getAngle()))));
+		 double initwidth = Constants.initWidth+(Constants.magicNumber*Math.cos(Math.toRadians((Variables.getAngle()))));
+         double initHeight = Constants.initHeight-(Constants.magicNumber*Math.sin(Math.toRadians((Variables.getAngle()))));
          
          double HortVel = FormulaHelper.getHorVel(Variables.getAngle(), Variables.getVelocity());
          double VertVel = FormulaHelper.getVertVel(Variables.getAngle(), Variables.getVelocity());
@@ -201,14 +198,13 @@ public class AnimationSection extends Canvas
          previousTime = time;
     
          Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))*Constants.NANOSECOND_RATIO, HortVel, Variables.getDisplacement()));
-         Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), 9.18));
+         Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), Variables.getGravity()));
          getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*10)));
          
-         if(initwidth+(Variables.getDisplacement()) > Constants.X_BOUDARY || initwidth+(Variables.getHeight()) < Constants.Y_BOUNDARY)
+         if(initwidth+(Variables.getDisplacement()) > Constants.X_BOUDARY || initwidth+(Variables.getHeight()) < Constants.Y_BOUNDARY||initwidth+(Variables.getHeight()) > 300)
          {
         	 this.stop();
          }
-        
 	}
         
 	private void drawOpticsFrame(boolean drawLines)
@@ -1016,8 +1012,11 @@ public class AnimationSection extends Canvas
             {
                 MainWindow.getChartSection().addDataPoint(Constants.ZERO, Constants.ZERO);
                 this.player.play();
+   
+                System.out.println("deg");
             }
-
+            
+            MainWindow.getGUIControlSection().getValues();
             this.animTimer.start();
 	}
         
@@ -1055,6 +1054,7 @@ public class AnimationSection extends Canvas
 			Variables.setVelocity(Constants.ZERO);
 			Variables.setHeight(Constants.ZERO);
 			Variables.setAngle(0);
+			this.player.stop();
 			
 			this.drawProjMotFrame();
         }

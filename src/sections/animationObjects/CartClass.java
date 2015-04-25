@@ -1,16 +1,12 @@
 package sections.animationObjects;
 
-import java.util.Random;
 
 import Main.Constants;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
-import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 
 public class CartClass

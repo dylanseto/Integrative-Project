@@ -218,6 +218,11 @@ public interface Constants
         public final int SPEED_RATIO = 40;
         public final int X_BOUDARY = 300;
         public final int Y_BOUNDARY = -30;
+        public final int initHeight = 199;
+        public final int initWidth = 21;
+        public final int magicNumber = 23;
+        public final int canonPos_X = 11;
+        public final int canonPos_Y = 196;
         
         public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
 
