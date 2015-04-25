@@ -225,5 +225,8 @@ public interface Constants
         public final int canonPos_Y = 196;
         
         public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
+        public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());
+        public final Media goombaSound = new Media(new File(Constants.DIR + "/src/res/smb3_thwomp.wav").toURI().toString());
+        public final Media mushaSound = new Media(new File(Constants.DIR + "/src/res/smb_powerup.wav").toURI().toString());
 
 }

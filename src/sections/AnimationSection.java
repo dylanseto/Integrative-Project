@@ -1011,7 +1011,27 @@ public class AnimationSection extends Canvas
             		||MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
             {
                 MainWindow.getChartSection().addDataPoint(Constants.ZERO, Constants.ZERO);
-                this.player.play();
+                
+                if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                {
+                	if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(0))
+                	{
+                		this.player = new MediaPlayer(Constants.maMiaSound);
+                	}
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(1)) //mushroom
+                	{
+                		this.player = new MediaPlayer(Constants.mushaSound);
+                	}
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(2)) //goomba
+                	{
+                		this.player = new MediaPlayer(Constants.goombaSound);
+                	}
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(3)) //star
+                	{
+                		this.player = new MediaPlayer(Constants.starSound);
+                	}
+                	this.player.play();
+                }
    
                 System.out.println("deg");
             }
