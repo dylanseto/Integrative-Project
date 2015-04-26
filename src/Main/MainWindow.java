@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import sections.AnimationSection;
 import sections.ChartSection;
@@ -67,10 +68,11 @@ public class MainWindow extends Application
 		
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
+                
+               //scene.getStylesheets().add(new File(Constants.DIR + "/src/res/style.css").toURI().toString());
 
-               scene.getStylesheets().add(new File(Constants.DIR + "/src/res/style.css").toURI().toString());
-
-               // scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
+                Font.loadFont(this.getClass().getResource("/res/PressStart2P.ttf").toExternalForm(), 10);
+               scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
 
 
 		primaryStage.setScene(scene);
