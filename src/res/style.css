@@ -1,3 +1,8 @@
+@font-face
+{
+    font-family: "Press Start 2P";
+}
+
 .text
 {
     
@@ -16,7 +21,7 @@
 
 .button:hover
 {
-    -fx-text-fill: white;} //rgb(23, 79, 115);
+    -fx-text-fill: white; //rgb(23, 79, 115);
     -fx-background-color: white;
 }
 
@@ -31,9 +36,4 @@
 {
     -fx-effect: dropshadow(gaussian, rgb(23, 79, 115), 12, 0.5, 0, 0);
     -fx-font-size: 115%;
-}
-
-font-face {
-    font-family: 'Press Start 2P';
-    src: url('PressStart2P.ttf');
 }

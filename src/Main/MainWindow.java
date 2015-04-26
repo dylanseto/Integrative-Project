@@ -1,6 +1,5 @@
 package Main;
 
-import java.io.File;
 
 import javafx.application.Application;
 import javafx.geometry.Orientation;
@@ -66,14 +65,13 @@ public class MainWindow extends Application
 
         mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
 		
+
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
                 
                //scene.getStylesheets().add(new File(Constants.DIR + "/src/res/style.css").toURI().toString());
-
-                Font.loadFont(this.getClass().getResource("/res/PressStart2P.ttf").toExternalForm(), 10);
+                Font.loadFont(this.getClass().getResource("/res/PressStart2P.ttf").toExternalForm(), 20);
                scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
-
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
