@@ -138,7 +138,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane indexRefFilmFLowPane = new FlowPane();
-	private final Label indexRefFilmLabel = new Label("Index Of Refraction Of Film: ");
+	private final Label indexRefFilmLabel = new Label("Index Of \nRefraction Of Film: ");
 	private final TextField indexRefFilmTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{

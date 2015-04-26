@@ -68,8 +68,10 @@ public class MainWindow extends Application
 
                 Scene scene = new Scene(new Group(mainWindow), 599, 590);
                 
-                Font font  = Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), 12);
-               scene.getStylesheets().add(this.getClass().getResource("/res/style.css").toExternalForm());
+                Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), 12);
+                Font.loadFont(this.getClass().getResourceAsStream("/res/bigmacca.ttf"), 12);
+               scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
+               guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlLabelStyle.css").toExternalForm());
 
 		primaryStage.setScene(scene);
 		primaryStage.show();

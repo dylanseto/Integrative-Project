@@ -97,7 +97,7 @@ public interface Constants
         public final String OBJ_HEIGHT_LABEL_TEXT = "Object height = ";
         public final String OBJ_DIST_LABEL_TEXT = "Object distance = ";
         public final String FOCAL_DIST_LABEL_TEXT = "Focal distance = ";
-        public final String WAVE_LENGTHS_LABEL_TEXT = "Wavelengths Within Visible Light Range (400nm - 700nm)";
+        public final String WAVE_LENGTHS_LABEL_TEXT = "Wavelengths Within Visible \nLight Range (400nm - 700nm)";
         public final String ENHANCED_LABEL_TEXT = "Enhanced";
         public final String DESTROYED_LABEL_TEXT = "Destroyed";
         public final String MATERIAL_LABEL_TEXT = "Material:";
