@@ -72,7 +72,7 @@ public class TableSection extends TableView
     
     public void addRow(double leftValue, double rightValue)
     {
-        addRow(String.valueOf(leftValue), Constants.FORMATTER.format(rightValue));
+        addRow(Constants.FORMATTER.format(leftValue), Constants.FORMATTER.format(rightValue));
     }
     
     public void addRow(String leftValue, String rightValue)

@@ -884,7 +884,7 @@ public class AnimationSection extends Canvas
                             }
                             for(int i = lastIndexConst; i < Variables.getWaveLengthsDest().size(); ++i)
                             {
-                                MainWindow.getTableSection().addLeftValue(String.valueOf(Variables.getWaveLengthsDest().get(i)));
+                                MainWindow.getTableSection().addLeftValue(Constants.FORMATTER.format(Variables.getWaveLengthsDest().get(i)));
                             }
                         }
                         else if(Variables.getWaveLengthsDest().size() < Variables.getWaveLengthsConst().size())
@@ -901,7 +901,7 @@ public class AnimationSection extends Canvas
                             }
                             for(int i = lastIndexDest; i < Variables.getWaveLengthsConst().size(); ++i)
                             {
-                                MainWindow.getTableSection().addRow(Constants.EMPTY_STRING, String.valueOf(Variables.getWaveLengthsConst().get(i)));
+                                MainWindow.getTableSection().addRow(Constants.EMPTY_STRING, Constants.FORMATTER.format(Variables.getWaveLengthsConst().get(i)));
                             }
                         }
 

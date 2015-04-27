@@ -1,0 +1,10 @@
+.label 
+{
+    -fx-text-fill: rgb(0, 30, 44);
+}
+
+.label .text
+{
+    -fx-font-family: "BIGMACCA";
+    -fx-font-size: 16;
+}

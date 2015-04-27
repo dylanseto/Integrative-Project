@@ -1,0 +1,24 @@
+/*
+.table-row-cell 
+{
+    //-fx-background: red;
+    -fx-background-color: blue;
+    -fx-text-fill: -fx-text-background-color;
+}
+*/
+
+
+.table-cell 
+{
+    -fx-padding: 0.166667em; /* 2px, plus border adds 1px */
+    -fx-background-color: rgba(23, 79, 115, 0.5);
+    -fx-border-color: rgb(23, 79, 115) rgb(23, 79, 115) rgb(23, 79, 115) rgb(23, 79, 115); //rgb(0, 30, 44);
+    -fx-cell-size: 2.0em; /* 24 */
+    -fx-text-fill: white;
+}
+
+.table-cell .text
+{
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}

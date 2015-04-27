@@ -71,8 +71,9 @@ public class MainWindow extends Application
                 Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), 12);
                 Font.loadFont(this.getClass().getResourceAsStream("/res/bigmacca.ttf"), 12);
                scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
-               guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlLabelStyle.css").toExternalForm());
-
+               guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlSectionStyle.css").toExternalForm());
+               tableSection.getStylesheets().add(this.getClass().getResource("/res/tableSectionStyle.css").toExternalForm());
+               
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
