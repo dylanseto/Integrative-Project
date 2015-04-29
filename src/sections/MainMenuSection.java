@@ -205,7 +205,11 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
         }
         
-        public Button getResetButton() {
+        public Button getPauseButton() {
+			return pauseButton;
+		}
+
+		public Button getResetButton() {
 			return resetButton;
 		}
 

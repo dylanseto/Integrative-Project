@@ -1098,6 +1098,7 @@ public class AnimationSection extends Canvas
 			this.previousTime = System.nanoTime();
 		}
 		MainWindow.getMainMenuSection().getResetButton().setDisable(false);
+		MainWindow.getMainMenuSection().getPauseButton().setDisable(true);
 	}
         
 	public void stop()
