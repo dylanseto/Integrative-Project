@@ -168,23 +168,23 @@ public class AnimationSection extends Canvas
         
 		drawProjMotFrame();
 	      
-         Image projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
+         Image projectileImage = Constants.starImage;
          
          if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
          {
-        	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
+        	 projectileImage = Constants.marioImage;
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
          {
-        	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
+        	 projectileImage = Constants.mushshroomImage;
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //Goomba
          {
-        	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
+        	 projectileImage = Constants.goombaImage;
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
          {
-        	 projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
+        	 projectileImage = Constants.starImage;
          }
          
 		 double initwidth = Constants.initWidth+(Constants.magicNumber*Math.cos(Math.toRadians((Variables.getAngle()))));
@@ -204,13 +204,12 @@ public class AnimationSection extends Canvas
     
          Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))*Constants.NANOSECOND_RATIO, HortVel, Variables.getDisplacement()));
          Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), Variables.getGravity()));
-         getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*10)));
+         getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          
          if(initwidth+(Variables.getDisplacement()) > Constants.X_BOUDARY || initwidth+(Variables.getHeight()) < Constants.Y_BOUNDARY||initwidth+(Variables.getHeight()) > 300)
          {
         	 this.stop();
          }
-         //System.out.println(totalTime);
 	}
         
 	private void drawOpticsFrame(boolean drawLines)
@@ -1102,10 +1101,6 @@ public class AnimationSection extends Canvas
 			{
 				this.previousTime = System.nanoTime();
 			}
-		}
-		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
-		{
-			//Not sure if I need anything here, really. TODO
 		}
 		MainWindow.getGUIControlSection().setDisable(false);
 		MainWindow.getMainMenuSection().getResetButton().setDisable(false);

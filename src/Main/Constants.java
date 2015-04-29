@@ -76,7 +76,7 @@ public interface Constants
         public final String OPTICS_HELP_MSG = "";
         public final String THIN_FILM_HELP_MSG = "";
         public final String NEW_BIKE_HELP_MSG = "";
-        public final String INF_GEOM_HELP_MSG = "";
+        public final String INF_GEOM_HELP_MSG = "Description: During this animation, the sides\nof a square will grow in size according each term\n value in the sum. You can notice that if the base\n in 0, there will be no growth. If the base in below\n 1 (exluding), the size of the square will eventually\n stabilize and if the square is 1 or above, it will\n increase indefinitely.\n\nCoefficent: A number, in an equation a(x^k), this is the a value.\nBase: A number, in an equation a(x^k), this is the x value.\nExponent: A number. This determines how many terms we should calculate.";
         
         //GUISection label texts
         public final String ENTER_VAL_LABEL_TEXT = "Enter Values";
@@ -222,7 +222,7 @@ public interface Constants
         
         //For Newton's Law and Projectile motion
         public final double NANOSECOND_RATIO = (1.0)/(1000000000.0);
-        public final int SPEED_RATIO = 40;
+        public final int SPEED_RATIO = 10;
         public final int X_BOUDARY = 300;
         public final int Y_BOUNDARY = -30;
         public final int initHeight = 199;
@@ -233,6 +233,10 @@ public interface Constants
         public final Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
         public final Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
         public final Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
+        public final Image starImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
+        public final Image goombaImage = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
+        public final Image mushshroomImage = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
+        public final Image marioImage = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
         
         public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
         public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());

@@ -2,7 +2,6 @@ package sections.animationObjects;
 
 
 import Main.Constants;
-import javafx.beans.property.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

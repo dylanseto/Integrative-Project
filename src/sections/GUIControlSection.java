@@ -9,10 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.transform.Rotate;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {

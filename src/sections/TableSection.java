@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TableSection extends TableView
 {
-    private final TableColumn colTitle;
+    private final TableColumn colTitle; //Fix these warnings.
     private final TableColumn colRightValue;
     private final TableColumn colLeftValue;
 

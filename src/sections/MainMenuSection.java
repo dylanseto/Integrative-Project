@@ -1,8 +1,6 @@
 package sections;
 
-import java.net.URISyntaxException;
-
-import javax.print.DocFlavor.URL;
+import javax.swing.JOptionPane;
 
 import Main.Constants;
 import Main.MainWindow;
@@ -13,11 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -25,7 +19,7 @@ import javafx.scene.text.Text;
  */
 public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 {
-	private ComboBox mainOptionBox;
+	private ComboBox<String> mainOptionBox;
 	private final ObservableList<String> mainOptionsList;
         
         private final Button subChoiceOneButton;
@@ -41,7 +35,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 	public MainMenuSection() 
 	{
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
-            mainOptionBox = new ComboBox(mainOptionsList);
+            mainOptionBox = new ComboBox<String>(mainOptionsList);
 
             this.subChoiceOneButton = new Button();
             this.subChoiceTwoButton = new Button();
@@ -94,7 +88,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                     showSubMenu(Constants.OPTION_YES, Constants.OPTION_NO);
                 }
                 
-                mainOptionBox = new ComboBox(mainOptionsList);
+                mainOptionBox = new ComboBox<String>(mainOptionsList);
                 mainOptionBox.setOnAction(this);
             }
             else if(event.getSource() == subChoiceOneButton)
@@ -128,13 +122,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
 
-                    
-                    Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(backImage, 0, 0);
-                    Image img = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
-                    Image img2 = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img, 11, 196);
-                    MainWindow.getAnimSection().getGraphicsContext2D().drawImage(img2, 10, 196);
+                    MainWindow.getAnimSection().drawProjMotFrame();
                     
                 }
                 else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
@@ -191,7 +179,10 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
             else if(event.getSource() == helpButton)
             {
-                
+                if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+                {
+                	JOptionPane.showMessageDialog(null, Constants.INF_GEOM_HELP_MSG);
+                }
             }
             else if(event.getSource() == doneButton)
             {
