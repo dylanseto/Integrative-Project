@@ -85,7 +85,14 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	
 	private final FlowPane objectDistanceFLowPane = new FlowPane();
 	private final Label objectDistanceLabel = new Label("Object Distance: ");
-	private final TextField objectDistanceTextField = new TextField();
+	private final TextField objectDistanceTextField = new TextField(){
+		public void replaceText(int start, int end, String text) 
+		{
+			if (text.matches("^[0-9\\.]*$")) {
+	            super.replaceText(start, end, text);
+	        }
+		}
+	};;
 	
 	private final FlowPane focalDistFLowPane = new FlowPane();
 	private final Label focalDistLabel = new Label("Focal Length: ");
