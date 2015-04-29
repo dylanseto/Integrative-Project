@@ -29,6 +29,7 @@ public interface Constants
         public final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
         public final int GUI_SPACING = 10;
         public final String NUMBERS_ONLY_REGEX = "^[0-9\\.]*$";
+        public final int FONT_SIZE = 12;
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -249,6 +250,6 @@ public interface Constants
         
         //For Inf Geom Series
         public final double DEFAULT_SIDE = 10.0;
-        public final long delay = 3000;
+        public final long delay = 1000;
 
 }

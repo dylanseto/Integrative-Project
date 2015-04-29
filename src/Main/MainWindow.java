@@ -67,15 +67,16 @@ public class MainWindow extends Application
         mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
 		
 
-                Scene scene = new Scene(new Group(mainWindow), 599, 590);
+                Scene scene = new Scene(new Group(mainWindow), 590, 590);
                 
-                Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), 12);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/bigmacca.ttf"), 12);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/CONTFREAK.ttf"), 12);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/venusRisingRg.ttf"), 12);
+                Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream("/res/bigmacca.ttf"), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream("/res/CONTFREAK.ttf"), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream("/res/venusRisingRg.ttf"), Constants.FONT_SIZE);
                 scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
                guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlSectionStyle.css").toExternalForm());
                tableSection.getStylesheets().add(this.getClass().getResource("/res/tableSectionStyle.css").toExternalForm());
+               primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

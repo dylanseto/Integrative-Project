@@ -167,25 +167,6 @@ public class AnimationSection extends Canvas
 		elapsedTime = time-previousTime;
         
 		drawProjMotFrame();
-	      
-         Image projectileImage = Constants.starImage;
-         
-         if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
-         {
-        	 projectileImage = Constants.marioImage;
-         }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
-         {
-        	 projectileImage = Constants.mushshroomImage;
-         }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //Goomba
-         {
-        	 projectileImage = Constants.goombaImage;
-         }
-         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
-         {
-        	 projectileImage = Constants.starImage;
-         }
          
 		 double initwidth = Constants.initWidth+(Constants.magicNumber*Math.cos(Math.toRadians((Variables.getAngle()))));
          double initHeight = Constants.initHeight-(Constants.magicNumber*Math.sin(Math.toRadians((Variables.getAngle()))));
@@ -204,8 +185,26 @@ public class AnimationSection extends Canvas
     
          Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))*Constants.NANOSECOND_RATIO, HortVel, Variables.getDisplacement()));
          Variables.setHeight(FormulaHelper.computeCurrentHeight(((double)(totalTime))*Constants.NANOSECOND_RATIO, VertVel, Variables.getHeight(), Variables.getGravity()));
-         getGraphicsContext2D().drawImage(projectileImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          
+         //draw based on projectile type
+         if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
+         {
+        	 getGraphicsContext2D().drawImage(Constants.marioImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+         }
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
+         {
+        	 getGraphicsContext2D().drawImage(Constants.mushshroomImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+         }
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //Goomba
+         {
+        	 getGraphicsContext2D().drawImage(Constants.goombaImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+         }
+         else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
+         {
+        	 getGraphicsContext2D().drawImage(Constants.starImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+         }
+         
+         //Check Boundaries
          if(initwidth+(Variables.getDisplacement()) > Constants.X_BOUDARY || initwidth+(Variables.getHeight()) < Constants.Y_BOUNDARY||initwidth+(Variables.getHeight()) > 300)
          {
         	 this.stop();
@@ -1143,7 +1142,8 @@ public class AnimationSection extends Canvas
         }
 		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
 		{
-			//Not sure if I need anything here, really.
+			MainWindow.getChartSection().clearData();
+			getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
 			this.interation = Constants.ZERO;
 			this.mainSquare.setSide(Constants.DEFAULT_SIDE);
 		}
