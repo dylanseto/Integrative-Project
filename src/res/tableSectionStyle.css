@@ -1,12 +1,3 @@
-/*
-.table-row-cell 
-{
-    //-fx-background: red;
-    -fx-background-color: blue;
-    -fx-text-fill: -fx-text-background-color;
-}
-*/
-
 .table-cell 
 {
     -fx-padding: 0.166667em; /* 2px, plus border adds 1px */
@@ -14,10 +5,34 @@
     -fx-border-color: rgb(23, 79, 115) rgb(23, 79, 115) rgb(23, 79, 115) rgb(23, 79, 115); //rgb(0, 30, 44);
     -fx-cell-size: 2.0em; /* 24 */
     -fx-text-fill: white;
+    -fx-alignment: center;
+    
 }
 
 .table-cell .text
 {
+    -fx-font-family: "Control Freak";
     -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+
+.table-row-cell:filled:focused:selected
+{
+    -fx-background-color: transparent;
+}
+
+.column-header
+{
+    -fx-effect: innershadow(three-pass-box, rgb(0, 30, 44), 5, 0.7, 0, 0);
+    -fx-background-color: rgba(23, 79, 115, 0.8);
+    -fx-border-color: rgb(0, 30, 44);
+}
+
+.column-header .text
+{
+    -fx-font-family: "Venus Rising";
     -fx-font-size: 12;
+    -fx-fill: rgb(0, 26, 38);
+    -fx-effect: dropshadow(gaussian, white, 10, 0.6, 0, 0);
+
 }
