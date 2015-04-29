@@ -413,6 +413,12 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 	Variables.setCoefficient(Double.valueOf(this.coefficientTextField.getText()));
                 	MainWindow.getChartSection().clearData();
                 	Variables.setBase(Double.valueOf(this.baseTextField.getText()));
+                	
+                	if(this.exponentTextField.getText().equalsIgnoreCase("inf"))
+                	{
+                		//not sure if we should have this actually.
+                	}
+                	
                 	Variables.setExponent(Integer.valueOf(this.exponentTextField.getText()));
                 	 System.out.println("GUI");
                 	 break;

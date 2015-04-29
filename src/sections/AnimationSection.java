@@ -44,10 +44,9 @@ public class AnimationSection extends Canvas
                        priceX_Intercept_1 = Constants.ZERO;
         private int deltaX_AddPoint = Constants.ZERO,
                     numFrames = Constants.ZERO;
-        //private final Image bikeGif = new Image("file:/" + Constants.DIR + "/src/res/bicycle.gif");
-        private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
         
-        //For Inifnite Geomtric series
+        
+        //For infinite geometric series
         private SquareClass mainSquare;
         private int interation;
 	
@@ -115,8 +114,8 @@ public class AnimationSection extends Canvas
 		this.previousTime = initTime;
 		this.player = new MediaPlayer(Constants.maMiaSound);
 		this.elapsedPause = Constants.ZERO;
-		this.mainSquare = new SquareClass(this.getGraphicsContext2D(), 0, 0, 10, Color.AQUAMARINE);
-		this.interation = 0;
+		this.mainSquare = new SquareClass(this.getGraphicsContext2D(), Constants.ZERO, Constants.ZERO, Constants.DEFAULT_SIDE, Color.AQUAMARINE);
+		this.interation = Constants.ZERO;
 	}
 	private void drawNewtonFrame(long time)
 	{
@@ -134,7 +133,7 @@ public class AnimationSection extends Canvas
         }
         previousTime = time;
         
-        Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))/1000000000, Variables.getVelocity(), Variables.getDisplacement()));
+        Variables.setDisplacement(FormulaHelper.computeDisplacement(((double)(elapsedTime))*Constants.NANOSECOND_RATIO, Variables.getVelocity(), Variables.getDisplacement()));
         newtonLawCart.setX(Variables.getDisplacement()/Constants.METER_RATIO);
         
         if(Variables.getDisplacement()/Constants.METER_RATIO > Constants.X_BOUDARY)
@@ -153,32 +152,22 @@ public class AnimationSection extends Canvas
 	public void drawProjMotFrame()
 	{
 		getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-		Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
-		getGraphicsContext2D().drawImage(backImage, 0, 0);
-		
-		Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
-        Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+		getGraphicsContext2D().drawImage(Constants.backImage, Constants.ZERO, Constants.ZERO);
         
         MainWindow.getAnimSection().getGraphicsContext2D().save();
-        Rotate r = new Rotate(-Variables.getAngle(), Constants.canonPos_X + canonImage.getWidth() / Constants.TWO, Constants.canonPos_Y + canonImage.getHeight() / Constants.TWO);
+        Rotate r = new Rotate(-Variables.getAngle(), Constants.canonPos_X + Constants.canonImage.getWidth() / Constants.TWO, Constants.canonPos_Y + Constants.canonImage.getHeight() / Constants.TWO);
         MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonImage, Constants.canonPos_X, Constants.canonPos_Y);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.canonImage, Constants.canonPos_X, Constants.canonPos_Y);
         MainWindow.getAnimSection().getGraphicsContext2D().restore();
         
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(canonStandImage, 11, 196);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.canonStandImage, Constants.canonPos_X, Constants.canonPos_Y);
 	}
 	private void drawProjMotFrame(long time)
 	{   
 		elapsedTime = time-previousTime;
-		
-        
         
 		drawProjMotFrame();
-         
-
-		//Make all of these constants.
-	
-         
+	      
          Image projectileImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
          
          if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
@@ -943,14 +932,14 @@ public class AnimationSection extends Canvas
                 
                 if(priceX_Intercept_2 <= Constants.ZERO || priceX_Intercept_1 <= Constants.ZERO)
                 {
-                    priceX_Intercept_2 = ((-70000 - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
-                    priceX_Intercept_1 = ((-70000 - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(70000 + 200 * Variables.getCostMake(), Constants.TWO) - 4 * 200 * (Variables.getCostSetUp() + 70000 * Variables.getCostMake())))/(-400);
+                    priceX_Intercept_2 = ((-Constants.intercept - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(Constants.intercept + 200 * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * 200 * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-400);
+                    priceX_Intercept_1 = ((-Constants.intercept - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.intercept + 200 * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * 200 * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-400);
                 }
 
                 if((numFrames++)%20 == Constants.ZERO)
                 {
                     double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_1,
-                           yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (70000 + 200 * Variables.getCostMake()) * xAddPoint - (70000 * Variables.getCostMake() + Variables.getCostSetUp());
+                           yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (Constants.intercept + 200 * Variables.getCostMake()) * xAddPoint - (Constants.intercept * Variables.getCostMake() + Variables.getCostSetUp());
 
                     if(xAddPoint - priceX_Intercept_2 < 20)
                     {
@@ -991,7 +980,7 @@ public class AnimationSection extends Canvas
             }
             else
             {
-                getGraphicsContext2D().drawImage(hoverOverPoint, Constants.ZERO, Constants.ZERO);
+                getGraphicsContext2D().drawImage(Constants.hoverOverPointImage, Constants.ZERO, Constants.ZERO);
             }
             
         }
@@ -1003,13 +992,13 @@ public class AnimationSection extends Canvas
             
             //draw money pile
             double profitRatio = profit/Variables.getMaxProfit();
-            Image moneyImage = new Image("file:/" + Constants.DIR + "/src/res/moneyPile.png", profitRatio * Constants.MONEY_PILE_MAX_WIDTH, profitRatio * Constants.MONEY_PILE_MAX_HEIGHT, false, true);
+            Image moneyImage = new Image(Constants.moneyPileImage, profitRatio * Constants.MONEY_PILE_MAX_WIDTH, profitRatio * Constants.MONEY_PILE_MAX_HEIGHT, false, true);
             getGraphicsContext2D().drawImage(moneyImage, (getWidth() - moneyImage.getRequestedWidth())/Constants.TWO, getHeight() - moneyImage.getRequestedHeight());
             
             //draw text at the top
             getGraphicsContext2D().setFill(Color.BLACK);
-            getGraphicsContext2D().fillText("Sale price = " + Constants.FORMATTER.format(salePrice) + "$\nNumber of units to sell = " + (int)(70000 - 200*salePrice)
-                                            + "\nPotential profit = " + Constants.FORMATTER.format(profit) + "$", 75, 15);
+            getGraphicsContext2D().fillText(Constants.salePriceString + Constants.FORMATTER.format(salePrice) + Constants.unitsForSaleString + (int)(70000 - 200*salePrice)
+                                            + Constants.potentialProfitString + Constants.FORMATTER.format(profit) + Constants.dollarSignString, 75, 15);
         }
         
         public void drawNewBikeFrame()
@@ -1038,7 +1027,7 @@ public class AnimationSection extends Canvas
             
             interation++;
             
-            Thread.sleep(3000);
+            Thread.sleep(Constants.delay);
 		}
 		catch(Exception e)
 		{
@@ -1152,7 +1141,7 @@ public class AnimationSection extends Canvas
 			Variables.setDisplacement(Constants.ZERO);
 			Variables.setVelocity(Constants.ZERO);
 			Variables.setHeight(Constants.ZERO);
-			Variables.setAngle(0);
+			Variables.setAngle(Constants.ZERO);
 			this.player.stop();
 			
 			this.drawProjMotFrame();
@@ -1160,7 +1149,7 @@ public class AnimationSection extends Canvas
 		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
 		{
 			//Not sure if I need anything here, really.
-			this.interation = 0;
+			this.interation = Constants.ZERO;
 			this.mainSquare.setSide(Constants.DEFAULT_SIDE);
 		}
 	}

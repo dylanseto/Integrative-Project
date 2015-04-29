@@ -1,11 +1,11 @@
 package Main;
 
 import java.io.File;
-import java.net.URL;
 import java.text.DecimalFormat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
 public interface Constants
@@ -210,6 +210,13 @@ public interface Constants
             //original height and width of money pile
         public final double MONEY_PILE_MAX_WIDTH = 300;
         public final double MONEY_PILE_MAX_HEIGHT = 250;
+        public final Image hoverOverPointImage = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
+        public final String salePriceString = "Sale price = ";
+        public final String moneyPileImage = "file:/" + Constants.DIR + "/src/res/moneyPile.png";
+        public final String unitsForSaleString = "$\nNumber of units to sell = ";
+        public final String potentialProfitString = "\nPotential profit = ";
+        public final String dollarSignString = "$";
+        public final double intercept = 70000;
         //public final double MONEY_PILE_OG_WIDTH = 400;
         //public final double MONEY_PILE_OG_HEIGHT = 341;
         
@@ -223,6 +230,9 @@ public interface Constants
         public final int magicNumber = 23;
         public final int canonPos_X = 11;
         public final int canonPos_Y = 196;
+        public final Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
+        public final Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+        public final Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
         
         public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
         public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());
@@ -231,5 +241,6 @@ public interface Constants
         
         //For Inf Geom Series
         public final double DEFAULT_SIDE = 10.0;
+        public final long delay = 3000;
 
 }
