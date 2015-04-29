@@ -28,6 +28,7 @@ public interface Constants
         public final String DIR = System.getProperty("user.dir");
         public final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
         public final int GUI_SPACING = 10;
+        public final String NUMBERS_ONLY_REGEX = "^[0-9\\.]*$";
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -105,9 +106,11 @@ public interface Constants
         public final String INDEX_REF_MAT_LABEL_TEXT = "nm = ";
         public final String THICKNESS_LABEL_TEXT = "Thickness: ";
         public final String COST_SET_UP_LABEL_TEXT = "Setup costs: ";
-        public final String COEFF_LABEL_TEXT = "a = ";
-        public final String BASE_LABEL_TEXT = "r = ";
-        public final String EXPONENT_LABEL_TEXT = "k = ";
+        public final String COST_BIKE_LABEL_TEXT = "Bike cost: ";
+        public final String COEFF_LABEL_TEXT = "Coefficient: ";
+        public final String BASE_LABEL_TEXT = "Base: ";
+        public final String EXPONENT_LABEL_TEXT = "Exponent: ";
+        public final String INDEX_REF_FILM_TEXT = "Index Of \nRefraction Of Film: ";
         
         //Graph labels
         public final int GRAPH_TITLE_INDEX = 0;

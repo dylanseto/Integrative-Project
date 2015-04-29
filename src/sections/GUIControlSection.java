@@ -23,7 +23,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	{
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -34,7 +34,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField massTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -45,7 +45,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField initVelTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -65,7 +65,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField angleTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -76,7 +76,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField objectHeightTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -87,7 +87,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField objectDistanceTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -98,7 +98,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField focalDistTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -115,18 +115,18 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField thicknessTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
 	};
 	
 	private final FlowPane costBikeFLowPane = new FlowPane();
-	private final Label costBikeLabel = new Label("Bike Cost: ");
+	private final Label costBikeLabel = new Label(Constants.COST_BIKE_LABEL_TEXT);
 	private final TextField costBikeTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -137,18 +137,18 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField costSetUpTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
 	};
 	
 	private final FlowPane indexRefFilmFLowPane = new FlowPane();
-	private final Label indexRefFilmLabel = new Label("Index Of \nRefraction Of Film: ");
+	private final Label indexRefFilmLabel = new Label(Constants.INDEX_REF_FILM_TEXT);
 	private final TextField indexRefFilmTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -157,36 +157,36 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane lenslFlowPane = new FlowPane();
 	private final ObservableList<String> lensList = Constants.LENS_TYPE_LIST;
 	private final ComboBox<String> lensOptionBox = new ComboBox<String>(lensList);
-	private final Label lensLabel = new Label("Lens Type: ");
+	private final Label lensLabel = new Label(Constants.LENS_LABEL_TEXT);
 	
 	private final FlowPane coffiecientFLowPane = new FlowPane();
-	private final Label coefficientLabel = new Label("Coefficient: ");
+	private final Label coefficientLabel = new Label(Constants.COEFF_LABEL_TEXT);
 	private final TextField coefficientTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
 	};
 	
 	private final FlowPane baseFLowPane = new FlowPane();
-	private final Label baseLabel = new Label("Base: ");
+	private final Label baseLabel = new Label(Constants.BASE_LABEL_TEXT);
 	private final TextField baseTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
 	};
 	
 	private final FlowPane exponentFLowPane = new FlowPane();
-	private final Label exponentLabel = new Label("Exponent: ");
+	private final Label exponentLabel = new Label(Constants.EXPONENT_LABEL_TEXT);
 	private final TextField exponentTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -423,13 +423,12 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 	MainWindow.getChartSection().clearData();
                 	Variables.setBase(Double.valueOf(this.baseTextField.getText()));
                 	
-                	if(this.exponentTextField.getText().equalsIgnoreCase("inf"))
+                	/*if(this.exponentTextField.getText().equalsIgnoreCase("inf"))
                 	{
                 		//not sure if we should have this actually.
-                	}
+                	}*/
                 	
                 	Variables.setExponent(Integer.valueOf(this.exponentTextField.getText()));
-                	 System.out.println("GUI");
                 	 break;
                     
                 default:
@@ -449,32 +448,32 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             {
                 Variables.setMaterialType(((String)(materialOptionBox.getSelectionModel().getSelectedItem())));
                 MainWindow.getAnimSection().drawThinFlimFrame();
-                if(Variables.getMaterialType().equalsIgnoreCase("water"))
+                if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.ZERO)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_WATER);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_WATER);
                 }
-                else if(Variables.getMaterialType().equalsIgnoreCase("glycerin"))
+                else if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.ONE)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_GLYCERIN);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_GLYCERIN);
                 }
-                else if(Variables.getMaterialType().equalsIgnoreCase("oil"))
+                else if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.TWO)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_OIL);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_OIL);
                 }
-                else if(Variables.getMaterialType().equalsIgnoreCase("zircon"))
+                else if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.THREE)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_ZIRCON);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_ZIRCON);
                 }
-                else if(Variables.getMaterialType().equalsIgnoreCase("diamond"))
+                else if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.FOUR)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_DIAMOND);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_DIAMOND);
                 }
-                else if(Variables.getMaterialType().equalsIgnoreCase("pyrex"))
+                else if(Variables.getMaterialType().equalsIgnoreCase(Constants.MATERIAL_TYPE_LIST.get(Constants.FIVE)))
                 {
                     indexRefMatLabel.setText(Constants.INDEX_REF_MAT_LABEL_TEXT + Constants.INDEX_REF_PYREX);
                     Variables.setIndexRefMaterial(Constants.INDEX_REF_PYREX);
