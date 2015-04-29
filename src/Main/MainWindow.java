@@ -33,6 +33,7 @@ public class MainWindow extends Application
 	
 	public void start(Stage primaryStage)
 	{
+		
                 VBox mainWindow = new VBox();
 		topSplitPane = new SplitPane();
 		bottomSplitPane = new SplitPane();
@@ -73,7 +74,6 @@ public class MainWindow extends Application
                scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
               guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlSectionStyle.css").toExternalForm());
               tableSection.getStylesheets().add(this.getClass().getResource("/res/tableSectionStyle.css").toExternalForm());
-               
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

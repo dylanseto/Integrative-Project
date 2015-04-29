@@ -228,5 +228,8 @@ public interface Constants
         public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());
         public final Media goombaSound = new Media(new File(Constants.DIR + "/src/res/smb3_thwomp.wav").toURI().toString());
         public final Media mushaSound = new Media(new File(Constants.DIR + "/src/res/smb_powerup.wav").toURI().toString());
+        
+        //For Inf Geom Series
+        public final double DEFAULT_SIDE = 10.0;
 
 }

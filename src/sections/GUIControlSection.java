@@ -180,7 +180,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField exponentTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.]*$")) {
+			if (text.matches("^[0-9\\.\\'i'\\'n'\\'f']*$")) {
 	            super.replaceText(start, end, text);
 	        }
 		}

@@ -98,7 +98,7 @@ public class FormulaHelper
         public static double computePartialSum(double coefficient, double base, int lastTermNumber)
         {
             double partialSum = Constants.ZERO;
-            for(int i = Constants.ZERO; i <= lastTermNumber; ++i)
+            for(int i = Constants.ZERO; i < lastTermNumber; ++i)
             {
                 partialSum += computeTermOfSum(coefficient, base, i);
             }

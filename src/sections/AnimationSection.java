@@ -1,6 +1,5 @@
 package sections;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import Main.Constants;
@@ -16,7 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import sections.animationObjects.CartClass;
-import sections.animationObjects.CircleClass;
+import sections.animationObjects.SquareClass;
 
 public class AnimationSection extends Canvas
 {
@@ -49,7 +48,8 @@ public class AnimationSection extends Canvas
         private final Image hoverOverPoint = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
         
         //For Inifnite Geomtric series
-        private ArrayList<CircleClass> circles;
+        private SquareClass mainSquare;
+        private int i;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -115,6 +115,8 @@ public class AnimationSection extends Canvas
 		this.previousTime = initTime;
 		this.player = new MediaPlayer(Constants.maMiaSound);
 		this.elapsedPause = Constants.ZERO;
+		this.mainSquare = new SquareClass(this.getGraphicsContext2D(), 0, 0, 10, Color.AQUAMARINE);
+		this.i = 0;
 	}
 	private void drawNewtonFrame(long time)
 	{
@@ -1017,19 +1019,29 @@ public class AnimationSection extends Canvas
         
 	private void drawInfSeriesFrame()
 	{
+		try
+		{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-            for(CircleClass circle : this.circles)
+            double term = FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), i);
+            double sum = FormulaHelper.computePartialSum(Variables.getCoefficient(), Variables.getBase(), i);
+            this.mainSquare.setSide(this.mainSquare.getSide()+(term));
+            System.out.println(this.mainSquare.getSide());
+            this.mainSquare.draw();
+            MainWindow.getChartSection().addDataPoint(i, sum);
+
+            
+            
+            if(i == Variables.getExponent())
             {
-            	//Make them move
-            	if(circle == null)
-            	{
-            		continue;
-            	}
-            	else
-            	{
-            		circle.draw();
-            	}
+            	stop();
             }
+            i++;
+            Thread.sleep(3000);
+		}
+		catch(Exception e)
+		{
+			
+		}
 	}
         
 	public void start()
@@ -1073,8 +1085,7 @@ public class AnimationSection extends Canvas
             }
             else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
             {
-            	circles = new ArrayList<CircleClass>();
-            	new Thread(new CircleCreationThread()).start();
+            	this.mainSquare.draw();
             }
 		}
             MainWindow.getGUIControlSection().getValues();
@@ -1087,16 +1098,25 @@ public class AnimationSection extends Canvas
 		this.animTimer.stop();
 		MainWindow.getGUIControlSection().setDisable(false);
 		
-		if(!pause)
+		if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
+				||MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
 		{
-			this.initTime = Constants.ZERO;
-			this.previousTime = initTime;
-			this.elapsedPause = Constants.ZERO;
+			if(!pause)
+			{
+				this.initTime = Constants.ZERO;
+				this.previousTime = initTime;
+				this.elapsedPause = Constants.ZERO;
+			}
+			else
+			{
+				this.previousTime = System.nanoTime();
+			}
 		}
-		else
+		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
 		{
-			this.previousTime = System.nanoTime();
+			//Not sure if I need anything here, really. TODO
 		}
+		MainWindow.getGUIControlSection().setDisable(false);
 		MainWindow.getMainMenuSection().getResetButton().setDisable(false);
 		MainWindow.getMainMenuSection().getPauseButton().setDisable(true);
 	}
@@ -1135,35 +1155,11 @@ public class AnimationSection extends Canvas
 			
 			this.drawProjMotFrame();
         }
-	}
-	class CircleCreationThread implements Runnable
-	{
-		private boolean running;
-		
-		public CircleCreationThread()
+		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
 		{
-			running = true;
+			//Not sure if I need anything here, really.
+			this.i = 0;
+			this.mainSquare.setSide(Constants.DEFAULT_SIDE);
 		}
-		@Override
-		public void run() 
-		{
-			try
-			{
-				for(int k = 0; k < Variables.getExponent(); k++)
-				{
-					int num = (int) FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), k);
-		            for(int i = Constants.ZERO; i < num; i++)
-		            {
-		            	AnimationSection.this.circles.add(new CircleClass(AnimationSection.this.getGraphicsContext2D()));
-		            }
-		            Thread.sleep(3000);
-				}
-			}
-			catch(Exception e)
-			{
-			}
-			
-		}
-		
 	}
 }
