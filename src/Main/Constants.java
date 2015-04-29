@@ -27,6 +27,7 @@ public interface Constants
         public final int MAX_RGB_VALUE = 255;
         public final String DIR = System.getProperty("user.dir");
         public final DecimalFormat FORMATTER = new DecimalFormat("#0.00");
+        public final int GUI_SPACING = 10;
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -80,15 +81,15 @@ public interface Constants
         
         //GUISection label texts
         public final String ENTER_VAL_LABEL_TEXT = "Enter Values";
-        public final String FORCE_LABEL_TEXT = "Force = ";
-        public final String MASS_LABEL_TEXT = "Mass = ";
-        public final String INIT_VEL_LABEL_TEXT = "Initial velocity = ";
+        public final String FORCE_LABEL_TEXT = "Force (N): ";
+        public final String MASS_LABEL_TEXT = "Mass (kg): ";
+        public final String INIT_VEL_LABEL_TEXT = "Initial Velocity (m/s) : ";
         public final String OBJECT_LABEL_TEXT = "Object:";
         public final String GRAVITY_LABEL_TEXT = "Gravity = ";
-        public final String ANGLE_LABEL_TEXT = "Angle = ";
+        public final String ANGLE_LABEL_TEXT = "Angle (degrees): ";
         public final String IMAGE_LABEL_TEXT = "Image";
         public final String IMG_DIST_LABEL_TEXT = "Distance";
-        public final String IMG_HEIGHT_LABEL_TEXT = "Height";
+        public final String IMG_HEIGHT_LABEL_TEXT = "Object Height:";
         public final String MAGNIFICATION_LABEL_TEXT = "Magnification";
         public final String REAL_OR_VIRT_LABEL_TEXT = "Real or Virtual?";
         public final String REAL_LABEL_TEXT = "Real";

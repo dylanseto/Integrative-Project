@@ -6,6 +6,7 @@ import calculations.Variables;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,10 +15,10 @@ import javafx.scene.layout.VBox;
 
 public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 {
-	private final Label enterValuesLabel = new Label("Enter Values---------------");
+	private final Label enterValuesLabel = new Label(Constants.ENTER_VAL_LABEL_TEXT);
 	
 	private final FlowPane forceFlowPane = new FlowPane();
-	private final Label forceLabel = new Label("Force (N): ");
+	private final Label forceLabel = new Label(Constants.FORCE_LABEL_TEXT);
 	private final TextField forceTextField = new TextField()
 	{
 		public void replaceText(int start, int end, String text) 
@@ -29,7 +30,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane massFlowPane = new FlowPane();
-	private final Label massLabel = new Label("Mass (kg): ");
+	private final Label massLabel = new Label(Constants.MASS_LABEL_TEXT);
 	private final TextField massTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -40,7 +41,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane initVelFLowPane = new FlowPane();
-	private final Label initVelLabel = new Label("Initial Velocity: ");
+	private final Label initVelLabel = new Label(Constants.INIT_VEL_LABEL_TEXT);
 	private final TextField initVelTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -60,7 +61,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final ComboBox<String> gravityOptionBox = new ComboBox<String>(GravityList);
 	
 	private final FlowPane angleFLowPane = new FlowPane();
-	private final Label angleLabel = new Label("Angle: ");
+	private final Label angleLabel = new Label(Constants.ANGLE_LABEL_TEXT);
 	private final TextField angleTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -71,7 +72,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane objectHeightFLowPane = new FlowPane();
-	private final Label objectHeightLabel = new Label("Object Height: ");
+	private final Label objectHeightLabel = new Label(Constants.IMG_HEIGHT_LABEL_TEXT);
 	private final TextField objectHeightTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -185,7 +186,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final TextField exponentTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
-			if (text.matches("^[0-9\\.\\'i'\\'n'\\'f']*$")) {
+			if (text.matches("^[0-9\\.]*$")) {
 	            super.replaceText(start, end, text);
 	        }
 		}
@@ -199,6 +200,9 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
          */
 	public GUIControlSection()
 	{
+		this.setSpacing(Constants.GUI_SPACING);
+		this.setAlignment(Pos.CENTER);
+		
 		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
 		this.forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
 		
