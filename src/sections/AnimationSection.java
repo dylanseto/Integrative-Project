@@ -49,7 +49,7 @@ public class AnimationSection extends Canvas
         
         //For Inifnite Geomtric series
         private SquareClass mainSquare;
-        private int i;
+        private int interation;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
@@ -116,7 +116,7 @@ public class AnimationSection extends Canvas
 		this.player = new MediaPlayer(Constants.maMiaSound);
 		this.elapsedPause = Constants.ZERO;
 		this.mainSquare = new SquareClass(this.getGraphicsContext2D(), 0, 0, 10, Color.AQUAMARINE);
-		this.i = 0;
+		this.interation = 0;
 	}
 	private void drawNewtonFrame(long time)
 	{
@@ -1022,20 +1022,22 @@ public class AnimationSection extends Canvas
 		try
 		{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-            double term = FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), i);
-            double sum = FormulaHelper.computePartialSum(Variables.getCoefficient(), Variables.getBase(), i);
+            double term = FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), interation);
+            double sum = FormulaHelper.computePartialSum(Variables.getCoefficient(), Variables.getBase(), interation);
             this.mainSquare.setSide(this.mainSquare.getSide()+(term));
             System.out.println(this.mainSquare.getSide());
             this.mainSquare.draw();
-            MainWindow.getChartSection().addDataPoint(i, sum);
+            MainWindow.getChartSection().addDataPoint(interation, sum);
 
             
             
-            if(i == Variables.getExponent())
+            if(interation == Variables.getExponent())
             {
             	stop();
             }
-            i++;
+            
+            interation++;
+            
             Thread.sleep(3000);
 		}
 		catch(Exception e)
@@ -1158,7 +1160,7 @@ public class AnimationSection extends Canvas
 		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
 		{
 			//Not sure if I need anything here, really.
-			this.i = 0;
+			this.interation = 0;
 			this.mainSquare.setSide(Constants.DEFAULT_SIDE);
 		}
 	}
