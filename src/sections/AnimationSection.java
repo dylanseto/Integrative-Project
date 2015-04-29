@@ -14,7 +14,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import sections.animationObjects.CartClass;
 import sections.animationObjects.CircleClass;
@@ -28,6 +27,8 @@ public class AnimationSection extends Canvas
 	private long previousTime;
 	private long totalTime;
 	private MediaPlayer player;
+	private boolean continued;
+	private long elapsedPause;
         
         //for thin film
         private int clearRectLengthReduction = Constants.ZERO;
@@ -49,20 +50,28 @@ public class AnimationSection extends Canvas
         
         //For Inifnite Geomtric series
         private ArrayList<CircleClass> circles;
-        private int iteration;
 	
 	AnimationTimer animTimer = new AnimationTimer(){
 		@Override
 		public void handle(long time) 
 		{
-         
 			if(initTime == Constants.ZERO)
 			{
 				initTime = time;
 				previousTime = initTime;
 			}
-			totalTime = time - initTime;
 			
+			//different check
+			if(continued)
+			{
+				elapsedPause += System.nanoTime() - previousTime;
+
+				previousTime = time;
+				continued = false;
+			}
+			
+			totalTime = time - initTime - elapsedPause;
+
 			switch(MainWindow.getUserInterface())
 			{
 				case NO_CHOICE: 
@@ -73,6 +82,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case PROJ_MOTION:
+
 								drawProjMotFrame(time);
                                     break;
                                     
@@ -104,6 +114,7 @@ public class AnimationSection extends Canvas
 		this.initTime = Constants.ZERO;
 		this.previousTime = initTime;
 		this.player = new MediaPlayer(Constants.maMiaSound);
+		this.elapsedPause = Constants.ZERO;
 	}
 	private void drawNewtonFrame(long time)
 	{
@@ -112,7 +123,7 @@ public class AnimationSection extends Canvas
 
         Variables.setVelocity(FormulaHelper.computeVelocity(((double)(totalTime))*Constants.NANOSECOND_RATIO, Variables.getAcceleration()));
         
-        if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
+        if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime-elapsedPause) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
         {
         	
         	
@@ -157,6 +168,7 @@ public class AnimationSection extends Canvas
 	private void drawProjMotFrame(long time)
 	{   
 		elapsedTime = time-previousTime;
+		
         
         
 		drawProjMotFrame();
@@ -190,7 +202,7 @@ public class AnimationSection extends Canvas
          double HortVel = FormulaHelper.getHorVel(Variables.getAngle(), Variables.getVelocity());
          double VertVel = FormulaHelper.getVertVel(Variables.getAngle(), Variables.getVelocity());
          
-         if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
+         if(TimeUnit.NANOSECONDS.toSeconds(previousTime-initTime-elapsedPause) != TimeUnit.NANOSECONDS.toSeconds(totalTime))
 	        {
 	        	
 	        	
@@ -207,6 +219,7 @@ public class AnimationSection extends Canvas
          {
         	 this.stop();
          }
+         //System.out.println(totalTime);
 	}
         
 	private void drawOpticsFrame(boolean drawLines)
@@ -1007,6 +1020,7 @@ public class AnimationSection extends Canvas
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
             for(CircleClass circle : this.circles)
             {
+            	//Make them move
             	if(circle == null)
             	{
             		continue;
@@ -1020,7 +1034,16 @@ public class AnimationSection extends Canvas
         
 	public void start()
 	{
-		System.out.println("animation");
+		this.start(false);
+	}
+	public void start(boolean continued)
+	{
+		if(continued)
+		{
+			this.continued = true;
+		}
+		else
+		{
             if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
             		||MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
             {
@@ -1053,17 +1076,33 @@ public class AnimationSection extends Canvas
             	circles = new ArrayList<CircleClass>();
             	new Thread(new CircleCreationThread()).start();
             }
+		}
             MainWindow.getGUIControlSection().getValues();
+           // MainWindow.getMainMenuSection().getS
             this.animTimer.start();
 	}
-        
-	public void stop()
+	
+	public void stop(boolean pause)
 	{
 		this.animTimer.stop();
 		MainWindow.getGUIControlSection().setDisable(false);
 		
-		this.initTime = Constants.ZERO;
-		this.previousTime = initTime;
+		if(!pause)
+		{
+			this.initTime = Constants.ZERO;
+			this.previousTime = initTime;
+			this.elapsedPause = Constants.ZERO;
+		}
+		else
+		{
+			this.previousTime = System.nanoTime();
+		}
+		MainWindow.getMainMenuSection().getResetButton().setDisable(false);
+	}
+        
+	public void stop()
+	{
+		stop(false);
 		
 	}
         
@@ -1107,21 +1146,20 @@ public class AnimationSection extends Canvas
 		@Override
 		public void run() 
 		{
-			try{
-				while(running)
+			try
+			{
+				for(int k = 0; k < Variables.getExponent(); k++)
 				{
-					System.out.println("like");
-					AnimationSection.this.iteration++;
-		            int num = (int) FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), AnimationSection.this.iteration);
+					int num = (int) FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), k);
 		            for(int i = Constants.ZERO; i < num; i++)
 		            {
 		            	AnimationSection.this.circles.add(new CircleClass(AnimationSection.this.getGraphicsContext2D()));
 		            }
 		            Thread.sleep(3000);
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+			catch(Exception e)
+			{
 			}
 			
 		}

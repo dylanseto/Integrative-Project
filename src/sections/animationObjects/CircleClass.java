@@ -21,8 +21,8 @@ public class CircleClass extends AnimationObject
 		this.color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
 		this.angle = rand.nextInt(180); //change to constants ------------------------------
 		this.negative = rand.nextBoolean();
-		this.setX(rand.nextInt(200));
-		this.setY(rand.nextInt(200));
+		this.setX(rand.nextInt(300));
+		this.setY(rand.nextInt(300));
 	}
 
 	public Color getColor() {

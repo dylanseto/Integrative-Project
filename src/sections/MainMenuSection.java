@@ -62,6 +62,10 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             doneButton.setOnAction(this);
             continueButton.setOnAction(this);
             
+            this.continueButton.setDisable(true);
+            this.resetButton.setDisable(true);
+            this.pauseButton.setDisable(true);
+            
             showComboBoxMenu();
             
 	}
@@ -151,21 +155,39 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                    showMainMenu(); 
                 }
             }
-            else if(event.getSource() == startButton || event.getSource() == continueButton)
+            else if(event.getSource() == startButton)
             {
                 if(MainWindow.getGUIControlSection().getValues())
                 {
                     MainWindow.getAnimSection().start();
-                    System.out.println("mainmenu");
                 }
+                this.pauseButton.setDisable(false);
+                this.startButton.setDisable(true);
+                this.startButton.setDisable(true);
+                this.continueButton.setDisable(true);
+            }
+            else if(event.getSource() == continueButton)
+            {
+            	if(MainWindow.getGUIControlSection().getValues())
+                {
+                    MainWindow.getAnimSection().start(true);
+                }
+                this.pauseButton.setDisable(false);
+                this.startButton.setDisable(true);
+                this.startButton.setDisable(true);
+                this.continueButton.setDisable(true);
             }
             else if(event.getSource() == pauseButton)
             {
-                MainWindow.getAnimSection().stop();
+                MainWindow.getAnimSection().stop(true);
+                this.continueButton.setDisable(false);
+                this.pauseButton.setDisable(true);
             }
             else if(event.getSource() == resetButton)
             {
                 MainWindow.getAnimSection().reset();
+                this.startButton.setDisable(false);
+                this.resetButton.setDisable(true);
             }
             else if(event.getSource() == helpButton)
             {
@@ -176,10 +198,18 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             	MainWindow.getAnimSection().reset();
                 MainWindow.setUserInterface(Constants.UserInterface.NO_CHOICE);
                 showComboBoxMenu();
+                this.continueButton.setDisable(true);
+                this.resetButton.setDisable(true);
+                this.pauseButton.setDisable(true);
+                this.startButton.setDisable(false);
             }
         }
         
-        private void showComboBoxMenu()
+        public Button getResetButton() {
+			return resetButton;
+		}
+
+		private void showComboBoxMenu()
         {
             getChildren().clear();
             getChildren().add(mainOptionBox);
