@@ -72,7 +72,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane objectHeightFLowPane = new FlowPane();
-	private final Label objectHeightLabel = new Label(Constants.IMG_HEIGHT_LABEL_TEXT);
+	private final Label objectHeightLabel = new Label(Constants.OBJ_HEIGHT_LABEL_TEXT);
 	private final TextField objectHeightTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -83,7 +83,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane objectDistanceFLowPane = new FlowPane();
-	private final Label objectDistanceLabel = new Label("Object Distance: ");
+	private final Label objectDistanceLabel = new Label(Constants.OBJ_DIST_LABEL_TEXT);
 	private final TextField objectDistanceTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -94,7 +94,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};;
 	
 	private final FlowPane focalDistFLowPane = new FlowPane();
-	private final Label focalDistLabel = new Label("Focal Length: ");
+	private final Label focalDistLabel = new Label(Constants.FOCAL_DIST_LABEL_TEXT);
 	private final TextField focalDistTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -111,7 +111,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label indexRefMatLabel = new Label(Constants.INDEX_REF_MAT_LABEL_TEXT);
 	
 	private final FlowPane thicknessFLowPane = new FlowPane();
-	private final Label thicknessLabel = new Label("Thickness: ");
+	private final Label thicknessLabel = new Label(Constants.THICKNESS_LABEL_TEXT);
 	private final TextField thicknessTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
@@ -133,7 +133,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	};
 	
 	private final FlowPane costSetUpFLowPane = new FlowPane();
-	private final Label costSetUpLabel = new Label("Setup Cost: ");
+	private final Label costSetUpLabel = new Label(Constants.COST_SET_UP_LABEL_TEXT);
 	private final TextField costSetUpTextField = new TextField(){
 		public void replaceText(int start, int end, String text) 
 		{
