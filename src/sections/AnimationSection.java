@@ -743,8 +743,6 @@ public class AnimationSection extends Canvas
                        MainWindow.getTableSection().setRightValue(Constants.ONE, Variables.getImageHeight());
                        MainWindow.getTableSection().setRightValue(Constants.TWO, -Variables.getImageDistance()/Variables.getObjDistance());
                        MainWindow.getTableSection().setRightValue(Constants.THREE, ((Variables.getImageDistance() < Constants.ZERO)?Constants.VIRTUAL_LABEL_TEXT:Constants.REAL_LABEL_TEXT));
-                       alphaIncrease = Constants.ZERO;
-                       rayGrowthIncrease = Constants.ZERO;
                        MainWindow.getGUIControlSection().setDisable(false);
                        stop(); 
                     }
@@ -906,9 +904,7 @@ public class AnimationSection extends Canvas
                                 MainWindow.getTableSection().addRow(Constants.EMPTY_STRING, Constants.FORMATTER.format(Variables.getWaveLengthsConst().get(i)));
                             }
                         }
-
-                        clearRectLengthReduction = Constants.ZERO;
-                        alphaIncrease = Constants.ZERO;
+                        
                         MainWindow.getGUIControlSection().setDisable(false);
                         stop();
                     }
@@ -930,14 +926,14 @@ public class AnimationSection extends Canvas
                 
                 if(priceX_Intercept_2 <= Constants.ZERO || priceX_Intercept_1 <= Constants.ZERO)
                 {
-                    priceX_Intercept_2 = ((-Constants.intercept - 200 * Variables.getCostMake()) - Math.sqrt(Math.pow(Constants.intercept + 200 * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * 200 * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-400);
-                    priceX_Intercept_1 = ((-Constants.intercept - 200 * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.intercept + 200 * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * 200 * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-400);
+                    priceX_Intercept_2 = ((-Constants.intercept - Constants.TWO_HUNDRED * Variables.getCostMake()) - Math.sqrt(Math.pow(Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
+                    priceX_Intercept_1 = ((-Constants.intercept - Constants.TWO_HUNDRED * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
                 }
 
                 if((numFrames++)%20 == Constants.ZERO)
                 {
                     double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_1,
-                           yAddPoint = -200 * Math.pow(xAddPoint, Constants.TWO) + (Constants.intercept + 200 * Variables.getCostMake()) * xAddPoint - (Constants.intercept * Variables.getCostMake() + Variables.getCostSetUp());
+                           yAddPoint = -Constants.TWO_HUNDRED * Math.pow(xAddPoint, Constants.TWO) + (Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake()) * xAddPoint - (Constants.intercept * Variables.getCostMake() + Variables.getCostSetUp());
 
                     if(xAddPoint - priceX_Intercept_2 < 20)
                     {
@@ -1140,6 +1136,44 @@ public class AnimationSection extends Canvas
 
                     this.drawProjMotFrame();
             }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.OPTICS)
+            {
+                for(int i = Constants.ONE; i < Constants.FOUR; ++i)
+                {
+                    MainWindow.getTableSection().setRightValue(i, Constants.EMPTY_STRING);
+                }
+                
+                Variables.setObjDistance(Constants.ZERO);
+                Variables.setObjHeight(Constants.ZERO);
+                Variables.setFocalPoint(Constants.ZERO);
+                Variables.setImageDistance(Constants.ZERO);
+                Variables.setImageHeight(Constants.ZERO);
+                
+                rayGrowthIncrease = Constants.ZERO;
+                alphaIncrease = Constants.ZERO;
+                drawOpticsFrame();
+            }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.THIN_FILM)
+            {
+                MainWindow.getTableSection().clearRows();
+                Variables.setWaveLengthsConst(null);
+                Variables.setWaveLengthsDest(null);
+                Variables.setIndexRefFilm(Constants.ZERO);
+                Variables.setIndexRefMaterial(Constants.ZERO);
+                Variables.setThickness(Constants.ZERO);
+                clearRectLengthReduction = Constants.ZERO;
+                alphaIncrease = Constants.ZERO;
+                
+                drawThinFlimFrame();
+            }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+            {
+                getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+                MainWindow.getChartSection().clearData();
+                Variables.setMaxProfit(Constants.ZERO);
+                Variables.setCostMake(Constants.ZERO);
+                Variables.setCostSetUp(Constants.ZERO);
+            }
             else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
             {
                     MainWindow.getChartSection().clearData();
@@ -1147,5 +1181,6 @@ public class AnimationSection extends Canvas
                     this.interation = Constants.ZERO;
                     this.mainSquare.setSide(Constants.DEFAULT_SIDE);
             }
+            
 	}
 }

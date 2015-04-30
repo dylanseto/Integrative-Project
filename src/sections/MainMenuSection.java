@@ -179,17 +179,29 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
             else if(event.getSource() == helpButton)
             {
-                if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+                if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
                 {
-                	JOptionPane.showMessageDialog(null, Constants.INF_GEOM_HELP_MSG);
-                }
-                else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
-                {
-                	JOptionPane.showMessageDialog(null, Constants.NEWTON_HELP_MSG);
+                    JOptionPane.showMessageDialog(null, Constants.NEWTON_HELP_MSG);
                 }
                 else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
                 {
-                	JOptionPane.showMessageDialog(null, Constants.PROJ_MOT_HELP_MSG);
+                    JOptionPane.showMessageDialog(null, Constants.PROJ_MOT_HELP_MSG);
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.OPTICS)
+                {
+                    JOptionPane.showMessageDialog(null, Constants.OPTICS_HELP_MSG);
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.THIN_FILM)
+                {
+                    JOptionPane.showMessageDialog(null, Constants.THIN_FILM_HELP_MSG);
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+                {
+                    JOptionPane.showMessageDialog(null, Constants.NEW_BIKE_HELP_MSG);
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+                {
+                    JOptionPane.showMessageDialog(null, Constants.INF_GEOM_HELP_MSG);
                 }
             }
             else if(event.getSource() == doneButton)

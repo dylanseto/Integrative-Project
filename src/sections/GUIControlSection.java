@@ -409,8 +409,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                         disableSection = false;
                         break;
                     }
-                    Variables.setMaxProfit(Constants.ZERO);
-                    MainWindow.getChartSection().clearData();
+                    
                     Variables.setCostMake(Double.valueOf(costBikeTextField.getText()));
                     Variables.setCostSetUp(Double.valueOf(costSetUpTextField.getText()));
                     break;
