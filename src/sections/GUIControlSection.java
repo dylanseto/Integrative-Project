@@ -54,11 +54,13 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane projectileFlowPane = new FlowPane();
 	private final ObservableList<String> projectileList = Constants.PROJECTILE_TYPE_LIST;
 	private final ComboBox<String> projectileOptionBox = new ComboBox<String>(projectileList);
+	private final Label projectileTypeLabel = new Label(Constants.PROJECTYLE_TYPE_LABEL_TEXT);
 
     
 	private final FlowPane gravityFlowPane = new FlowPane();
 	private final ObservableList<String> GravityList = Constants.GRAVITY_TYPE_LIST;
 	private final ComboBox<String> gravityOptionBox = new ComboBox<String>(GravityList);
+	private final Label gravityTypeLabel = new Label(Constants.GRAVITY_TYPE_LABEL_TEXT);
 	
 	private final FlowPane angleFLowPane = new FlowPane();
 	private final Label angleLabel = new Label(Constants.ANGLE_LABEL_TEXT);
@@ -107,6 +109,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane materialFlowPane = new FlowPane();
 	private final ObservableList<String> materialList = Constants.MATERIAL_TYPE_LIST;
 	private final ComboBox<String> materialOptionBox = new ComboBox<String>(materialList);
+	private final Label materialListLabel = new Label(Constants.MATERIAL_LIST_LABEL_TEXT);
 	
 	private final Label indexRefMatLabel = new Label(Constants.INDEX_REF_MAT_LABEL_TEXT);
 	
@@ -206,8 +209,8 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
 		this.forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
 		
-		this.projectileFlowPane.getChildren().add(projectileOptionBox);
-		this.gravityFlowPane.getChildren().add(gravityOptionBox);
+		this.projectileFlowPane.getChildren().addAll(projectileTypeLabel,projectileOptionBox);
+		this.gravityFlowPane.getChildren().addAll(gravityTypeLabel, gravityOptionBox);
 		this.angleFLowPane.getChildren().addAll(angleLabel, angleTextField);
 		this.initVelFLowPane.getChildren().addAll(initVelLabel, initVelTextField);
 		
@@ -216,7 +219,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 		this.focalDistFLowPane.getChildren().addAll(focalDistLabel, focalDistTextField);
 		this.lenslFlowPane.getChildren().addAll(lensLabel, lensOptionBox);
 		
-		this.materialFlowPane.getChildren().add(materialOptionBox);
+		this.materialFlowPane.getChildren().addAll(materialListLabel, materialOptionBox);
 		this.thicknessFLowPane.getChildren().addAll(thicknessLabel, thicknessTextField);
 		this.indexRefFilmFLowPane.getChildren().addAll(indexRefFilmLabel, indexRefFilmTextField);
 		

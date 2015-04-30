@@ -112,6 +112,9 @@ public interface Constants
         public final String BASE_LABEL_TEXT = "Base: ";
         public final String EXPONENT_LABEL_TEXT = "Exponent: ";
         public final String INDEX_REF_FILM_TEXT = "Index Of \nRefraction Of Film: ";
+        public final String PROJECTYLE_TYPE_LABEL_TEXT = "Projectile: ";
+        public final String GRAVITY_TYPE_LABEL_TEXT = "Gravity: ";
+        public final String MATERIAL_LIST_LABEL_TEXT = "Material: ";
         
         //Graph labels
         public final int GRAPH_TITLE_INDEX = 0;
