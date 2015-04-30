@@ -197,6 +197,13 @@ public interface Constants
         public final double X_POS_SYMBOL_2 = END_POINT_X_POS - 10;
         public final double Y_POS_SYMBOL_1 = 20;
         public final double Y_POS_SHIFT_SYMBOL_2 = 30;
+            //material types
+        public final String WATER = "water";
+        public final String GLYCERIN = "glycerin";
+        public final String OIL = "oil";
+        public final String ZIRCON = "zircon";
+        public final String DIAMOND = "diamond";
+        public final String PYREX = "pyrex";
             
         
         //optics animation constants
@@ -257,6 +264,17 @@ public interface Constants
         public final long delay = 1000;
         
         //ID's for css
-        public final String SHOW_XY_VALUES = "show-xy-values";
-
+        public final String ID_SHOW_XY_VALUES = "show-xy-values";
+        
+        //urls for fonts
+        public final String FONT_PRESS_START_2P = "/res/PressStart2P.ttf";
+        public final String FONT_BIGMACCA = "/res/bigmacca.ttf";
+        public final String FONT_CONT_FREAK = "/res/CONTFREAK.ttf";
+        public final String FONT_VENUS_RISING = "/res/venusRisingRg.ttf";
+        
+        //urls for css
+        public final String CSS_MAIN = "/res/buttonComboBoxstyle.css";
+        public final String CSS_GUI = "/res/guiControlSectionStyle.css";
+        public final String CSS_TABLE = "/res/tableSectionStyle.css";
+        public final String CSS_CHART = "/res/chartSectionStyle.css";
 }

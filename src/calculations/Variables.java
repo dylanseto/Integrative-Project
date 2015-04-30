@@ -25,9 +25,7 @@ public class Variables
     private static double imageDistance;
     private static double costMake;
     private static double costSetUp;
-    private static double priceBike;//useless so far
     private static double maxProfit;
-    private static int    units;//useless so far
     private static String lensType;
     private static String materialType;
     private static double thickness;
@@ -37,7 +35,6 @@ public class Variables
     private static double indexRefMaterial;
     private static double base;
     private static double coefficient;
-    private static int    counter;
     private static int    exponent;
     private static String projectileType;
     private static String gravityType;
@@ -60,9 +57,7 @@ public class Variables
         imageDistance = Constants.ZERO;
         costMake = Constants.ZERO;
         costSetUp = Constants.ZERO;
-        priceBike = Constants.ZERO;
         maxProfit = Constants.ZERO;
-        units = Constants.ZERO;
         lensType = Constants.EMPTY_STRING;
         materialType = Constants.EMPTY_STRING;
         thickness = Constants.ZERO;
@@ -72,7 +67,6 @@ public class Variables
         indexRefMaterial = Constants.ZERO;
         base = Constants.ZERO;
         coefficient = Constants.ZERO;
-        counter = Constants.ZERO;
         exponent = Constants.ZERO;
         projectileType = Constants.EMPTY_STRING;
         gravityType = Constants.EMPTY_STRING;
@@ -237,17 +231,7 @@ public class Variables
     {
         costSetUp = cost;
     }
-
-    public static double getPriceBike() 
-    {
-        return priceBike;
-    }
-
-    public static void setPriceBike(double price) 
-    {
-        priceBike = price;
-    }
-
+    
     public static double getMaxProfit() 
     {
         return maxProfit;
@@ -256,16 +240,6 @@ public class Variables
     public static void setMaxProfit(double p) 
     {
         maxProfit = p;
-    }
-
-    public static int getUnits() 
-    {
-        return units;
-    }
-
-    public static void setUnits(int u) 
-    {
-        units = u;
     }
 
     public static String getLensType() 
@@ -357,17 +331,6 @@ public class Variables
     {
         coefficient = a;
     }
-
-    public static void incrementCounter()
-    {
-        ++counter;
-    }
-    
-    public static void resetCounterToZero()
-    {
-        counter = Constants.ZERO;
-    }
-
 
     public static int getExponent() 
     {

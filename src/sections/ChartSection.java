@@ -78,7 +78,7 @@ public class ChartSection extends LineChart<Number, Number>
                         }
                         
                         showXYValuesLabel.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
-                        showXYValuesLabel.setId(Constants.SHOW_XY_VALUES);
+                        showXYValuesLabel.setId(Constants.ID_SHOW_XY_VALUES);
                         getChildren().add(showXYValuesLabel);
                     }
                   

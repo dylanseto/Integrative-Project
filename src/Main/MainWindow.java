@@ -35,6 +35,7 @@ public class MainWindow extends Application
 	{
 		
                 VBox mainWindow = new VBox();
+                
 		topSplitPane = new SplitPane();
 		bottomSplitPane = new SplitPane();
                 
@@ -65,18 +66,19 @@ public class MainWindow extends Application
                 bottomSplitPane.getItems().add(guiControlSection);
 
         mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
-		
-
+		   
                 Scene scene = new Scene(new Group(mainWindow), 590, 590);
                 
-                Font.loadFont(this.getClass().getResourceAsStream("/res/PressStart2P.ttf"), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/bigmacca.ttf"), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/CONTFREAK.ttf"), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream("/res/venusRisingRg.ttf"), Constants.FONT_SIZE);
-                scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
-               guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlSectionStyle.css").toExternalForm());
-               tableSection.getStylesheets().add(this.getClass().getResource("/res/tableSectionStyle.css").toExternalForm());
-               chartSection.getStylesheets().add(this.getClass().getResource("/res/chartSectionStyle.css").toExternalForm());
+                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_PRESS_START_2P), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_BIGMACCA), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_CONT_FREAK), Constants.FONT_SIZE);
+                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_VENUS_RISING), Constants.FONT_SIZE);
+                
+                scene.getStylesheets().add(this.getClass().getResource(Constants.CSS_MAIN).toExternalForm());
+               guiControlSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_GUI).toExternalForm());
+               tableSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_TABLE).toExternalForm());
+               chartSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_CHART).toExternalForm());
+               
                primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();

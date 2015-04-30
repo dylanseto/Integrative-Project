@@ -25,7 +25,7 @@ public class FormulaHelper
 	//Projectile motion
 	public static double computeCurrentHeight(double deltaTime, double curVelocty_y, double prevHeight, double gravity)
 	{
-		return ((curVelocty_y*deltaTime)+(Constants.ONE_HALF*-1*gravity*Math.pow(deltaTime, Constants.TWO)));
+		return ((curVelocty_y*deltaTime)+(Constants.ONE_HALF*-Constants.ONE*gravity*Math.pow(deltaTime, Constants.TWO)));
 	}
 	
 	public static double getVertVel(double angleDegrees, double initVel)

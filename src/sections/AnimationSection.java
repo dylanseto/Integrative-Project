@@ -20,7 +20,7 @@ import sections.animationObjects.SquareClass;
 public class AnimationSection extends Canvas
 {
 	//Newton's law and projectile Motion
-	private CartClass newtonLawCart;
+	private final CartClass newtonLawCart;
 	private long elapsedTime = System.nanoTime();
 	private long initTime;
 	private long previousTime;
@@ -762,27 +762,27 @@ public class AnimationSection extends Canvas
 	private void drawThinFilmFrame(boolean drawLines)
 	{
             getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-            if(Variables.getMaterialType().equalsIgnoreCase("water"))
+            if(Variables.getMaterialType().equalsIgnoreCase(Constants.WATER))
             {
                 materialColor = Color.BLUE;
             }
-            else if(Variables.getMaterialType().equalsIgnoreCase("glycerin"))
+            else if(Variables.getMaterialType().equalsIgnoreCase(Constants.GLYCERIN))
             {
                 materialColor = Color.GREY;//make different shade of grey
             }
-            else if(Variables.getMaterialType().equalsIgnoreCase("oil"))
+            else if(Variables.getMaterialType().equalsIgnoreCase(Constants.OIL))
             {
                 materialColor = Color.GREY;//make different shade of grey
             }
-            else if(Variables.getMaterialType().equalsIgnoreCase("zircon"))
+            else if(Variables.getMaterialType().equalsIgnoreCase(Constants.ZIRCON))
             {
                 materialColor = Color.LIGHTBLUE;//make bright blue
             }
-            else if(Variables.getMaterialType().equalsIgnoreCase("diamond"))
+            else if(Variables.getMaterialType().equalsIgnoreCase(Constants.DIAMOND))
             {
                 materialColor = Color.LIGHTGRAY;//make bright shade of grey
             }
-            else if(Variables.getMaterialType().equalsIgnoreCase("pyrex"))
+            else if(Variables.getMaterialType().equalsIgnoreCase(Constants.PYREX))
             {
                 materialColor = Color.LIGHTGRAY;//make an opaque grey
             }
@@ -1052,19 +1052,19 @@ public class AnimationSection extends Canvas
                 
                 if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
                 {
-                	if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(0))
+                	if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO))
                 	{
                 		this.player = new MediaPlayer(Constants.maMiaSound);
                 	}
-                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(1)) //mushroom
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
                 	{
                 		this.player = new MediaPlayer(Constants.mushaSound);
                 	}
-                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(2)) //goomba
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //goomba
                 	{
                 		this.player = new MediaPlayer(Constants.goombaSound);
                 	}
-                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(3)) //star
+                	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
                 	{
                 		this.player = new MediaPlayer(Constants.starSound);
                 	}
@@ -1114,38 +1114,38 @@ public class AnimationSection extends Canvas
         
 	public void reset()
 	{
-		if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
-        {
-			MainWindow.getChartSection().clearData();
-			
-			//Reset all Variables to default values.
-			Variables.setAcceleration(Constants.ZERO);
-			Variables.setDisplacement(Constants.ZERO);
-			Variables.setVelocity(Constants.ZERO);
-			this.newtonLawCart.setX(Constants.ZERO);
-			
-			this.drawNewtonFrame();
-        }
-		else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
-        {
-			MainWindow.getChartSection().clearData();
-			
-			//Reset all Variables to default values.
-			Variables.setAcceleration(Constants.ZERO);
-			Variables.setDisplacement(Constants.ZERO);
-			Variables.setVelocity(Constants.ZERO);
-			Variables.setHeight(Constants.ZERO);
-			Variables.setAngle(Constants.ZERO);
-			this.player.stop();
-			
-			this.drawProjMotFrame();
-        }
-		else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
-		{
-			MainWindow.getChartSection().clearData();
-			getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-			this.interation = Constants.ZERO;
-			this.mainSquare.setSide(Constants.DEFAULT_SIDE);
-		}
+            if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+            {
+                    MainWindow.getChartSection().clearData();
+
+                    //Reset all Variables to default values.
+                    Variables.setAcceleration(Constants.ZERO);
+                    Variables.setDisplacement(Constants.ZERO);
+                    Variables.setVelocity(Constants.ZERO);
+                    this.newtonLawCart.setX(Constants.ZERO);
+
+                    this.drawNewtonFrame();
+            }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+            {
+                    MainWindow.getChartSection().clearData();
+
+                    //Reset all Variables to default values.
+                    Variables.setAcceleration(Constants.ZERO);
+                    Variables.setDisplacement(Constants.ZERO);
+                    Variables.setVelocity(Constants.ZERO);
+                    Variables.setHeight(Constants.ZERO);
+                    Variables.setAngle(Constants.ZERO);
+                    this.player.stop();
+
+                    this.drawProjMotFrame();
+            }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+            {
+                    MainWindow.getChartSection().clearData();
+                    getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
+                    this.interation = Constants.ZERO;
+                    this.mainSquare.setSide(Constants.DEFAULT_SIDE);
+            }
 	}
 }
