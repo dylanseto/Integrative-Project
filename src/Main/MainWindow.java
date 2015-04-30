@@ -67,7 +67,7 @@ public class MainWindow extends Application
 
         mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
 		   
-                Scene scene = new Scene(new Group(mainWindow), 590, 590);
+                Scene scene = new Scene(new Group(mainWindow), Constants.SCENE_SIDE_LENGTH, Constants.SCENE_SIDE_LENGTH);
                 
                 Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_PRESS_START_2P), Constants.FONT_SIZE);
                 Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_BIGMACCA), Constants.FONT_SIZE);

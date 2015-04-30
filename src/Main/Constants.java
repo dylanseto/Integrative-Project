@@ -31,6 +31,7 @@ public interface Constants
         public final int GUI_SPACING = 10;
         public final String NUMBERS_ONLY_REGEX = "^[0-9\\.]*$";
         public final int FONT_SIZE = 12;
+        public final int SCENE_SIDE_LENGTH = 590;
 
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
@@ -47,7 +48,6 @@ public interface Constants
         
 	//Sizing ratios
 	public final double METER_RATIO = 0.01;
-	public final double SCREEN_SPLIT_RATIO = 0.5;
 
 	//Combo Box options
 	public final String OPTION_MECHANICS = "Mechanics";

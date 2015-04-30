@@ -35,6 +35,9 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
         
 	public MainMenuSection() 
 	{
+		
+		this.setSpacing(Constants.GUI_SPACING);
+		this.setAlignment(Pos.CENTER);
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
             mainOptionBox = new ComboBox<String>(mainOptionsList);
 
