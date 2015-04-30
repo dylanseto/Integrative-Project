@@ -112,7 +112,7 @@ public class AnimationSection extends Canvas
 		this.newtonLawCart = new CartClass(this.getGraphicsContext2D()); //work on this.
 		this.initTime = Constants.ZERO;
 		this.previousTime = initTime;
-		this.player = new MediaPlayer(Constants.maMiaSound);
+		this.player = new MediaPlayer(Constants.MA_MIA_SOUND);
 		this.elapsedPause = Constants.ZERO;
 		this.mainSquare = new SquareClass(this.getGraphicsContext2D(), Constants.ZERO, Constants.ZERO, Constants.DEFAULT_SIDE, Color.AQUAMARINE);
 		this.interation = Constants.ZERO;
@@ -152,15 +152,15 @@ public class AnimationSection extends Canvas
 	public void drawProjMotFrame()
 	{
 		getGraphicsContext2D().clearRect(Constants.ZERO, Constants.ZERO, getWidth(), getHeight());
-		getGraphicsContext2D().drawImage(Constants.backImage, Constants.ZERO, Constants.ZERO);
+		getGraphicsContext2D().drawImage(Constants.BACK_IMAGE, Constants.ZERO, Constants.ZERO);
         
         MainWindow.getAnimSection().getGraphicsContext2D().save();
-        Rotate r = new Rotate(-Variables.getAngle(), Constants.canonPos_X + Constants.canonImage.getWidth() / Constants.TWO, Constants.canonPos_Y + Constants.canonImage.getHeight() / Constants.TWO);
+        Rotate r = new Rotate(-Variables.getAngle(), Constants.CANNON_POS_X + Constants.CANNON_IMAGE.getWidth() / Constants.TWO, Constants.CANNON_POS_Y + Constants.CANNON_IMAGE.getHeight() / Constants.TWO);
         MainWindow.getAnimSection().getGraphicsContext2D().setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.canonImage, Constants.canonPos_X, Constants.canonPos_Y);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.CANNON_IMAGE, Constants.CANNON_POS_X, Constants.CANNON_POS_Y);
         MainWindow.getAnimSection().getGraphicsContext2D().restore();
         
-        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.canonStandImage, Constants.canonPos_X, Constants.canonPos_Y);
+        MainWindow.getAnimSection().getGraphicsContext2D().drawImage(Constants.CANNON_STAND_IMAGE, Constants.CANNON_POS_X, Constants.CANNON_POS_Y);
 	}
 	private void drawProjMotFrame(long time)
 	{   
@@ -168,8 +168,8 @@ public class AnimationSection extends Canvas
         
 		drawProjMotFrame();
          
-		 double initwidth = Constants.initWidth+(Constants.magicNumber*Math.cos(Math.toRadians((Variables.getAngle()))));
-         double initHeight = Constants.initHeight-(Constants.magicNumber*Math.sin(Math.toRadians((Variables.getAngle()))));
+		 double initwidth = Constants.INIT_WIDTH+(Constants.MAGIC_NUMBER*Math.cos(Math.toRadians((Variables.getAngle()))));
+         double initHeight = Constants.INIT_HEIGHT-(Constants.MAGIC_NUMBER*Math.sin(Math.toRadians((Variables.getAngle()))));
          
          double HortVel = FormulaHelper.getHorVel(Variables.getAngle(), Variables.getVelocity());
          double VertVel = FormulaHelper.getVertVel(Variables.getAngle(), Variables.getVelocity());
@@ -189,19 +189,19 @@ public class AnimationSection extends Canvas
          //draw based on projectile type
          if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO)) // Mario
          {
-        	 getGraphicsContext2D().drawImage(Constants.marioImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+        	 getGraphicsContext2D().drawImage(Constants.MARIO_IMAGE, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
          {
-        	 getGraphicsContext2D().drawImage(Constants.mushshroomImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+        	 getGraphicsContext2D().drawImage(Constants.MUSHROOM_IMAGE, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //Goomba
          {
-        	 getGraphicsContext2D().drawImage(Constants.goombaImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+        	 getGraphicsContext2D().drawImage(Constants.GOOMBA_IMAGE, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          }
          else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
          {
-        	 getGraphicsContext2D().drawImage(Constants.starImage, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
+        	 getGraphicsContext2D().drawImage(Constants.STAR_IMAGE, initwidth+(Variables.getDisplacement()), (initHeight-(Variables.getHeight()*Constants.SPEED_RATIO)));
          }
          
          //Check Boundaries
@@ -929,14 +929,14 @@ public class AnimationSection extends Canvas
                 
                 if(priceX_Intercept_2 <= Constants.ZERO || priceX_Intercept_1 <= Constants.ZERO)
                 {
-                    priceX_Intercept_2 = ((-Constants.intercept - Constants.TWO_HUNDRED * Variables.getCostMake()) - Math.sqrt(Math.pow(Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
-                    priceX_Intercept_1 = ((-Constants.intercept - Constants.TWO_HUNDRED * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.intercept * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
+                    priceX_Intercept_2 = ((-Constants.SEVENTY_THOUSAND - Constants.TWO_HUNDRED * Variables.getCostMake()) - Math.sqrt(Math.pow(Constants.SEVENTY_THOUSAND + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.SEVENTY_THOUSAND * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
+                    priceX_Intercept_1 = ((-Constants.SEVENTY_THOUSAND - Constants.TWO_HUNDRED * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.SEVENTY_THOUSAND + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.SEVENTY_THOUSAND * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
                 }
 
                 if((numFrames++)%20 == Constants.ZERO)
                 {
                     double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_1,
-                           yAddPoint = -Constants.TWO_HUNDRED * Math.pow(xAddPoint, Constants.TWO) + (Constants.intercept + Constants.TWO_HUNDRED * Variables.getCostMake()) * xAddPoint - (Constants.intercept * Variables.getCostMake() + Variables.getCostSetUp());
+                           yAddPoint = -Constants.TWO_HUNDRED * Math.pow(xAddPoint, Constants.TWO) + (Constants.SEVENTY_THOUSAND + Constants.TWO_HUNDRED * Variables.getCostMake()) * xAddPoint - (Constants.SEVENTY_THOUSAND * Variables.getCostMake() + Variables.getCostSetUp());
 
                     if(xAddPoint - priceX_Intercept_2 < 20)
                     {
@@ -977,7 +977,7 @@ public class AnimationSection extends Canvas
             }
             else
             {
-                getGraphicsContext2D().drawImage(Constants.hoverOverPointImage, Constants.ZERO, Constants.ZERO);
+                getGraphicsContext2D().drawImage(Constants.HOVER_OVER_POINT_IMAGE, Constants.ZERO, Constants.ZERO);
             }
             
         }
@@ -989,13 +989,13 @@ public class AnimationSection extends Canvas
             
             //draw money pile
             double profitRatio = profit/Variables.getMaxProfit();
-            Image moneyImage = new Image(Constants.moneyPileImage, profitRatio * Constants.MONEY_PILE_MAX_WIDTH, profitRatio * Constants.MONEY_PILE_MAX_HEIGHT, false, true);
+            Image moneyImage = new Image(Constants.MONEY_PILE_IMAGE, profitRatio * Constants.MONEY_PILE_MAX_WIDTH, profitRatio * Constants.MONEY_PILE_MAX_HEIGHT, false, true);
             getGraphicsContext2D().drawImage(moneyImage, (getWidth() - moneyImage.getRequestedWidth())/Constants.TWO, getHeight() - moneyImage.getRequestedHeight());
             
             //draw text at the top
             getGraphicsContext2D().setFill(Color.BLACK);
-            getGraphicsContext2D().fillText(Constants.salePriceString + Constants.FORMATTER.format(salePrice) + Constants.unitsForSaleString + (int)(70000 - 200*salePrice)
-                                            + Constants.potentialProfitString + Constants.FORMATTER.format(profit) + Constants.dollarSignString, 75, 15);
+            getGraphicsContext2D().fillText(Constants.SALE_PRICE_STRING + Constants.FORMATTER.format(salePrice) + Constants.UNITS_FOR_SALE_STRING + (int)(70000 - Constants.TWO_HUNDRED*salePrice)
+                                            + Constants.POTENTIAL_PROFIT_STRING + Constants.FORMATTER.format(profit) + Constants.DOLLAR_SIGN_STRING, 75, 15);
         }
         
         public void drawNewBikeFrame()
@@ -1024,7 +1024,7 @@ public class AnimationSection extends Canvas
             
             interation++;
             
-            Thread.sleep(Constants.delay);
+            Thread.sleep(Constants.DELAY);
 		}
 		catch(Exception e)
 		{
@@ -1053,19 +1053,19 @@ public class AnimationSection extends Canvas
                 {
                 	if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ZERO))
                 	{
-                		this.player = new MediaPlayer(Constants.maMiaSound);
+                		this.player = new MediaPlayer(Constants.MA_MIA_SOUND);
                 	}
                 	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.ONE)) //mushroom
                 	{
-                		this.player = new MediaPlayer(Constants.mushaSound);
+                		this.player = new MediaPlayer(Constants.MUSHA_SOUND);
                 	}
                 	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.TWO)) //goomba
                 	{
-                		this.player = new MediaPlayer(Constants.goombaSound);
+                		this.player = new MediaPlayer(Constants.GOOMBA_SOUND);
                 	}
                 	else if(Variables.getProjectileType() == Constants.PROJECTILE_TYPE_LIST.get(Constants.THREE)) //star
                 	{
-                		this.player = new MediaPlayer(Constants.starSound);
+                		this.player = new MediaPlayer(Constants.STAR_SOUND);
                 	}
                 	this.player.play();
                 }

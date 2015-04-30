@@ -77,9 +77,9 @@ public interface Constants
         //Help messages
         public final String NEWTON_HELP_MSG = "Description: During this animation, a car will\nmove according to newton's second law in relation\nto the specified mass and force. The velocity and acceleration\n will calculated according to F=ma.\n\nMass: The specified mass of the car in kilograms.\nForce: The specified force in Newtons.";
         public final String PROJ_MOT_HELP_MSG = "Description: During this animation, you will\nwatch a cannon shoot a specified projectile according\nto the specified gravity, angle and velocity of the object being launched.\n\nProjectile: The type of projectile you want to throw. This has no effect\n on the launch.\nGravity: The specified gravity constant to use.\nAngle: The angle of the cannon in degrees.\nInitial Velocty: The initial velocity of the projectile.";
-        public final String OPTICS_HELP_MSG = "Description: During this animation, the rays that form the ray diagram will \nform simoultaneously, according to the specified input, \nand the object and image will also be drawn as a blue arrow and red arrow respectively. Then the image distance and height will be calculated \nas well as other useful info such as the image type and whther it's real or not.\n\nObject Height: A number representing how far the object is from the lens (in cm).\nObject Distance: A number representing how tall the object is (in cm).\nFocal Distance: A number representing how long the focal distances of the lens are.\nLens type: Choose either 'converging' or 'diverging' for the type of lens.";
-        public final String THIN_FILM_HELP_MSG = "Description: During this animation, a ray of light will travel towards a thin film. The ray will then experience thin film interference,\nand it will rebound,with one ray from the film, and one ray from the material.\n It will travel until it hits the end of the panel,\nthen it will show the phase change.\n\n Material: Choose the material that the ray will rebound off. Its index of refraction is shown below, in 'NM = .'\nThickness: A number representing the thickness of the film in nanometers.\nIndex of Refraction of Film: A number that specifies the index of refraction of the thin film.";
-        public final String NEW_BIKE_HELP_MSG = "Description: During this animation, the profit at each possible sale price will be calculated,\nthen the user may hover over the data points to see \nhow much money could be made at that sale price, \nas well as how many units could be sold at that sale price.\n\nBike Cost: A number representing the production cost of one bike.\nSet Up Costs: A (large) number representing how much it costed to advertize, promote the bike, etc.";
+        public final String OPTICS_HELP_MSG = "Description: During this animation, the rays that form the ray diagram will \nform simoultaneously, according to the specified input, \nand the object and image will also be drawn as a blue arrow and red arrow respectively.\nThen the image distance and height will be calculated \nas well as other useful info such as the image type and whther it's real or not.\n\nObject Height: A number representing how far the object is from the lens (in cm).\nObject Distance: A number representing how tall the object is (in cm).\nFocal Distance: A number representing how long the focal distances of the lens are.\nLens type: Choose either 'converging' or 'diverging' for the type of lens.";
+        public final String THIN_FILM_HELP_MSG = "Description: During this animation, a ray of light will travel towards a thin film. The ray will then experience thin film interference,\nand it will rebound,with one ray from the film, and one ray from the material. It will travel until it hits the end of the panel,then it will show the phase change.\n\n Material: Choose the material that the thin film rests on. Its index of refraction is shown below, in 'NM = .'\nThickness: A number representing the thickness of the film in nanometers.\nIndex of Refraction of Film: A number that specifies the index of refraction of the thin film.";
+        public final String NEW_BIKE_HELP_MSG = "Description: During this animation, the profit at each possible sale price will be calculated,\nthen the user may hover over the data points to see \nhow much money could be made at that sale price, \nas well as how many units could be sold at that sale price.\n\nBike Cost: A number representing the production cost of one bike.\nSet Up Costs: A (large) number representing how much it costs to advertise, promote the bike, etc.";
         public final String INF_GEOM_HELP_MSG = "Description: During this animation, the sides\nof a square will grow in size according the value\nof term each  in the sum. You may notice that if the base\n is 0, there will be no growth. If the base in below\n 1 (excluding), the size of the square will eventually\n stabilize and if the square is 1 or above, it will\n increase indefinitely.\n\nCoefficent: A number, in an equation a(x^k), this is the a value.\nBase: A number, in an equation a(x^k), this is the x value.\nExponent: A number. This determines how many terms we should calculate.";
         
         //GUISection label texts
@@ -226,43 +226,41 @@ public interface Constants
             //original height and width of money pile
         public final double MONEY_PILE_MAX_WIDTH = 300;
         public final double MONEY_PILE_MAX_HEIGHT = 250;
-        public final Image hoverOverPointImage = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
-        public final String salePriceString = "Sale price = ";
-        public final String moneyPileImage = "file:/" + Constants.DIR + "/src/res/moneyPile.png";
-        public final String unitsForSaleString = "$\nNumber of units to sell = ";
-        public final String potentialProfitString = "\nPotential profit = ";
-        public final String dollarSignString = "$";
-        public final double intercept = 70000;
-        //public final double MONEY_PILE_OG_WIDTH = 400;
-        //public final double MONEY_PILE_OG_HEIGHT = 341;
+        public final Image HOVER_OVER_POINT_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/hoverOverPoint.png");
+        public final String SALE_PRICE_STRING = "Sale price = ";
+        public final String MONEY_PILE_IMAGE = "file:/" + Constants.DIR + "/src/res/moneyPile.png";
+        public final String UNITS_FOR_SALE_STRING = "$\nNumber of units to sell = ";
+        public final String POTENTIAL_PROFIT_STRING = "\nPotential profit = ";
+        public final String DOLLAR_SIGN_STRING = "$";
+        public final int SEVENTY_THOUSAND = 70000;
         
         //For Newton's Law and Projectile motion
         public final double NANOSECOND_RATIO = (1.0)/(1000000000.0);
         public final int SPEED_RATIO = 10;
         public final int X_BOUDARY = 300;
         public final int Y_BOUNDARY = -30;
-        public final int initHeight = 199;
-        public final int initWidth = 21;
-        public final int magicNumber = 23;
-        public final int canonPos_X = 11;
-        public final int canonPos_Y = 196;
-        public final Image canonImage = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
-        public final Image canonStandImage = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
-        public final Image backImage = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
-        public final Image starImage = new Image("file:/" + Constants.DIR + "/src/res/star.png");
-        public final Image goombaImage = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
-        public final Image mushshroomImage = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
-        public final Image marioImage = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
-        public final Image newtLawBack = new Image("file:/" + Constants.DIR + "/src/res/NewtLawBack.jpg");
+        public final int INIT_HEIGHT = 199;
+        public final int INIT_WIDTH = 21;
+        public final int MAGIC_NUMBER = 23;
+        public final int CANNON_POS_X = 11;
+        public final int CANNON_POS_Y = 196;
+        public final Image CANNON_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/Cannon.png");
+        public final Image CANNON_STAND_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/CannonStand2.png");
+        public final Image BACK_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/ProjMotBack.png");
+        public final Image STAR_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/star.png");
+        public final Image GOOMBA_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
+        public final Image MUSHROOM_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
+        public final Image MARIO_IMAGE = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
+        public final Image NEWT_LAW_BACK = new Image("file:/" + Constants.DIR + "/src/res/NewtLawBack.jpg");
         
-        public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
-        public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());
-        public final Media goombaSound = new Media(new File(Constants.DIR + "/src/res/smb3_thwomp.wav").toURI().toString());
-        public final Media mushaSound = new Media(new File(Constants.DIR + "/src/res/smb_powerup.wav").toURI().toString());
+        public final Media MA_MIA_SOUND = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
+        public final Media STAR_SOUND = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());
+        public final Media GOOMBA_SOUND = new Media(new File(Constants.DIR + "/src/res/smb3_thwomp.wav").toURI().toString());
+        public final Media MUSHA_SOUND = new Media(new File(Constants.DIR + "/src/res/smb_powerup.wav").toURI().toString());
         
         //For Inf Geom Series
         public final double DEFAULT_SIDE = 10.0;
-        public final long delay = 1000;
+        public final long DELAY = 1000;
         
         //ID's for css
         public final String ID_SHOW_XY_VALUES = "show-xy-values";
