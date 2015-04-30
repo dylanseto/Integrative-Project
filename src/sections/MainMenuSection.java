@@ -183,6 +183,14 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                 	JOptionPane.showMessageDialog(null, Constants.INF_GEOM_HELP_MSG);
                 }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+                {
+                	JOptionPane.showMessageDialog(null, Constants.NEWTON_HELP_MSG);
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                {
+                	JOptionPane.showMessageDialog(null, Constants.PROJ_MOT_HELP_MSG);
+                }
             }
             else if(event.getSource() == doneButton)
             {

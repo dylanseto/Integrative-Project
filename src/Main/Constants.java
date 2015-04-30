@@ -74,12 +74,12 @@ public interface Constants
         public final String CONTINUE_BUTTON = "Continue";
         
         //Help messages
-        public final String NEWTON_HELP_MSG = "";
-        public final String PROJ_MOT_HELP_MSG = "";
+        public final String NEWTON_HELP_MSG = "Description: During this animation, a car will\nmove according to newton's second law in relation\nto the specified mass and force. The velocity and acceleration\n will calculated according to F=ma.\n\nMass: The specified mass of the car in kilograms.\nForce: The specified force in Newtons.";
+        public final String PROJ_MOT_HELP_MSG = "Description: During this animation, you will\nwatch a cannon shoot a specified projectile according\nto the specified gravity, angle and velocity of the object being launched.\n\nProjectile: The type of projectile you want to throw. This has no effect\n on the launch.\nGravity: The specified gravity constant to use.\nAngle: The angle of the cannon in degrees.\nInitial Velocty: The initial velocity of the projectile.";
         public final String OPTICS_HELP_MSG = "";
         public final String THIN_FILM_HELP_MSG = "";
         public final String NEW_BIKE_HELP_MSG = "";
-        public final String INF_GEOM_HELP_MSG = "Description: During this animation, the sides\nof a square will grow in size according each term\n value in the sum. You can notice that if the base\n in 0, there will be no growth. If the base in below\n 1 (exluding), the size of the square will eventually\n stabilize and if the square is 1 or above, it will\n increase indefinitely.\n\nCoefficent: A number, in an equation a(x^k), this is the a value.\nBase: A number, in an equation a(x^k), this is the x value.\nExponent: A number. This determines how many terms we should calculate.";
+        public final String INF_GEOM_HELP_MSG = "Description: During this animation, the sides\nof a square will grow in size according the value\nof term each  in the sum. You may notice that if the base\n is 0, there will be no growth. If the base in below\n 1 (excluding), the size of the square will eventually\n stabilize and if the square is 1 or above, it will\n increase indefinitely.\n\nCoefficent: A number, in an equation a(x^k), this is the a value.\nBase: A number, in an equation a(x^k), this is the x value.\nExponent: A number. This determines how many terms we should calculate.";
         
         //GUISection label texts
         public final String ENTER_VAL_LABEL_TEXT = "Enter Values";
