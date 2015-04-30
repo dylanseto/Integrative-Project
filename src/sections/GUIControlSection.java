@@ -372,7 +372,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 	break;
                     
                 case OPTICS:
-                    if(lensOptionBox.getSelectionModel().getSelectedItem().isEmpty()
+                    if(((String)(lensOptionBox.getSelectionModel().getSelectedItem())) == null
                             || objectHeightTextField.getText().isEmpty()
                             || objectDistanceTextField.getText().isEmpty()
                             || focalDistTextField.getText().isEmpty())

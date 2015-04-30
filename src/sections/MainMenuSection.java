@@ -149,6 +149,10 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     MainWindow.getAnimSection().start();
                 }
+                else
+                {
+                	JOptionPane.showMessageDialog(null, "Invalid Or Missing Values. Please check that you've filled on necessary field.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 this.pauseButton.setDisable(false);
                 this.startButton.setDisable(true);
                 this.startButton.setDisable(true);

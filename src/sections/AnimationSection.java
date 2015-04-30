@@ -783,6 +783,9 @@ public class AnimationSection extends Canvas
             else if(Variables.getMaterialType().equalsIgnoreCase(Constants.PYREX))
             {
                 materialColor = Color.LIGHTGRAY;//make an opaque grey
+            }else
+            {
+            	materialColor = Color.TRANSPARENT;
             }
             
             getGraphicsContext2D().setFill(materialColor);
