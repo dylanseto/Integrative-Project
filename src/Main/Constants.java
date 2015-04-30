@@ -173,11 +173,11 @@ public interface Constants
         
         //Cart class constants
         public final double[] Car_Polygon_X = {10, 20, 30, 50, 60, 70, 80, 10};
-    	public final double[] Car_Polygon_Y = {140, 140, 130, 130, 140, 140, 160, 160};;
+    	public final double[] Car_Polygon_Y = {220, 220, 210, 210, 220, 220, 240, 240};
     	public final int POLYGON_SIDE_NUM = 8;
     	public final int CAR_WHEEL_ONE_INIT_X = 20;
     	public final int CAR_WHEEL_TWO_INIT_X = 45;
-    	public final int CAR_WHEEL_INIT_Y = 150;
+    	public final int CAR_WHEEL_INIT_Y = 230;
     	public final int CAR_WHEEL_DIAMETER = 15;
         
         //thin film animation constants
@@ -242,6 +242,7 @@ public interface Constants
         public final Image goombaImage = new Image("file:/" + Constants.DIR + "/src/res/Goomba.png");
         public final Image mushshroomImage = new Image("file:/" + Constants.DIR + "/src/res/mushroom.png");
         public final Image marioImage = new Image("file:/" + Constants.DIR + "/src/res/mario.png");
+        public final Image newtLawBack = new Image("file:/" + Constants.DIR + "/src/res/NewtLawBack.jpg");
         
         public final Media maMiaSound = new Media(new File(Constants.DIR + "/src/res/sm64_mario_mamma-mia.wav").toURI().toString());
         public final Media starSound = new Media(new File(Constants.DIR + "/src/res/Super Mario Kart - Star Power.mp3").toURI().toString());

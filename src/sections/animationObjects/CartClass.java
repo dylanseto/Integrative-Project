@@ -20,6 +20,7 @@ public class CartClass extends AnimationObject
 	{
 		//graphics.setFill(Color.BLACK);
 		//graphics.strokeLine(0, 150, 300, 150);
+		graphics.drawImage(Constants.newtLawBack, 0, 0);
 		
 		graphics.setFill(Color.BLUE);
 		double[] x = Constants.Car_Polygon_X.clone();
