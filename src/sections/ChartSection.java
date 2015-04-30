@@ -53,11 +53,9 @@ public class ChartSection extends LineChart<Number, Number>
         //made a change to constructor here
     	HoverDetector(final double data_x, final double data_y)
     	{	
-    		setPrefSize(15, 15);
-    		System.out.println("hi2");
+    		setPrefSize(Constants.HOVER_PREF_SIZE, Constants.HOVER_PREF_SIZE);
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
-    	          //System.out.println("mouse over "); //hover over
                   
                     if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
                     {

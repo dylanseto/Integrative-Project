@@ -40,10 +40,10 @@ public class MainWindow extends Application
 		bottomSplitPane = new SplitPane();
                 
                 topSplitPane.setOrientation(Orientation.HORIZONTAL);
-		topSplitPane.setPrefSize(600, 300);
+		topSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
                 
                 bottomSplitPane.setOrientation(Orientation.HORIZONTAL);
-		bottomSplitPane.setPrefSize(600, 300);
+		bottomSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
        
 		mainMenuSection = new MainMenuSection();
                 animSection = new AnimationSection();

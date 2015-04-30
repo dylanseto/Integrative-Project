@@ -951,7 +951,7 @@ public class AnimationSection extends Canvas
                     priceX_Intercept_1 = ((-Constants.SEVENTY_THOUSAND - Constants.TWO_HUNDRED * Variables.getCostMake()) + Math.sqrt(Math.pow(Constants.SEVENTY_THOUSAND + Constants.TWO_HUNDRED * Variables.getCostMake(), Constants.TWO) - Constants.FOUR * Constants.TWO_HUNDRED * (Variables.getCostSetUp() + Constants.SEVENTY_THOUSAND * Variables.getCostMake())))/(-Constants.FOUR_HUNDRED);
                 }
 
-                if((numFrames++)%20 == Constants.ZERO)
+                if((numFrames++)%Constants.MOD_ADD_POINT == Constants.ZERO)
                 {
                     double xAddPoint = deltaX_AddPoint * 15 + priceX_Intercept_1,
                            yAddPoint = -Constants.TWO_HUNDRED * Math.pow(xAddPoint, Constants.TWO) + (Constants.SEVENTY_THOUSAND + Constants.TWO_HUNDRED * Variables.getCostMake()) * xAddPoint - (Constants.SEVENTY_THOUSAND * Variables.getCostMake() + Variables.getCostSetUp());
@@ -1095,7 +1095,6 @@ public class AnimationSection extends Canvas
             }
 		}
             MainWindow.getGUIControlSection().getValues();
-           // MainWindow.getMainMenuSection().getS
             this.animTimer.start();
 	}
 	

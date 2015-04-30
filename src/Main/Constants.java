@@ -31,8 +31,13 @@ public interface Constants
         public final int GUI_SPACING = 10;
         public final String NUMBERS_ONLY_REGEX = "^[0-9\\.]*$";
         public final int FONT_SIZE = 12;
+        
+        //Window display
+        	//MainWindow
         public final int SCENE_SIDE_LENGTH = 590;
-
+        	//splitpanes
+        public final int SPLIT_PANE_LENGTH = 600;
+        public final int SPLIT_PANE_WIDTH = 300;
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
 	public final double INDEX_REF_WATER = 1.333;
@@ -128,6 +133,9 @@ public interface Constants
         public final String X_TEXT = "X:";
         public final String Y_TEXT1 = "s\nY: ";
         public final String Y_TEXT2 = "\nY: ";
+        
+        //chartsection constants
+        public final int HOVER_PREF_SIZE = 15;
         
         //TableSection constants
         public final String RIGHT_VALUE = "rightValue";
@@ -228,6 +236,7 @@ public interface Constants
         public final String POTENTIAL_PROFIT_STRING = "\nPotential profit = ";
         public final String DOLLAR_SIGN_STRING = "$";
         public final int SEVENTY_THOUSAND = 70000;
+        public final int MOD_ADD_POINT = 20;
         
         //For Newton's Law and Projectile motion
         public final double NANOSECOND_RATIO = (1.0)/(1000000000.0);
