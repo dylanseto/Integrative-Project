@@ -77,9 +77,15 @@ public interface Constants
         //Help messages
         public final String NEWTON_HELP_MSG = "Description: During this animation, a car will\nmove according to newton's second law in relation\nto the specified mass and force. The velocity and acceleration\n will calculated according to F=ma.\n\nMass: The specified mass of the car in kilograms.\nForce: The specified force in Newtons.";
         public final String PROJ_MOT_HELP_MSG = "Description: During this animation, you will\nwatch a cannon shoot a specified projectile according\nto the specified gravity, angle and velocity of the object being launched.\n\nProjectile: The type of projectile you want to throw. This has no effect\n on the launch.\nGravity: The specified gravity constant to use.\nAngle: The angle of the cannon in degrees.\nInitial Velocty: The initial velocity of the projectile.";
+<<<<<<< .mine
+        public final String OPTICS_HELP_MSG = "Description: During this animation, the rays that\n form the ray diagram will form simoultaneously,\n according to the specified input, and the object and image will also be drawn\n as a blue arrow and red arrow respectively. Then the image distance and height will be calculated \nas well as other useful info such as the image type and whther it's real or not.\n\nObject Height: A number representing how far the object is from the lens (in cm).\nObject Distance: A number representing how tall the object is (in cm).\nFocal Distance: A number representing how long the focal distances of the lens are.\nLens type: Choose either 'converging' or 'diverging' for the type of lens.";
+        public final String THIN_FILM_HELP_MSG = "Description: During this animation, a ray of light will travel towards a thin film. The ray will then experience thin film interference,\nand it will rebound,with one ray from the film, and one ray from the material.\n It will travel until it hits the end of the panel,\nthen it will show the phase change.\n\n Material: Choose the material that the ray will rebound off. Its index of refraction is shown below, in 'NM = .'\nThickness: A number representing the thickness of the film in nanometers.\nIndex of Refraction of Film: A number that specifies the index of refraction of the thin film.";
+        public final String NEW_BIKE_HELP_MSG = "Description: During this animation, the profit at each possible sale price will be calculated,\nthen the user may hover over the data points to see \nhow much money could be made at that sale price, \nas well as how many units could be sold at that sale price.\n\nBike Cost: A number representing the production cost of one bike.\nSet Up Costs: A (large) number representing how much it costed to advertize, promote the bike, etc.";
+=======
         public final String OPTICS_HELP_MSG = "Description: During this animation, the rays that form the ray diagram will \nform simoultaneously, according to the specified input, \nand the object and image will also be drawn as a blue arrow and red arrow respectively.\nThen the image distance and height will be calculated \nas well as other useful info such as the image type and whther it's real or not.\n\nObject Height: A number representing how far the object is from the lens (in cm).\nObject Distance: A number representing how tall the object is (in cm).\nFocal Distance: A number representing how long the focal distances of the lens are.\nLens type: Choose either 'converging' or 'diverging' for the type of lens.";
         public final String THIN_FILM_HELP_MSG = "Description: During this animation, a ray of light will travel towards a thin film. The ray will then experience thin film interference,\nand it will rebound,with one ray from the film, and one ray from the material. It will travel until it hits the end of the panel,then it will show the phase change.\n\n Material: Choose the material that the thin film rests on. Its index of refraction is shown below, in 'NM = .'\nThickness: A number representing the thickness of the film in nanometers.\nIndex of Refraction of Film: A number that specifies the index of refraction of the thin film.";
         public final String NEW_BIKE_HELP_MSG = "Description: During this animation, the profit at each possible sale price will be calculated,\nthen the user may hover over the data points to see \nhow much money could be made at that sale price, \nas well as how many units could be sold at that sale price.\n\nBike Cost: A number representing the production cost of one bike.\nSet Up Costs: A (large) number representing how much it costs to advertise, promote the bike, etc.";
+>>>>>>> .r175
         public final String INF_GEOM_HELP_MSG = "Description: During this animation, the sides\nof a square will grow in size according the value\nof term each  in the sum. You may notice that if the base\n is 0, there will be no growth. If the base in below\n 1 (excluding), the size of the square will eventually\n stabilize and if the square is 1 or above, it will\n increase indefinitely.\n\nCoefficent: A number, in an equation a(x^k), this is the a value.\nBase: A number, in an equation a(x^k), this is the x value.\nExponent: A number. This determines how many terms we should calculate.";
         
         //GUISection label texts
@@ -124,7 +130,10 @@ public interface Constants
         public final String[] NEWTON_GRAPH_LABELS = {"Velocity vs. Time", "Velocity (m/s)", "Time (s)"};
         public final String[] PROJ_MOT_GRAPH_LABELS = {"\t\tVertical \nDisplacement vs. Time", "Time (s)", "Vertical Displacement (m)"};
         public final String[] NEW_BIKE_GRAPH_LABELS = {"Profit vs. Sale Price", "Sale Price ($)", "Profit ($)"};
-        public final String[] INF_GEOM_GRAPH_LABELS = {"\tPartial Sum \nvs. Term Number", "Partial Sum", "Term Number"};
+        public final String[] INF_GEOM_GRAPH_LABELS = {"\tPartial Sum \nvs. Term Number", "Term Number", "Partial Sum"};
+        public final String X_TEXT = "X:";
+        public final String Y_TEXT1 = "s\nY: ";
+        public final String Y_TEXT2 = "\nY: ";
         
         //TableSection constants
         public final String RIGHT_VALUE = "rightValue";
@@ -159,20 +168,10 @@ public interface Constants
                                                                                                   "Super Mario 64");
         public final ObservableList<String> LENS_TYPE_LIST = FXCollections.observableArrayList("Converging", "Diverging");
         public final ObservableList<String> MATERIAL_TYPE_LIST = FXCollections.observableArrayList("Water", "Glycerin", "Oil", "Zircon", "Diamond", "Pyrex");
-
-	//Unit labels
-        public final String UNIT_NEWTON = "N";
-        public final String UNIT_KG = "kg";
-        public final String UNIT_M_PER_S = "m/s";
-        public final String UNIT_DEGREE = "\u00B0";
-        public final String UNIT_CM = "cm";
-        public final String UNIT_NM = "nm";
-        public final String UNIT_DOLLAR = "$";
         
 	//Math
 	public final double TWO_PI = 2*Math.PI;
 	public final double FULL_ROTATION = 360;
-        public final String SIGMA = "\u03A3";
         public final String PI_TEXT = "\u03C0";
         
         //Cart class constants

@@ -54,22 +54,7 @@ public class AnimationSection extends Canvas
 		@Override
 		public void handle(long time) 
 		{
-			if(initTime == Constants.ZERO)
-			{
-				initTime = time;
-				previousTime = initTime;
-			}
 			
-			//different check
-			if(continued)
-			{
-				elapsedPause += System.nanoTime() - previousTime;
-
-				previousTime = time;
-				continued = false;
-			}
-			
-			totalTime = time - initTime - elapsedPause;
 
 			switch(MainWindow.getUserInterface())
 			{
@@ -77,6 +62,7 @@ public class AnimationSection extends Canvas
                                     break;
                                     
 				case NEWTON_LAW:
+					
 								drawNewtonFrame(time);
                                     break;
                                     
@@ -119,6 +105,22 @@ public class AnimationSection extends Canvas
 	}
 	private void drawNewtonFrame(long time)
 	{
+		if(initTime == Constants.ZERO)
+		{
+			initTime = time;
+			previousTime = initTime;
+		}
+		
+		//different check
+		if(continued)
+		{
+			elapsedPause += System.nanoTime() - previousTime;
+
+			previousTime = time;
+			continued = false;
+		}
+		totalTime = time - initTime - elapsedPause;
+		
 		Variables.setAcceleration(FormulaHelper.computeAccel(Variables.getForce(), Variables.getMass()));
         elapsedTime = time-previousTime;
 
@@ -164,6 +166,22 @@ public class AnimationSection extends Canvas
 	}
 	private void drawProjMotFrame(long time)
 	{   
+		if(initTime == Constants.ZERO)
+		{
+			initTime = time;
+			previousTime = initTime;
+		}
+		
+		//different check
+		if(continued)
+		{
+			elapsedPause += System.nanoTime() - previousTime;
+
+			previousTime = time;
+			continued = false;
+		}
+		totalTime = time - initTime - elapsedPause;
+		
 		elapsedTime = time-previousTime;
         
 		drawProjMotFrame();
@@ -1013,7 +1031,7 @@ public class AnimationSection extends Canvas
             this.mainSquare.setSide(this.mainSquare.getSide()+(term));
             System.out.println(this.mainSquare.getSide());
             this.mainSquare.draw();
-            MainWindow.getChartSection().addDataPoint(interation, sum);
+            MainWindow.getChartSection().addDataPoint(interation, sum, true);
 
             
             

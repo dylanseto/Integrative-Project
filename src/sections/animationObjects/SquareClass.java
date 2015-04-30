@@ -1,7 +1,5 @@
 package sections.animationObjects;
 
-import java.util.Random;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -9,15 +7,13 @@ import javafx.scene.paint.Paint;
 public class SquareClass extends AnimationObject 
 {
 	private Color color;
-	private Random rand; 
 	private double side;
 	
 	public SquareClass(GraphicsContext graphics, double x, double y, double side) 
 	{
 		super(graphics);
 		
-		this.rand = new Random();
-		this.color = Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+		this.color = Color.BISQUE;
 		this.setX(x);
 		this.setY(y);
 		this.side = side;
@@ -26,7 +22,6 @@ public class SquareClass extends AnimationObject
 	{
 		super(graphics);
 		
-		this.rand = new Random();
 		this.color = color;
 		this.setX(x);
 		this.setY(y);

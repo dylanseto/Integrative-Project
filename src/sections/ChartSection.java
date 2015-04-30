@@ -54,6 +54,7 @@ public class ChartSection extends LineChart<Number, Number>
     	HoverDetector(final double data_x, final double data_y)
     	{	
     		setPrefSize(15, 15);
+    		System.out.println("hi2");
     		setOnMouseEntered(new EventHandler<MouseEvent>() {
     	        @Override public void handle(MouseEvent mouseEvent) {
     	          //System.out.println("mouse over "); //hover over
@@ -63,24 +64,29 @@ public class ChartSection extends LineChart<Number, Number>
                         MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
                     }
                     else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
-                            || MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                            || MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION
+                            || MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
                     {
                         Label showXYValuesLabel = new Label();
                         
                         if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
                         {
-                            showXYValuesLabel.setText("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m/s");
+                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m/s");
                             
                         }
                         else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
                         {
-                            showXYValuesLabel.setText("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m");
+                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m");
                         }
-                        
+                        else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+                        {
+                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT2 + Constants.FORMATTER.format(data_y));
+                        }
                         showXYValuesLabel.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
                         showXYValuesLabel.setId(Constants.ID_SHOW_XY_VALUES);
                         getChildren().add(showXYValuesLabel);
                     }
+                    
                   
     	          setCursor(Cursor.NONE);
     	          toFront();
