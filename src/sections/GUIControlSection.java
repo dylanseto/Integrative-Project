@@ -386,6 +386,11 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     Variables.setFocalPoint(((Variables.getLensType().equalsIgnoreCase(Constants.LENS_DIVERGING))
                                             ? -Double.valueOf(focalDistTextField.getText())
                                             : Double.valueOf(focalDistTextField.getText())));
+                    if(Variables.getLensType().equalsIgnoreCase(Constants.LENS_CONVERGING) 
+                    		&& (int)Variables.getFocalPoint() == (int)Variables.getObjDistance())
+                    {
+                    	Variables.setFocalPoint(Variables.getFocalPoint() + Constants.DIST_ADJUST);
+                    }
                     MainWindow.getAnimSection().drawOpticsFrame();
                     break;
                     

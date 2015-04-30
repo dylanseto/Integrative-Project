@@ -214,6 +214,8 @@ public interface Constants
             //lens type
         public final String LENS_DIVERGING  = "diverging";
         public final String LENS_CONVERGING = "converging";
+        	//for when focal length = obj distance
+        public final double DIST_ADJUST = 0.1;
         
         //for new bike
             //original height and width of money pile
