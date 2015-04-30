@@ -121,9 +121,9 @@ public interface Constants
         public final int GRAPH_Y_AXIS_INDEX = 1;
         public final int GRAPH_X_AXIS_INDEX = 2;
         public final String[] NEWTON_GRAPH_LABELS = {"Velocity vs. Time", "Velocity (m/s)", "Time (s)"};
-        public final String[] PROJ_MOT_GRAPH_LABELS = {"Vertical Displacement vs. Time", "Time (s)", "Vertical Displacement (m)"};
+        public final String[] PROJ_MOT_GRAPH_LABELS = {"\t\tVertical \nDisplacement vs. Time", "Time (s)", "Vertical Displacement (m)"};
         public final String[] NEW_BIKE_GRAPH_LABELS = {"Profit vs. Sale Price", "Sale Price ($)", "Profit ($)"};
-        public final String[] INF_GEOM_GRAPH_LABELS = {"Partial Sum vs. Term Number", "Partial Sum", "Term Number"};
+        public final String[] INF_GEOM_GRAPH_LABELS = {"\tPartial Sum \nvs. Term Number", "Partial Sum", "Term Number"};
         
         //TableSection constants
         public final String RIGHT_VALUE = "rightValue";
@@ -255,5 +255,8 @@ public interface Constants
         //For Inf Geom Series
         public final double DEFAULT_SIDE = 10.0;
         public final long delay = 1000;
+        
+        //ID's for css
+        public final String SHOW_XY_VALUES = "show-xy-values";
 
 }

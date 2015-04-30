@@ -76,6 +76,7 @@ public class MainWindow extends Application
                 scene.getStylesheets().add(this.getClass().getResource("/res/buttonComboBoxstyle.css").toExternalForm());
                guiControlSection.getStylesheets().add(this.getClass().getResource("/res/guiControlSectionStyle.css").toExternalForm());
                tableSection.getStylesheets().add(this.getClass().getResource("/res/tableSectionStyle.css").toExternalForm());
+               chartSection.getStylesheets().add(this.getClass().getResource("/res/chartSectionStyle.css").toExternalForm());
                primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();

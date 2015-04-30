@@ -43,7 +43,6 @@ public class ChartSection extends LineChart<Number, Number>
     	
     	if(hover)
     	{
-                //made a change to constructor of HoverDetector
     		data.setNode(new HoverDetector(x, y));
     	}
     	
@@ -63,17 +62,24 @@ public class ChartSection extends LineChart<Number, Number>
                     {
                         MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
                     }
-                    else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+                    else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
+                            || MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
                     {
-                    	Label label = new Label("X: " + data_x + "s\ny: " + Constants.FORMATTER.format(data_y) + "m/s");
-                    	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
-                    	getChildren().add(label);
-                    }
-                    else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
-                    {
-                    	Label label = new Label("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m");
-                    	label.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
-                    	getChildren().add(label);
+                        Label showXYValuesLabel = new Label();
+                        
+                        if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+                        {
+                            showXYValuesLabel.setText("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m/s");
+                            
+                        }
+                        else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                        {
+                            showXYValuesLabel.setText("X: " + data_x + "s\nY: " + Constants.FORMATTER.format(data_y) + "m");
+                        }
+                        
+                        showXYValuesLabel.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
+                        showXYValuesLabel.setId(Constants.SHOW_XY_VALUES);
+                        getChildren().add(showXYValuesLabel);
                     }
                   
     	          setCursor(Cursor.NONE);
