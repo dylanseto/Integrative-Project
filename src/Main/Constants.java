@@ -38,6 +38,9 @@ public interface Constants
         	//splitpanes
         public final int SPLIT_PANE_LENGTH = 600;
         public final int SPLIT_PANE_WIDTH = 300;
+                //title
+        public final String WINDOW_TITLE = "Integrative Project - Ahmad El-Baher and Dylan Seto";
+        
 	//Index of Refraction
 	public final double INDEX_REF_AIR = 1.0003;
 	public final double INDEX_REF_WATER = 1.333;
