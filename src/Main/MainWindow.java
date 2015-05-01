@@ -67,6 +67,7 @@ public class MainWindow extends Application
             primaryStage.setResizable(false);
             primaryStage.setTitle(Constants.WINDOW_TITLE);
             primaryStage.setScene(scene);
+            primaryStage.setTitle(Constants.WINDOW_TITLE);
             primaryStage.show();
 	}
 	
