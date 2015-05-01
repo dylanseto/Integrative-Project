@@ -1,7 +1,6 @@
 package sections;
 
 import javax.swing.JOptionPane;
-
 import Main.Constants;
 import Main.MainWindow;
 import javafx.collections.FXCollections;
@@ -14,15 +13,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-/**
- *
- * @author cstuser
- */
 public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
 {
 	private ComboBox<String> mainOptionBox;
 	private final ObservableList<String> mainOptionsList;
-        
         private final Button subChoiceOneButton;
         private final Button subChoiceTwoButton;
         private final Button startButton;
@@ -35,12 +29,10 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
         
 	public MainMenuSection() 
 	{
-		
-		this.setSpacing(Constants.GUI_SPACING);
-		this.setAlignment(Pos.CENTER);
+            this.setSpacing(Constants.GUI_SPACING);
+            this.setAlignment(Pos.CENTER);
             mainOptionsList = FXCollections.observableArrayList(Constants.OPTION_MECHANICS, Constants.OPTION_WAVES, Constants.OPTION_CALCULUS, Constants.OPTION_EXIT);
             mainOptionBox = new ComboBox<String>(mainOptionsList);
-
             this.subChoiceOneButton = new Button();
             this.subChoiceTwoButton = new Button();
             this.startButton = new Button(Constants.START_BUTTON);
@@ -49,7 +41,6 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             this.helpButton = new Button(Constants.HELP_BUTTON);
             this.doneButton = new Button(Constants.DONE_BUTTON);
             this.continueButton = new Button(Constants.CONTINUE_BUTTON);
-            
             mainOptionBox.setOnAction(this);
             subChoiceOneButton.setOnAction(this);
             subChoiceTwoButton.setOnAction(this);
@@ -59,19 +50,15 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             helpButton.setOnAction(this);
             doneButton.setOnAction(this);
             continueButton.setOnAction(this);
-            
             this.continueButton.setDisable(true);
             this.resetButton.setDisable(true);
             this.pauseButton.setDisable(true);
-            
             showComboBoxMenu();
-            
 	}
 
         public void handle(ActionEvent event) 
         {
             //when you click help, a JOptionPane-like message pops up and shows approproate text depending on userInterface
-            
             if(event.getSource() == mainOptionBox)
             {
                 if(((String)(mainOptionBox.getSelectionModel().getSelectedItem())).equalsIgnoreCase(Constants.OPTION_MECHANICS))
@@ -91,7 +78,6 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                     getChildren().add(new Label(Constants.CONFIRM_EXIT_MSG));
                     showSubMenu(Constants.OPTION_YES, Constants.OPTION_NO);
                 }
-                
                 mainOptionBox = new ComboBox<String>(mainOptionsList);
                 mainOptionBox.setOnAction(this);
             }
@@ -125,9 +111,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_PROJ_MOT))
                 {
                     MainWindow.setUserInterface(Constants.UserInterface.PROJ_MOTION);
-
                     MainWindow.getAnimSection().drawProjMotFrame();
-                    
                 }
                 else if(subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_THIN_FILM))
                 {
@@ -141,7 +125,6 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 {
                     showComboBoxMenu();
                 }
-                
                 if(!subChoiceTwoButton.getText().equalsIgnoreCase(Constants.OPTION_NO))
                 {
                    showMainMenu(); 
@@ -155,7 +138,7 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 }
                 else
                 {
-                	JOptionPane.showMessageDialog(null, "Invalid Or Missing Values. Please check that you've filled on necessary field.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, Constants.ERROR_MSG, Constants.ERROR_MSG_TITLE, JOptionPane.ERROR_MESSAGE);
                 }
                 this.pauseButton.setDisable(false);
                 this.startButton.setDisable(true);
@@ -224,15 +207,17 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
             }
         }
         
-        public Button getPauseButton() {
-			return pauseButton;
-		}
+        public Button getPauseButton() 
+        {
+            return pauseButton;
+	}
 
-		public Button getResetButton() {
-			return resetButton;
-		}
+        public Button getResetButton() 
+        {
+            return resetButton;
+        }
 
-		private void showComboBoxMenu()
+	private void showComboBoxMenu()
         {
             getChildren().clear();
             getChildren().add(mainOptionBox);

@@ -20,68 +20,53 @@ public class MainWindow extends Application
 	private static Constants.UserInterface userInterface;
 	private static SplitPane topSplitPane;
 	private static SplitPane bottomSplitPane;
-    private static AnimationSection animSection;
-    private static ChartSection chartSection;
-    private static TableSection tableSection;
+        private static AnimationSection animSection;
+        private static ChartSection chartSection;
+        private static TableSection tableSection;
 	private static MainMenuSection mainMenuSection;
         private static GUIControlSection guiControlSection;
         
 	public static void main(String[] args) 
 	{
-		launch(args); 
+            launch(args); 
 	}
 	
 	public void start(Stage primaryStage)
 	{
-		
-                VBox mainWindow = new VBox();
-                
-		topSplitPane = new SplitPane();
-		bottomSplitPane = new SplitPane();
-                
-                topSplitPane.setOrientation(Orientation.HORIZONTAL);
-		topSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
-                
-                bottomSplitPane.setOrientation(Orientation.HORIZONTAL);
-		bottomSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
-       
-		mainMenuSection = new MainMenuSection();
-                animSection = new AnimationSection();
-                animSection.setWidth(topSplitPane.getPrefWidth()/Constants.TWO);
-                animSection.setHeight(topSplitPane.getPrefHeight());
-                tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight());
-                chartSection = new ChartSection();
-                chartSection.setVisible(false);
-                tableSection.setVisible(false);
-
-                guiControlSection = new GUIControlSection();
-		userInterface = Constants.UserInterface.NO_CHOICE;
-                
-                
-                topSplitPane.getItems().add(animSection);
-                topSplitPane.getItems().add(chartSection);
-                
-               
-                bottomSplitPane.getItems().add(mainMenuSection);
-                bottomSplitPane.getItems().add(guiControlSection);
-
-        mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
-		   
-                Scene scene = new Scene(new Group(mainWindow), Constants.SCENE_SIDE_LENGTH, Constants.SCENE_SIDE_LENGTH);
-                
-                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_PRESS_START_2P), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_BIGMACCA), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_CONT_FREAK), Constants.FONT_SIZE);
-                Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_VENUS_RISING), Constants.FONT_SIZE);
-                
-                scene.getStylesheets().add(this.getClass().getResource(Constants.CSS_MAIN).toExternalForm());
-               guiControlSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_GUI).toExternalForm());
-               tableSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_TABLE).toExternalForm());
-               chartSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_CHART).toExternalForm());
-               
-               primaryStage.setResizable(false);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+            VBox mainWindow = new VBox();
+            topSplitPane = new SplitPane();
+            bottomSplitPane = new SplitPane();
+            topSplitPane.setOrientation(Orientation.HORIZONTAL);
+            topSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
+            bottomSplitPane.setOrientation(Orientation.HORIZONTAL);
+            bottomSplitPane.setPrefSize(Constants.SPLIT_PANE_LENGTH, Constants.SPLIT_PANE_LENGTH);
+            mainMenuSection = new MainMenuSection();
+            animSection = new AnimationSection();
+            animSection.setWidth(topSplitPane.getPrefWidth()/Constants.TWO);
+            animSection.setHeight(topSplitPane.getPrefHeight());
+            tableSection = new TableSection(topSplitPane.getPrefWidth()/Constants.TWO, topSplitPane.getPrefHeight());
+            chartSection = new ChartSection();
+            chartSection.setVisible(false);
+            tableSection.setVisible(false);
+            guiControlSection = new GUIControlSection();
+            userInterface = Constants.UserInterface.NO_CHOICE;
+            topSplitPane.getItems().add(animSection);
+            topSplitPane.getItems().add(chartSection);
+            bottomSplitPane.getItems().add(mainMenuSection);
+            bottomSplitPane.getItems().add(guiControlSection);
+            mainWindow.getChildren().addAll(topSplitPane, bottomSplitPane);
+            Scene scene = new Scene(new Group(mainWindow), Constants.SCENE_SIDE_LENGTH, Constants.SCENE_SIDE_LENGTH);
+            Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_PRESS_START_2P), Constants.FONT_SIZE);
+            Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_BIGMACCA), Constants.FONT_SIZE);
+            Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_CONT_FREAK), Constants.FONT_SIZE);
+            Font.loadFont(this.getClass().getResourceAsStream(Constants.FONT_VENUS_RISING), Constants.FONT_SIZE);
+            scene.getStylesheets().add(this.getClass().getResource(Constants.CSS_MAIN).toExternalForm());
+            guiControlSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_GUI).toExternalForm());
+            tableSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_TABLE).toExternalForm());
+            chartSection.getStylesheets().add(this.getClass().getResource(Constants.CSS_CHART).toExternalForm());
+            primaryStage.setResizable(false);
+            primaryStage.setScene(scene);
+            primaryStage.show();
 	}
 	
 	public static Constants.UserInterface getUserInterface()
@@ -205,16 +190,6 @@ public class MainWindow extends Application
                 guiControlSection.setVisible(userInterface != Constants.UserInterface.NO_CHOICE);
 	}
 
-	public static SplitPane getTopSplitPane() 
-        {
-		return topSplitPane;
-	}
-
-	public static SplitPane getBottomSplitPane() 
-        {
-		return bottomSplitPane;
-	}
-
         public static AnimationSection getAnimSection() 
         {
             return animSection;
@@ -230,7 +205,7 @@ public class MainWindow extends Application
             return tableSection;
         }
 
-            public static MainMenuSection getMainMenuSection() 
+        public static MainMenuSection getMainMenuSection() 
         {
             return mainMenuSection;
         }

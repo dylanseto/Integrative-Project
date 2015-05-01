@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TableSection extends TableView
 {
-    private final TableColumn colTitle; //Fix these warnings.
+    private final TableColumn colTitle;
     private final TableColumn colRightValue;
     private final TableColumn colLeftValue;
 
@@ -37,7 +37,7 @@ public class TableSection extends TableView
         colRightValue = new TableColumn();
         colRightValue.setPrefWidth(prefWidth * Constants.ONE_HALF);
         colRightValue.setCellValueFactory(
-              new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
+               new PropertyValueFactory<TableEntry,String>(Constants.LEFT_VALUE));
         colRightValue.setEditable(false);
         colRightValue.setResizable(false);
         colRightValue.setSortable(false);
