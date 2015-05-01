@@ -1,11 +1,11 @@
 package sections;
-
 import Main.Constants;
 import Main.MainWindow;
 import calculations.Variables;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,6 +21,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final Label forceLabel = new Label(Constants.FORCE_LABEL_TEXT);
 	private final TextField forceTextField = new TextField()
 	{
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -32,6 +33,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane massFlowPane = new FlowPane();
 	private final Label massLabel = new Label(Constants.MASS_LABEL_TEXT);
 	private final TextField massTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -43,6 +45,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane initVelFLowPane = new FlowPane();
 	private final Label initVelLabel = new Label(Constants.INIT_VEL_LABEL_TEXT);
 	private final TextField initVelTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -65,6 +68,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane angleFLowPane = new FlowPane();
 	private final Label angleLabel = new Label(Constants.ANGLE_LABEL_TEXT);
 	private final TextField angleTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -76,6 +80,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane objectHeightFLowPane = new FlowPane();
 	private final Label objectHeightLabel = new Label(Constants.OBJ_HEIGHT_LABEL_TEXT);
 	private final TextField objectHeightTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -87,6 +92,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane objectDistanceFLowPane = new FlowPane();
 	private final Label objectDistanceLabel = new Label(Constants.OBJ_DIST_LABEL_TEXT);
 	private final TextField objectDistanceTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -98,6 +104,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane focalDistFLowPane = new FlowPane();
 	private final Label focalDistLabel = new Label(Constants.FOCAL_DIST_LABEL_TEXT);
 	private final TextField focalDistTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -116,6 +123,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane thicknessFLowPane = new FlowPane();
 	private final Label thicknessLabel = new Label(Constants.THICKNESS_LABEL_TEXT);
 	private final TextField thicknessTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -127,6 +135,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane costBikeFLowPane = new FlowPane();
 	private final Label costBikeLabel = new Label(Constants.COST_BIKE_LABEL_TEXT);
 	private final TextField costBikeTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -138,6 +147,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane costSetUpFLowPane = new FlowPane();
 	private final Label costSetUpLabel = new Label(Constants.COST_SET_UP_LABEL_TEXT);
 	private final TextField costSetUpTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -149,6 +159,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane indexRefFilmFLowPane = new FlowPane();
 	private final Label indexRefFilmLabel = new Label(Constants.INDEX_REF_FILM_TEXT);
 	private final TextField indexRefFilmTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -165,7 +176,8 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane coffiecientFLowPane = new FlowPane();
 	private final Label coefficientLabel = new Label(Constants.COEFF_LABEL_TEXT);
 	private final TextField coefficientTextField = new TextField(){
-		public void replaceText(int start, int end, String text) 
+		@Override
+                public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
 	            super.replaceText(start, end, text);
@@ -176,6 +188,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane baseFLowPane = new FlowPane();
 	private final Label baseLabel = new Label(Constants.BASE_LABEL_TEXT);
 	private final TextField baseTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -187,6 +200,7 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	private final FlowPane exponentFLowPane = new FlowPane();
 	private final Label exponentLabel = new Label(Constants.EXPONENT_LABEL_TEXT);
 	private final TextField exponentTextField = new TextField(){
+                @Override
 		public void replaceText(int start, int end, String text) 
 		{
 			if (text.matches(Constants.NUMBERS_ONLY_REGEX)) {
@@ -203,93 +217,92 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
          */
 	public GUIControlSection()
 	{
-		this.setSpacing(Constants.GUI_SPACING);
-		this.setAlignment(Pos.CENTER);
-		
-		this.massFlowPane.getChildren().addAll(massLabel, massTextField);
-		this.forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
-		
-		this.projectileFlowPane.getChildren().addAll(projectileTypeLabel,projectileOptionBox);
-		this.gravityFlowPane.getChildren().addAll(gravityTypeLabel, gravityOptionBox);
-		this.angleFLowPane.getChildren().addAll(angleLabel, angleTextField);
-		this.initVelFLowPane.getChildren().addAll(initVelLabel, initVelTextField);
-		
-		this.objectHeightFLowPane.getChildren().addAll(objectHeightLabel, objectHeightTextField);
-		this.objectDistanceFLowPane.getChildren().addAll(objectDistanceLabel, objectDistanceTextField);
-		this.focalDistFLowPane.getChildren().addAll(focalDistLabel, focalDistTextField);
-		this.lenslFlowPane.getChildren().addAll(lensLabel, lensOptionBox);
-		
-		this.materialFlowPane.getChildren().addAll(materialListLabel, materialOptionBox);
-		this.thicknessFLowPane.getChildren().addAll(thicknessLabel, thicknessTextField);
-		this.indexRefFilmFLowPane.getChildren().addAll(indexRefFilmLabel, indexRefFilmTextField);
-		
-		this.costBikeFLowPane.getChildren().addAll(costBikeLabel, costBikeTextField);
-		this.costSetUpFLowPane.getChildren().addAll(costSetUpLabel, costSetUpTextField);
-		
-		this.coffiecientFLowPane.getChildren().addAll(coefficientLabel, coefficientTextField);
-		this.baseFLowPane.getChildren().addAll(baseLabel, baseTextField);
-		this.exponentFLowPane.getChildren().addAll(exponentLabel, exponentTextField);
-                
-                massTextField.setOnAction(this);
-                forceTextField.setOnAction(this);
-                
-                projectileOptionBox.setOnAction(this);
-                gravityOptionBox.setOnAction(this);
-                angleTextField.setOnAction(this);
-                initVelTextField.setOnAction(this);
-                
-                objectHeightTextField.setOnAction(this);
-                objectDistanceTextField.setOnAction(this);
-                focalDistTextField.setOnAction(this);
-                lensOptionBox.setOnAction(this);
-                
-                materialOptionBox.setOnAction(this);
-                thicknessTextField.setOnAction(this);
-		indexRefFilmTextField.setOnAction(this);
-                
-                costBikeTextField.setOnAction(this);
-                costSetUpTextField.setOnAction(this);
-                
-                coefficientTextField.setOnAction(this);
-                baseTextField.setOnAction(this);
-                exponentTextField.setOnAction(this);
-                
+            this.setSpacing(Constants.GUI_SPACING);
+            this.setAlignment(Pos.CENTER);
+            this.setPadding(new Insets(Constants.FIVE));
+
+            this.massFlowPane.getChildren().addAll(massLabel, massTextField);
+            this.forceFlowPane.getChildren().addAll(forceLabel, forceTextField);
+
+            this.projectileFlowPane.getChildren().addAll(projectileTypeLabel,projectileOptionBox);
+            this.gravityFlowPane.getChildren().addAll(gravityTypeLabel, gravityOptionBox);
+            this.angleFLowPane.getChildren().addAll(angleLabel, angleTextField);
+            this.initVelFLowPane.getChildren().addAll(initVelLabel, initVelTextField);
+
+            this.objectHeightFLowPane.getChildren().addAll(objectHeightLabel, objectHeightTextField);
+            this.objectDistanceFLowPane.getChildren().addAll(objectDistanceLabel, objectDistanceTextField);
+            this.focalDistFLowPane.getChildren().addAll(focalDistLabel, focalDistTextField);
+            this.lenslFlowPane.getChildren().addAll(lensLabel, lensOptionBox);
+
+            this.materialFlowPane.getChildren().addAll(materialListLabel, materialOptionBox);
+            this.thicknessFLowPane.getChildren().addAll(thicknessLabel, thicknessTextField);
+            this.indexRefFilmFLowPane.getChildren().addAll(indexRefFilmLabel, indexRefFilmTextField);
+
+            this.costBikeFLowPane.getChildren().addAll(costBikeLabel, costBikeTextField);
+            this.costSetUpFLowPane.getChildren().addAll(costSetUpLabel, costSetUpTextField);
+
+            this.coffiecientFLowPane.getChildren().addAll(coefficientLabel, coefficientTextField);
+            this.baseFLowPane.getChildren().addAll(baseLabel, baseTextField);
+            this.exponentFLowPane.getChildren().addAll(exponentLabel, exponentTextField);
+
+            massTextField.setOnAction(this);
+            forceTextField.setOnAction(this);
+
+            projectileOptionBox.setOnAction(this);
+            gravityOptionBox.setOnAction(this);
+            angleTextField.setOnAction(this);
+            initVelTextField.setOnAction(this);
+
+            objectHeightTextField.setOnAction(this);
+            objectDistanceTextField.setOnAction(this);
+            focalDistTextField.setOnAction(this);
+            lensOptionBox.setOnAction(this);
+
+            materialOptionBox.setOnAction(this);
+            thicknessTextField.setOnAction(this);
+            indexRefFilmTextField.setOnAction(this);
+
+            costBikeTextField.setOnAction(this);
+            costSetUpTextField.setOnAction(this);
+
+            coefficientTextField.setOnAction(this);
+            baseTextField.setOnAction(this);
+            exponentTextField.setOnAction(this);
 	}
 	public void showNewtonLawControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, massFlowPane, forceFlowPane);
-		
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, massFlowPane, forceFlowPane);
 	}
 	
 	public void showProjMotControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, projectileFlowPane, gravityFlowPane, angleFLowPane, initVelFLowPane);
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, projectileFlowPane, gravityFlowPane, angleFLowPane, initVelFLowPane);
 	}
 	
 	public void showOpticsControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, objectHeightFLowPane, objectDistanceFLowPane, focalDistFLowPane, lenslFlowPane);
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, objectHeightFLowPane, objectDistanceFLowPane, focalDistFLowPane, lenslFlowPane);
 	}
 	
 	public void showThinFilmControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, materialFlowPane, indexRefMatLabel, thicknessFLowPane, indexRefFilmFLowPane);
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, materialFlowPane, indexRefMatLabel, thicknessFLowPane, indexRefFilmFLowPane);
 	}
 	
 	public void showNewBikeControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, costBikeFLowPane, costSetUpFLowPane);
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, costBikeFLowPane, costSetUpFLowPane);
 	}
 	
 	public void showInfSeriesControls()
 	{
-		this.getChildren().clear();
-		this.getChildren().addAll(enterValuesLabel, coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
+            this.getChildren().clear();
+            this.getChildren().addAll(enterValuesLabel, coffiecientFLowPane,baseFLowPane,exponentFLowPane,infSumEquationLabel,partSumEquationLabel);
 	}
         
         public boolean getValues()
