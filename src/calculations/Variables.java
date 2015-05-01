@@ -14,7 +14,6 @@ public class Variables
     private static double force;
     private static double mass;
     private static double acceleration;
-    private static double deltaTime;
     private static double height;
     private static double angle;
     private static double gravity;
@@ -46,7 +45,6 @@ public class Variables
         force = Constants.ZERO;
         mass = Constants.ZERO;
         acceleration = Constants.ZERO;
-        deltaTime = Constants.ZERO;
         height = Constants.ZERO;
         angle = Constants.ZERO;
         gravity = Constants.ZERO;
@@ -120,16 +118,6 @@ public class Variables
     public static void setAcceleration(double a) 
     {
         acceleration = a;
-    }
-
-    public static double getDeltaTime() 
-    {
-        return deltaTime;
-    }
-
-    public static void setDeltaTime(double dt) 
-    {
-        deltaTime = dt;
     }
 
     public static double getHeight() 
