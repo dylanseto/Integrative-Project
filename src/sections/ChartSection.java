@@ -53,57 +53,55 @@ public class ChartSection extends LineChart<Number, Number>
         //made a change to constructor here
     	HoverDetector(final double data_x, final double data_y)
     	{	
-    		setPrefSize(Constants.HOVER_PREF_SIZE, Constants.HOVER_PREF_SIZE);
-    		setOnMouseEntered(new EventHandler<MouseEvent>() {
-    	        @Override public void handle(MouseEvent mouseEvent) {
-                  
-                    if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
-                    {
-                        MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
-                    }
-                    else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
-                            || MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION
-                            || MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
-                    {
-                        Label showXYValuesLabel = new Label();
-                        
-                        if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
-                        {
-                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m/s");
-                            
-                        }
-                        else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
-                        {
-                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m");
-                        }
-                        else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
-                        {
-                            showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT2 + Constants.FORMATTER.format(data_y));
-                        }
-                        showXYValuesLabel.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
-                        showXYValuesLabel.setId(Constants.ID_SHOW_XY_VALUES);
-                        getChildren().add(showXYValuesLabel);
-                    }
-                    
-                  
-    	          setCursor(Cursor.NONE);
-    	          toFront();
-    	        }
-    	      });
-    		setOnMouseExited(new EventHandler<MouseEvent>() {
-    	        @Override public void handle(MouseEvent mouseEvent) {
-    	          //System.out.println("mouse exit"); //hovers away
-                  
-                    if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
-                    {
-                        MainWindow.getAnimSection().drawNewBikeFrame();
-                    }
-                    getChildren().clear();
-                  
-    	          setCursor(Cursor.CROSSHAIR);
-    	          toFront();
-    	        }
-    	      });
+            setPrefSize(Constants.HOVER_PREF_SIZE, Constants.HOVER_PREF_SIZE);
+            setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+
+            if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+            {
+                MainWindow.getAnimSection().drawNewBikeFrame(data_x, data_y);
+            }
+            else if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW
+                    || MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION
+                    || MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+            {
+                Label showXYValuesLabel = new Label();
+
+                if(MainWindow.getUserInterface() == Constants.UserInterface.NEWTON_LAW)
+                {
+                    showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m/s");
+
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.PROJ_MOTION)
+                {
+                    showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT1 + Constants.FORMATTER.format(data_y) + "m");
+                }
+                else if(MainWindow.getUserInterface() == Constants.UserInterface.INF_GEOM_SERIES)
+                {
+                    showXYValuesLabel.setText(Constants.X_TEXT + data_x + Constants.Y_TEXT2 + Constants.FORMATTER.format(data_y));
+                }
+                showXYValuesLabel.setMinSize(Label.USE_PREF_SIZE*Constants.FIVE, Label.USE_PREF_SIZE*Constants.FIVE);
+                showXYValuesLabel.setId(Constants.ID_SHOW_XY_VALUES);
+                getChildren().add(showXYValuesLabel);
+            }
+
+              setCursor(Cursor.NONE);
+              toFront();
+            }
+          });
+            setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                //hovers away
+                if(MainWindow.getUserInterface() == Constants.UserInterface.SPORTS_BIKE)
+                {
+                    MainWindow.getAnimSection().drawNewBikeFrame();
+                }
+                getChildren().clear();
+
+                setCursor(Cursor.CROSSHAIR);
+                toFront();
+            }
+          });
     	}
     }
 

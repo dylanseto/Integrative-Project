@@ -135,15 +135,16 @@ public class MainMenuSection extends VBox implements EventHandler<ActionEvent>
                 if(MainWindow.getGUIControlSection().getValues())
                 {
                     MainWindow.getAnimSection().start();
+                    this.pauseButton.setDisable(false);
+                    this.startButton.setDisable(true);
+                    this.startButton.setDisable(true);
+                    this.continueButton.setDisable(true);
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null, Constants.ERROR_MSG, Constants.ERROR_MSG_TITLE, JOptionPane.ERROR_MESSAGE);
                 }
-                this.pauseButton.setDisable(false);
-                this.startButton.setDisable(true);
-                this.startButton.setDisable(true);
-                this.continueButton.setDisable(true);
+                
             }
             else if(event.getSource() == continueButton)
             {

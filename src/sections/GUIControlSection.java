@@ -300,7 +300,9 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 
                 case NEWTON_LAW:
                     if(massTextField.getText().isEmpty()
-                            || forceTextField.getText().isEmpty())
+                            || forceTextField.getText().isEmpty()
+                            || Double.valueOf(massTextField.getText()) == Constants.ZERO
+                            || Double.valueOf(forceTextField.getText()) == Constants.ZERO)
                     {
                         disableSection = false;
                         break;
@@ -313,14 +315,14 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 	if(gravityOptionBox.getSelectionModel().getSelectedItem() == null
                 			|| projectileOptionBox.getSelectionModel().getSelectedItem().isEmpty()
                 			|| initVelTextField.getText().isEmpty()
-                			|| angleTextField.getText().isEmpty())
+                			|| angleTextField.getText().isEmpty()
+                                        || Double.valueOf(initVelTextField.getText()) == Constants.ZERO)
                 	{
                 		disableSection = false;
                 		break;
                 	}
-                	//System.out.println(Variables.getDisplacement());
+                        
                 	Variables.setGravityType(gravityOptionBox.getSelectionModel().getSelectedItem());
-
                 	if(Variables.getGravityType() == Constants.GRAVITY_TYPE_LIST.get(Constants.ZERO))
                 	{
                 		//No gravity
@@ -375,7 +377,10 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     if(((String)(lensOptionBox.getSelectionModel().getSelectedItem())) == null
                             || objectHeightTextField.getText().isEmpty()
                             || objectDistanceTextField.getText().isEmpty()
-                            || focalDistTextField.getText().isEmpty())
+                            || focalDistTextField.getText().isEmpty()
+                            || Double.valueOf(objectHeightTextField.getText()) == Constants.ZERO
+                            || Double.valueOf(objectDistanceTextField.getText()) == Constants.ZERO
+                            || Double.valueOf(focalDistTextField.getText()) == Constants.ZERO)
                     {
                         disableSection = false;
                         break;
@@ -397,7 +402,9 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 case THIN_FILM:
                     if(((String)(materialOptionBox.getSelectionModel().getSelectedItem())) == null
                             || thicknessTextField.getText().isEmpty()
-                            || indexRefFilmTextField.getText().isEmpty())
+                            || indexRefFilmTextField.getText().isEmpty()
+                            || Double.valueOf(thicknessTextField.getText()) == Constants.ZERO
+                            || Double.valueOf(indexRefFilmTextField.getText()) == Constants.ZERO)
                     {
                         disableSection = false;
                         break;
@@ -420,8 +427,8 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                     break;
                 case INF_GEOM_SERIES:
                 	if(this.coefficientTextField.getText().isEmpty()
-                			|| this.baseTextField.getText().isEmpty()
-                			|| this.exponentTextField.getText().isEmpty())
+                            || this.baseTextField.getText().isEmpty()
+                            || this.exponentTextField.getText().isEmpty())
                 	{
                 		disableSection = false;
                         break;
@@ -429,14 +436,8 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
                 	Variables.setCoefficient(Double.valueOf(this.coefficientTextField.getText()));
                 	MainWindow.getChartSection().clearData();
                 	Variables.setBase(Double.valueOf(this.baseTextField.getText()));
-                	
-                	/*if(this.exponentTextField.getText().equalsIgnoreCase("inf"))
-                	{
-                		//not sure if we should have this actually.
-                	}*/
-                	
                 	Variables.setExponent(Integer.valueOf(this.exponentTextField.getText()));
-                	 break;
+                	break;
                     
                 default:
                     disableSection = false;
@@ -449,8 +450,6 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
 	@Override
 	public void handle(ActionEvent event) 
 	{
-
-            //handling each individual component
             if(event.getSource() == materialOptionBox)
             {
                 Variables.setMaterialType(((String)(materialOptionBox.getSelectionModel().getSelectedItem())));
@@ -518,7 +517,6 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             else if(event.getSource() == lensOptionBox)
             {
                 Variables.setLensType(((String)(lensOptionBox.getSelectionModel().getSelectedItem())));
-                //MainWindow.getAnimSection().drawOpticsFrame();
             }
             else if(event.getSource() == costBikeTextField)
             {
@@ -532,7 +530,6 @@ public class GUIControlSection extends VBox implements EventHandler<ActionEvent>
             {
             	Variables.setAngle(Double.valueOf(angleTextField.getText()));
             	MainWindow.getAnimSection().drawProjMotFrame();
-            	
             }
 	}
 }

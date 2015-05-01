@@ -21,22 +21,21 @@ public abstract class AnimationObject
 	}
 	public AnimationObject(SimpleDoubleProperty x_property, SimpleDoubleProperty y_property, GraphicsContext graphics)
 	{
-		this.x_property = x_property; 
-		this.y_property = y_property;
-		this.graphics = graphics;
+            this.x_property = x_property; 
+            this.y_property = y_property;
+            this.graphics = graphics;
 	}
 	public SimpleDoubleProperty getX() {
-		return x_property;
+            return x_property;
 	}
 	public void setX(double x)
 	{
-		x_property.set(x);
+            x_property.set(x);
 	}
 	public SimpleDoubleProperty getY() {
-		return y_property;
+            return y_property;
 	}
-	public void setY(double y)
-	{
-		y_property.set(y);
+	public void setY(double y){
+            y_property.set(y);
 	}
 }
