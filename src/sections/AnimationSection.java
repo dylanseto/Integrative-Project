@@ -1010,7 +1010,6 @@ public class AnimationSection extends Canvas
             double term = FormulaHelper.computeTermOfSum(Variables.getCoefficient(), Variables.getBase(), interation);
             double sum = FormulaHelper.computePartialSum(Variables.getCoefficient(), Variables.getBase(), interation);
             this.mainSquare.setSide(this.mainSquare.getSide()+(term));
-            System.out.println(this.mainSquare.getSide());
             this.mainSquare.draw();
             MainWindow.getChartSection().addDataPoint(interation, sum, true);
 
